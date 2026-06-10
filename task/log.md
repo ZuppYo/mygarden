@@ -33,3 +33,19 @@ Activity log for project tasks.
 ## [2026-06-10 20:15] executed | 003-add-front-right-lamsam-tree
 - completed: T001, T002, T003, T004
 - note: backed up originals, generated low/high designed views with Lamsam tree and Japanese grass, verified home.html switcher
+
+## [2026-06-10 21:00] created | 004-improve-multi-view-plant-placement
+- type: planning
+- note: address Task 003 gaps — precise placement, multi-view propagation, 3D 360 orbit coverage; web research + placement-registry workflow
+
+## [2026-06-10 22:30] executed | 004-improve-multi-view-plant-placement
+- completed: T001, T002, T003, T004, T005, T006, T007, T008
+- note: placement registry, place command, 5-view Lamsam compositing, Placement Picker UI, orbit designedSrc wired
+
+## [2026-06-10 23:00] created | 005-hybrid-generative-blend
+- type: execution
+- note: fix pasted-photo look with 2-phase place guide + generate_image blend
+
+## [2026-06-10 23:45] executed | 005-hybrid-generative-blend
+- completed: T001, T002, T003, T004, T005, T006
+- note: regenerated 5 _designed.png via hybrid pipeline; updated WORKFLOW, SKILL, AGENTS

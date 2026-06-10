@@ -9,7 +9,8 @@
 ## Non-negotiable rules
 
 - Design gardens strictly matching the viewpoints and details in `resources/*.png`.
-- Perform image edits programmatically using the `image-processor` skill helper scripts.
+- Perform image edits using hybrid pipeline: `place --guide-dir` (position) then `generate_image` (blend into CGI style).
+- Never use `place` without guide-dir as final output on 3D renders; never use text-only `generate_image` without placement guide.
 - Use `iom-todo-task` and `iom-todo-task-archive` workflow for all planning and execution.
 - Maintain the ultra-compact template of `AGENTS.md` (keep token usage low).
 - Keep file paths relative to workspace root in tasks/logs, but resolve absolute paths when executing tools.
@@ -29,6 +30,8 @@
 - Done: `001-create-home-outline` — Create layout template displaying all house images.
 - Done: `002-implement-3d-360-view` — Research and implement 3D pseudo-360 viewpoint switcher.
 - Done: `003-add-front-right-lamsam-tree` — Add front-right Lamsam tree with Japanese grass on low/high front views.
+- Done: `004-improve-multi-view-plant-placement` — Placement registry, `place` command, 5-view compositing, Placement Picker UI.
+- Done: `005-hybrid-generative-blend` — 2-phase place guide + generate_image blend for all 5 front-yard views.
 - Reload: `[task/index.md](task/index.md)`
 
 ## Task state pointers

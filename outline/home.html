@@ -687,6 +687,80 @@
             margin-bottom: 1rem;
             color: var(--border-color);
         }
+
+        /* Placement Picker */
+        .placement-panel {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .placement-panel.active {
+            display: block;
+        }
+
+        .placement-panel h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .placement-panel p.hint {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .placement-canvas-wrap {
+            position: relative;
+            max-width: 900px;
+            cursor: crosshair;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 2px dashed var(--border-color);
+        }
+
+        .placement-canvas-wrap img {
+            width: 100%;
+            display: block;
+        }
+
+        .placement-marker {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            margin-left: -9px;
+            margin-top: -9px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            background: var(--primary-color);
+            box-shadow: 0 0 0 2px var(--primary-color);
+            pointer-events: none;
+            display: none;
+        }
+
+        .placement-output {
+            margin-top: 1rem;
+            background: #0d1320;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #a7f3d0;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .placement-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+            flex-wrap: wrap;
+        }
     </style>
 </head>
 <body>
@@ -743,6 +817,21 @@
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
                     <input type="text" class="search-input" id="search-input" placeholder="ค้นหาตามชื่อมุมมอง/ไฟล์...">
+                    <button class="filter-btn" id="btn-toggle-placement" type="button" style="white-space: nowrap;">📍 Placement Picker</button>
+                </div>
+            </div>
+
+            <!-- Placement Picker (anchor view: front-low) -->
+            <div class="placement-panel" id="placement-panel">
+                <h3>📍 Placement Picker — หน้าบ้านมุมต่ำ (anchor view)</h3>
+                <p class="hint">คลิกบนรูปเพื่อระบุตำแหน่งต้นไม้ (bottom-center anchor) แล้วคัดลอก JSON ไปอัปเดต <code>design/placements.json</code> และ <code>design/view-anchors.json</code></p>
+                <div class="placement-canvas-wrap" id="placement-canvas">
+                    <img id="placement-ref-img" src="../resources/หน้าบ้านมุมต่ำ.png" alt="Placement reference">
+                    <div class="placement-marker" id="placement-marker"></div>
+                </div>
+                <pre class="placement-output" id="placement-output">คลิกบนรูปเพื่อเริ่มต้น…</pre>
+                <div class="placement-actions">
+                    <button class="filter-btn" id="btn-copy-placement" type="button">คัดลอก JSON</button>
                 </div>
             </div>
 
@@ -750,17 +839,18 @@
             <div class="image-grid" id="image-grid">
                 <!-- 1. หน้าบ้านตรงกลาง -->
                 <div class="image-card" data-zone="front" data-name="หน้าบ้าน ตรงกลาง front center center">
-                    <div class="image-wrapper" onclick="openModal('../resources/หน้าบ้านตรงกลาง.png', 'หน้าบ้าน ตรงกลาง (Front Center View)')">
+                    <div class="image-wrapper" id="wrapper-front-center" onclick="openModal('../resources/หน้าบ้านตรงกลาง_designed.png', 'หน้าบ้าน ตรงกลาง (หลังจัดสวน)')">
                         <span class="zone-badge">หน้าบ้าน</span>
-                        <img src="../resources/หน้าบ้านตรงกลาง.png" alt="หน้าบ้านตรงกลาง">
+                        <img id="img-front-center" src="../resources/หน้าบ้านตรงกลาง_designed.png" alt="หน้าบ้านตรงกลาง">
+                        <span id="badge-front-center" class="zone-badge" style="left: auto; right: 0.75rem; background-color: var(--primary-color); color: #fff;">🌳 จัดสวนแล้ว</span>
                     </div>
                     <div class="card-details">
                         <div>
                             <h3>หน้าบ้าน ตรงกลาง</h3>
-                            <p class="filename">หน้าบ้านตรงกลาง.png</p>
+                            <p class="filename" id="filename-front-center">หน้าบ้านตรงกลาง_designed.png</p>
                         </div>
                         <div class="card-actions">
-                            <button class="view-btn" onclick="openModal('../resources/หน้าบ้านตรงกลาง.png', 'หน้าบ้าน ตรงกลาง (Front Center View)')">
+                            <button id="btn-front-center" class="view-btn" onclick="openModal('../resources/หน้าบ้านตรงกลาง_designed.png', 'หน้าบ้าน ตรงกลาง (หลังจัดสวน)')">
                                 ขยายภาพ 
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
                             </button>
@@ -952,17 +1042,18 @@
 
                 <!-- 11. โรงจอดรถ ด้านหน้า -->
                 <div class="image-card" data-zone="garage" data-name="โรงจอดรถ ด้านหน้า garage front">
-                    <div class="image-wrapper" onclick="openModal('../resources/โรงจอดรถด้านหน้า.png', 'โรงจอดรถ ด้านหน้า (Garage Front View)')">
+                    <div class="image-wrapper" id="wrapper-garage-front" onclick="openModal('../resources/โรงจอดรถด้านหน้า_designed.png', 'โรงจอดรถ ด้านหน้า (หลังจัดสวน)')">
                         <span class="zone-badge">โรงจอดรถ</span>
-                        <img src="../resources/โรงจอดรถด้านหน้า.png" alt="โรงจอดรถด้านหน้า">
+                        <img id="img-garage-front" src="../resources/โรงจอดรถด้านหน้า_designed.png" alt="โรงจอดรถด้านหน้า">
+                        <span id="badge-garage-front" class="zone-badge" style="left: auto; right: 0.75rem; background-color: var(--primary-color); color: #fff;">🌳 จัดสวนแล้ว</span>
                     </div>
                     <div class="card-details">
                         <div>
                             <h3>โรงจอดรถ ด้านหน้า</h3>
-                            <p class="filename">โรงจอดรถด้านหน้า.png</p>
+                            <p class="filename" id="filename-garage-front">โรงจอดรถด้านหน้า_designed.png</p>
                         </div>
                         <div class="card-actions">
-                            <button class="view-btn" onclick="openModal('../resources/โรงจอดรถด้านหน้า.png', 'โรงจอดรถ ด้านหน้า (Garage Front View)')">
+                            <button id="btn-garage-front" class="view-btn" onclick="openModal('../resources/โรงจอดรถด้านหน้า_designed.png', 'โรงจอดรถ ด้านหน้า (หลังจัดสวน)')">
                                 ขยายภาพ
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
                             </button>
@@ -992,17 +1083,18 @@
 
                 <!-- 13. โรงจอดรถ ด้านขวา -->
                 <div class="image-card" data-zone="garage" data-name="โรงจอดรถ ด้านขวา garage right">
-                    <div class="image-wrapper" onclick="openModal('../resources/โรงจอดรถด้านขวา.png', 'โรงจอดรถ ด้านขวา (Garage Right View)')">
+                    <div class="image-wrapper" id="wrapper-garage-right" onclick="openModal('../resources/โรงจอดรถด้านขวา_designed.png', 'โรงจอดรถ ด้านขวา (หลังจัดสวน)')">
                         <span class="zone-badge">โรงจอดรถ</span>
-                        <img src="../resources/โรงจอดรถด้านขวา.png" alt="โรงจอดรถด้านขวา">
+                        <img id="img-garage-right" src="../resources/โรงจอดรถด้านขวา_designed.png" alt="โรงจอดรถด้านขวา">
+                        <span id="badge-garage-right" class="zone-badge" style="left: auto; right: 0.75rem; background-color: var(--primary-color); color: #fff;">🌳 จัดสวนแล้ว</span>
                     </div>
                     <div class="card-details">
                         <div>
                             <h3>โรงจอดรถ ด้านขวา</h3>
-                            <p class="filename">โรงจอดรถด้านขวา.png</p>
+                            <p class="filename" id="filename-garage-right">โรงจอดรถด้านขวา_designed.png</p>
                         </div>
                         <div class="card-actions">
-                            <button class="view-btn" onclick="openModal('../resources/โรงจอดรถด้านขวา.png', 'โรงจอดรถ ด้านขวา (Garage Right View)')">
+                            <button id="btn-garage-right" class="view-btn" onclick="openModal('../resources/โรงจอดรถด้านขวา_designed.png', 'โรงจอดรถ ด้านขวา (หลังจัดสวน)')">
                                 ขยายภาพ
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
                             </button>
@@ -1209,13 +1301,13 @@
         // --- ORBIT 3D VIEW CONTROLS ---
         // Viewpoints DB mapping coordinates to layout PNGs
         const viewpoints = [
-            { id: 'front-center', angle: 180, level: 'normal', name: 'หน้าบ้าน ตรงกลาง', zone: 'หน้าบ้าน', src: '../resources/หน้าบ้านตรงกลาง.png' },
+            { id: 'front-center', angle: 180, level: 'normal', name: 'หน้าบ้าน ตรงกลาง', zone: 'หน้าบ้าน', src: '../resources/หน้าบ้านตรงกลาง.png', designedSrc: '../resources/หน้าบ้านตรงกลาง_designed.png' },
             { id: 'front-low', angle: 180, level: 'low', name: 'หน้าบ้าน มุมต่ำ', zone: 'หน้าบ้าน', src: '../resources/หน้าบ้านมุมต่ำ.png', designedSrc: '../resources/หน้าบ้านมุมต่ำ_designed.png' },
             { id: 'front-high', angle: 180, level: 'high', name: 'หน้าบ้าน มุมสูง', zone: 'หน้าบ้าน', src: '../resources/หน้าบ้านมุมสูง.png', designedSrc: '../resources/หน้าบ้านมุมสูง_designed.png' },
             
-            { id: 'garage-front', angle: 170, level: 'normal', name: 'โรงจอดรถ ด้านหน้า', zone: 'โรงจอดรถ', src: '../resources/โรงจอดรถด้านหน้า.png' },
+            { id: 'garage-front', angle: 170, level: 'normal', name: 'โรงจอดรถ ด้านหน้า', zone: 'โรงจอดรถ', src: '../resources/โรงจอดรถด้านหน้า.png', designedSrc: '../resources/โรงจอดรถด้านหน้า_designed.png' },
             { id: 'garage-left', angle: 195, level: 'normal', name: 'โรงจอดรถ ด้านซ้าย', zone: 'โรงจอดรถ', src: '../resources/โรงจอดรถด้านซ้าย.png' },
-            { id: 'garage-right', angle: 155, level: 'normal', name: 'โรงจอดรถ ด้านขวา', zone: 'โรงจอดรถ', src: '../resources/โรงจอดรถด้านขวา.png' },
+            { id: 'garage-right', angle: 155, level: 'normal', name: 'โรงจอดรถ ด้านขวา', zone: 'โรงจอดรถ', src: '../resources/โรงจอดรถด้านขวา.png', designedSrc: '../resources/โรงจอดรถด้านขวา_designed.png' },
             
             { id: 'left-front', angle: 225, level: 'normal', name: 'ข้างบ้านฝั่งซ้าย ด้านหน้า', zone: 'ข้างบ้านฝั่งซ้าย', src: '../resources/ข้างบ้านฝั่งซ้ายด้านหน้า.png' },
             { id: 'left-middle', angle: 270, level: 'normal', name: 'ข้างบ้านฝั่งซ้าย ตรงกลาง', zone: 'ข้างบ้านฝั่งซ้าย', src: '../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png' },
@@ -1493,13 +1585,20 @@
         const btnModeDesigned = document.getElementById('btn-mode-designed');
         const btnModeRaw = document.getElementById('btn-mode-raw');
 
+        const DESIGNED_GALLERY_VIEWS = [
+            { prefix: 'front-center', raw: '../resources/หน้าบ้านตรงกลาง.png', designed: '../resources/หน้าบ้านตรงกลาง_designed.png', designedTitle: 'หน้าบ้าน ตรงกลาง (หลังจัดสวน)', rawTitle: 'หน้าบ้าน ตรงกลาง (โครงสร้างเดิม)', designedFile: 'หน้าบ้านตรงกลาง_designed.png', rawFile: 'หน้าบ้านตรงกลาง.png' },
+            { prefix: 'front-low', raw: '../resources/หน้าบ้านมุมต่ำ.png', designed: '../resources/หน้าบ้านมุมต่ำ_designed.png', designedTitle: 'หน้าบ้าน มุมต่ำ (หลังจัดสวน)', rawTitle: 'หน้าบ้าน มุมต่ำ (โครงสร้างเดิม)', designedFile: 'หน้าบ้านมุมต่ำ_designed.png', rawFile: 'หน้าบ้านมุมต่ำ.png' },
+            { prefix: 'front-high', raw: '../resources/หน้าบ้านมุมสูง.png', designed: '../resources/หน้าบ้านมุมสูง_designed.png', designedTitle: 'หน้าบ้าน มุมสูง (หลังจัดสวน)', rawTitle: 'หน้าบ้าน มุมสูง (โครงสร้างเดิม)', designedFile: 'หน้าบ้านมุมสูง_designed.png', rawFile: 'หน้าบ้านมุมสูง.png' },
+            { prefix: 'garage-front', raw: '../resources/โรงจอดรถด้านหน้า.png', designed: '../resources/โรงจอดรถด้านหน้า_designed.png', designedTitle: 'โรงจอดรถ ด้านหน้า (หลังจัดสวน)', rawTitle: 'โรงจอดรถ ด้านหน้า (โครงสร้างเดิม)', designedFile: 'โรงจอดรถด้านหน้า_designed.png', rawFile: 'โรงจอดรถด้านหน้า.png' },
+            { prefix: 'garage-right', raw: '../resources/โรงจอดรถด้านขวา.png', designed: '../resources/โรงจอดรถด้านขวา_designed.png', designedTitle: 'โรงจอดรถ ด้านขวา (หลังจัดสวน)', rawTitle: 'โรงจอดรถ ด้านขวา (โครงสร้างเดิม)', designedFile: 'โรงจอดรถด้านขวา_designed.png', rawFile: 'โรงจอดรถด้านขวา.png' },
+        ];
+
         function setGlobalMode(mode) {
             globalMode = mode;
             if (mode === 'designed') {
                 btnModeDesigned.classList.add('active');
                 btnModeDesigned.style.background = '';
                 btnModeDesigned.style.color = '';
-                
                 btnModeRaw.classList.remove('active');
                 btnModeRaw.style.background = 'transparent';
                 btnModeRaw.style.color = 'var(--text-muted)';
@@ -1507,57 +1606,93 @@
                 btnModeRaw.classList.add('active');
                 btnModeRaw.style.background = '';
                 btnModeRaw.style.color = '';
-                
                 btnModeDesigned.classList.remove('active');
                 btnModeDesigned.style.background = 'transparent';
                 btnModeDesigned.style.color = 'var(--text-muted)';
             }
 
-            // Update Gallery images
-            const frontLowImg = document.getElementById('img-front-low');
-            const frontLowWrapper = document.getElementById('wrapper-front-low');
-            const frontLowBtn = document.getElementById('btn-front-low');
-            const frontLowBadge = document.getElementById('badge-front-low');
-            const frontLowFilename = document.getElementById('filename-front-low');
+            DESIGNED_GALLERY_VIEWS.forEach((view) => {
+                const isDesigned = mode === 'designed';
+                const src = isDesigned ? view.designed : view.raw;
+                const title = isDesigned ? view.designedTitle : view.rawTitle;
+                const filename = isDesigned ? view.designedFile : view.rawFile;
+                const img = document.getElementById(`img-${view.prefix}`);
+                const wrapper = document.getElementById(`wrapper-${view.prefix}`);
+                const btn = document.getElementById(`btn-${view.prefix}`);
+                const badge = document.getElementById(`badge-${view.prefix}`);
+                const filenameEl = document.getElementById(`filename-${view.prefix}`);
+                if (img) img.src = src;
+                if (wrapper) wrapper.setAttribute('onclick', `openModal('${src}', '${title}')`);
+                if (btn) btn.setAttribute('onclick', `openModal('${src}', '${title}')`);
+                if (badge) badge.style.display = isDesigned ? 'block' : 'none';
+                if (filenameEl) filenameEl.textContent = filename;
+            });
 
-            const frontHighImg = document.getElementById('img-front-high');
-            const frontHighWrapper = document.getElementById('wrapper-front-high');
-            const frontHighBtn = document.getElementById('btn-front-high');
-            const frontHighBadge = document.getElementById('badge-front-high');
-            const frontHighFilename = document.getElementById('filename-front-high');
-
-            if (mode === 'designed') {
-                if (frontLowImg) frontLowImg.src = '../resources/หน้าบ้านมุมต่ำ_designed.png';
-                if (frontLowWrapper) frontLowWrapper.setAttribute('onclick', "openModal('../resources/หน้าบ้านมุมต่ำ_designed.png', 'หน้าบ้าน มุมต่ำ (หลังจัดสวน)')");
-                if (frontLowBtn) frontLowBtn.setAttribute('onclick', "openModal('../resources/หน้าบ้านมุมต่ำ_designed.png', 'หน้าบ้าน มุมต่ำ (หลังจัดสวน)')");
-                if (frontLowBadge) frontLowBadge.style.display = 'block';
-                if (frontLowFilename) frontLowFilename.textContent = 'หน้าบ้านมุมต่ำ_designed.png';
-
-                if (frontHighImg) frontHighImg.src = '../resources/หน้าบ้านมุมสูง_designed.png';
-                if (frontHighWrapper) frontHighWrapper.setAttribute('onclick', "openModal('../resources/หน้าบ้านมุมสูง_designed.png', 'หน้าบ้าน มุมสูง (หลังจัดสวน)')");
-                if (frontHighBtn) frontHighBtn.setAttribute('onclick', "openModal('../resources/หน้าบ้านมุมสูง_designed.png', 'หน้าบ้าน มุมสูง (หลังจัดสวน)')");
-                if (frontHighBadge) frontHighBadge.style.display = 'block';
-                if (frontHighFilename) frontHighFilename.textContent = 'หน้าบ้านมุมสูง_designed.png';
-            } else {
-                if (frontLowImg) frontLowImg.src = '../resources/หน้าบ้านมุมต่ำ.png';
-                if (frontLowWrapper) frontLowWrapper.setAttribute('onclick', "openModal('../resources/หน้าบ้านมุมต่ำ.png', 'หน้าบ้าน มุมต่ำ (โครงสร้างเดิม)')");
-                if (frontLowBtn) frontLowBtn.setAttribute('onclick', "openModal('../resources/หน้าบ้านมุมต่ำ.png', 'หน้าบ้าน มุมต่ำ (โครงสร้างเดิม)')");
-                if (frontLowBadge) frontLowBadge.style.display = 'none';
-                if (frontLowFilename) frontLowFilename.textContent = 'หน้าบ้านมุมต่ำ.png';
-
-                if (frontHighImg) frontHighImg.src = '../resources/หน้าบ้านมุมสูง.png';
-                if (frontHighWrapper) frontHighWrapper.setAttribute('onclick', "openModal('../resources/หน้าบ้านมุมสูง.png', 'หน้าบ้าน มุมสูง (โครงสร้างเดิม)')");
-                if (frontHighBtn) frontHighBtn.setAttribute('onclick', "openModal('../resources/หน้าบ้านมุมสูง.png', 'หน้าบ้าน มุมสูง (โครงสร้างเดิม)')");
-                if (frontHighBadge) frontHighBadge.style.display = 'none';
-                if (frontHighFilename) frontHighFilename.textContent = 'หน้าบ้านมุมสูง.png';
-            }
-
-            // Update Orbit view if active
             selectViewpoint(currentAngle, currentLevel);
         }
 
         btnModeDesigned.addEventListener('click', () => setGlobalMode('designed'));
         btnModeRaw.addEventListener('click', () => setGlobalMode('raw'));
+
+        // PLACEMENT PICKER
+        const btnTogglePlacement = document.getElementById('btn-toggle-placement');
+        const placementPanel = document.getElementById('placement-panel');
+        const placementCanvas = document.getElementById('placement-canvas');
+        const placementRefImg = document.getElementById('placement-ref-img');
+        const placementMarker = document.getElementById('placement-marker');
+        const placementOutput = document.getElementById('placement-output');
+        const btnCopyPlacement = document.getElementById('btn-copy-placement');
+        const PLACEMENT_REF_WIDTH = 2153;
+        const PLACEMENT_REF_HEIGHT = 1228;
+        let lastPlacementJson = '';
+
+        btnTogglePlacement.addEventListener('click', () => {
+            placementPanel.classList.toggle('active');
+            btnTogglePlacement.classList.toggle('active');
+        });
+
+        placementCanvas.addEventListener('click', (e) => {
+            const rect = placementRefImg.getBoundingClientRect();
+            const relX = (e.clientX - rect.left) / rect.width;
+            const relY = (e.clientY - rect.top) / rect.height;
+            const pixelX = Math.round(relX * PLACEMENT_REF_WIDTH);
+            const pixelY = Math.round(relY * PLACEMENT_REF_HEIGHT);
+
+            placementMarker.style.display = 'block';
+            placementMarker.style.left = `${relX * 100}%`;
+            placementMarker.style.top = `${relY * 100}%`;
+
+            const snippet = {
+                placements_json: {
+                    anchorNormX: Number(relX.toFixed(3)),
+                    anchorNormY: Number(relY.toFixed(3)),
+                    worldX: Number(relX.toFixed(2)),
+                    worldY: Number(relY.toFixed(2)),
+                },
+                view_anchors_front_low: {
+                    'lamsam-front-right': {
+                        anchorX: pixelX,
+                        anchorY: pixelY,
+                        scale: 0.34,
+                        grassRadius: 130,
+                    },
+                },
+                run: 'python .agents/skills/image-processor/scripts/process_image.py place --placement lamsam-front-right',
+            };
+            lastPlacementJson = JSON.stringify(snippet, null, 2);
+            placementOutput.textContent = lastPlacementJson;
+        });
+
+        btnCopyPlacement.addEventListener('click', async () => {
+            if (!lastPlacementJson) return;
+            try {
+                await navigator.clipboard.writeText(lastPlacementJson);
+                btnCopyPlacement.textContent = 'คัดลอกแล้ว ✓';
+                setTimeout(() => { btnCopyPlacement.textContent = 'คัดลอก JSON'; }, 2000);
+            } catch (err) {
+                placementOutput.textContent += '\n\n(คัดลอกไม่สำเร็จ — เลือกข้อความด้านบนแล้ว Ctrl+C)';
+            }
+        });
     </script>
 </body>
 </html>

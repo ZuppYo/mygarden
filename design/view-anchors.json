@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "views": [
+    {
+      "viewId": "front-low",
+      "file": "หน้าบ้านมุมต่ำ.png",
+      "width": 2153,
+      "height": 1228,
+      "anchors": [
+        { "id": "gate-center", "worldX": 0.5, "worldY": 0.82, "pixelX": 1080, "pixelY": 900 },
+        { "id": "driveway-right", "worldX": 0.72, "worldY": 0.72, "pixelX": 1580, "pixelY": 860 },
+        { "id": "house-front-left", "worldX": 0.18, "worldY": 0.42, "pixelX": 400, "pixelY": 500 }
+      ],
+      "placements": {
+        "lamsam-front-right": {
+          "anchorX": 1580,
+          "anchorY": 820,
+          "scale": 0.34,
+          "grassRadius": 130
+        }
+      }
+    },
+    {
+      "viewId": "front-high",
+      "file": "หน้าบ้านมุมสูง.png",
+      "width": 2035,
+      "height": 1241,
+      "anchors": [
+        { "id": "gate-center", "worldX": 0.5, "worldY": 0.85, "pixelX": 1020, "pixelY": 1050 },
+        { "id": "driveway-right", "worldX": 0.72, "worldY": 0.7, "pixelX": 1480, "pixelY": 780 }
+      ],
+      "placements": {
+        "lamsam-front-right": {
+          "anchorX": 1520,
+          "anchorY": 720,
+          "scale": 0.28,
+          "grassRadius": 110
+        }
+      }
+    },
+    {
+      "viewId": "front-center",
+      "file": "หน้าบ้านตรงกลาง.png",
+      "width": 2147,
+      "height": 1221,
+      "anchors": [
+        { "id": "gate-center", "worldX": 0.5, "worldY": 0.8, "pixelX": 1070, "pixelY": 880 },
+        { "id": "driveway-right", "worldX": 0.72, "worldY": 0.68, "pixelX": 1540, "pixelY": 800 }
+      ],
+      "placements": {
+        "lamsam-front-right": {
+          "anchorX": 1560,
+          "anchorY": 790,
+          "scale": 0.32,
+          "grassRadius": 120
+        }
+      }
+    },
+    {
+      "viewId": "garage-front",
+      "file": "โรงจอดรถด้านหน้า.png",
+      "width": 1995,
+      "height": 1206,
+      "anchors": [
+        { "id": "driveway-right", "worldX": 0.72, "worldY": 0.65, "pixelX": 1380, "pixelY": 750 }
+      ],
+      "placements": {
+        "lamsam-front-right": {
+          "anchorX": 1320,
+          "anchorY": 760,
+          "scale": 0.3,
+          "grassRadius": 100
+        }
+      }
+    },
+    {
+      "viewId": "garage-right",
+      "file": "โรงจอดรถด้านขวา.png",
+      "width": 1842,
+      "height": 1129,
+      "anchors": [
+        { "id": "driveway-right", "worldX": 0.72, "worldY": 0.6, "pixelX": 1050, "pixelY": 680 }
+      ],
+      "placements": {
+        "lamsam-front-right": {
+          "anchorX": 980,
+          "anchorY": 700,
+          "scale": 0.32,
+          "grassRadius": 105
+        }
+      }
+    }
+  ]
+}

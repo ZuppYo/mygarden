@@ -1,7 +1,9 @@
 #!/usr/bin/env python
+import json
 import os
 import sys
 import argparse
+from pathlib import Path
 
 # Check if Pillow is installed
 try:
@@ -95,6 +97,133 @@ def do_collage(args):
         collage_img.save(args.output)
     print("Collage creation complete successfully.")
 
+
+def _load_json(path):
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _find_placement(placements_data, placement_id):
+    for element in placements_data.get("elements", []):
+        if element["id"] == placement_id:
+            return element
+    return None
+
+
+def _find_view(views_data, view_id):
+    for view in views_data.get("views", []):
+        if view["viewId"] == view_id:
+            return view
+    return None
+
+
+def _draw_grass_patch(base, anchor_x, anchor_y, radius, color, alpha):
+    from PIL import ImageDraw
+
+    layer = Image.new("RGBA", base.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(layer)
+    bbox = [
+        anchor_x - radius,
+        anchor_y - radius * 0.55,
+        anchor_x + radius,
+        anchor_y + radius * 0.15,
+    ]
+    draw.ellipse(bbox, fill=(*color, alpha))
+    return Image.alpha_composite(base, layer)
+
+
+def _paste_tree(base, asset_path, anchor_x, anchor_y, scale):
+    overlay = Image.open(asset_path).convert("RGBA")
+    if scale != 1.0:
+        w, h = overlay.size
+        overlay = overlay.resize(
+            (max(1, int(w * scale)), max(1, int(h * scale))),
+            Image.Resampling.LANCZOS,
+        )
+    paste_x = int(anchor_x - overlay.width / 2)
+    paste_y = int(anchor_y - overlay.height)
+    base.paste(overlay, (paste_x, paste_y), overlay)
+    return base
+
+
+def do_place(args):
+    workspace = Path(args.workspace).resolve()
+    design_dir = workspace / args.design_dir
+    resources_dir = workspace / args.resources_dir
+
+    placements_data = _load_json(design_dir / "placements.json")
+    view_anchors_data = _load_json(design_dir / "view-anchors.json")
+    visibility_data = _load_json(design_dir / "visibility-matrix.json")
+
+    placement = _find_placement(placements_data, args.placement)
+    if not placement:
+        print(f"Error: placement '{args.placement}' not found.", file=sys.stderr)
+        sys.exit(1)
+
+    visibility_entry = visibility_data.get("placements", {}).get(args.placement)
+    if not visibility_entry:
+        print(f"Error: no visibility entry for '{args.placement}'.", file=sys.stderr)
+        sys.exit(1)
+
+    asset_path = workspace / placement["asset"]
+    if not asset_path.exists():
+        print(f"Error: asset not found: {asset_path}", file=sys.stderr)
+        sys.exit(1)
+
+    grass_cfg = placement.get("grass", {})
+    grass_enabled = grass_cfg.get("enabled", False)
+    grass_color = tuple(grass_cfg.get("color", [46, 125, 50]))
+    grass_alpha = grass_cfg.get("alpha", 160)
+
+    processed = []
+    for view_id in visibility_entry["viewIds"]:
+        view = _find_view(view_anchors_data, view_id)
+        if not view:
+            print(f"Warning: view '{view_id}' not in view-anchors.json, skipping.", file=sys.stderr)
+            continue
+
+        params = view.get("placements", {}).get(args.placement)
+        if not params:
+            print(f"Warning: no placement params for '{args.placement}' in '{view_id}', skipping.", file=sys.stderr)
+            continue
+
+        base_path = resources_dir / view["file"]
+        if not base_path.exists():
+            print(f"Warning: base image missing: {base_path}, skipping.", file=sys.stderr)
+            continue
+
+        stem = Path(view["file"]).stem
+        if args.guide_dir:
+            guide_dir = workspace / args.guide_dir
+            guide_dir.mkdir(parents=True, exist_ok=True)
+            output_path = guide_dir / f"{view_id}_guide.png"
+        else:
+            output_path = resources_dir / f"{stem}_designed.png"
+
+        print(f"Placing '{args.placement}' on {view['file']} -> {output_path}")
+        base = Image.open(base_path).convert("RGBA")
+
+        anchor_x = int(params["anchorX"])
+        anchor_y = int(params["anchorY"])
+        scale = float(params.get("scale", 1.0))
+        grass_radius = int(params.get("grassRadius", 100))
+
+        if grass_enabled:
+            base = _draw_grass_patch(base, anchor_x, anchor_y, grass_radius, grass_color, grass_alpha)
+
+        base = _paste_tree(base, asset_path, anchor_x, anchor_y, scale)
+        base.convert("RGB").save(output_path)
+        processed.append(str(output_path.relative_to(workspace)))
+
+    if not processed:
+        print("Error: no views were processed.", file=sys.stderr)
+        sys.exit(1)
+
+    print(f"Place complete: {len(processed)} view(s).")
+    for p in processed:
+        print(f"  - {p}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Programmatic Image manipulation tool utilizing Pillow.")
     subparsers = parser.add_subparsers(dest="command", required=True, help="Command to run")
@@ -131,6 +260,33 @@ def main():
     collage_parser.add_argument("--tile-width", type=int, help="Optional width for each grid cell")
     collage_parser.add_argument("--tile-height", type=int, help="Optional height for each grid cell")
 
+    # Place (multi-view placement pipeline)
+    place_parser = subparsers.add_parser(
+        "place",
+        help="Apply placement registry to all visible views (outputs *_designed.png)",
+    )
+    place_parser.add_argument("--placement", required=True, help="Placement element id from placements.json")
+    place_parser.add_argument(
+        "--workspace",
+        default=".",
+        help="Workspace root (default: current directory)",
+    )
+    place_parser.add_argument(
+        "--design-dir",
+        default="design",
+        help="Design config directory relative to workspace",
+    )
+    place_parser.add_argument(
+        "--resources-dir",
+        default="resources",
+        help="Resources image directory relative to workspace",
+    )
+    place_parser.add_argument(
+        "--guide-dir",
+        default=None,
+        help="If set, write placement guides here (e.g. design/guides) instead of *_designed.png",
+    )
+
     args = parser.parse_args()
 
     if args.command == "crop":
@@ -141,6 +297,8 @@ def main():
         do_overlay(args)
     elif args.command == "collage":
         do_collage(args)
+    elif args.command == "place":
+        do_place(args)
 
 if __name__ == "__main__":
     main()

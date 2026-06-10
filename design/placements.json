@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "coordinateSystem": {
+    "description": "Normalized site plan: origin top-left, X right, Y toward street",
+    "unit": "normalized"
+  },
+  "elements": [
+    {
+      "id": "lamsam-front-right",
+      "species": "Lamsam",
+      "speciesTh": "ล่ำซำ",
+      "asset": "resources/tree/ต้นล่ำซำ-3-cutout.png",
+      "worldX": 0.72,
+      "worldY": 0.62,
+      "heightM": 2.25,
+      "canopyM": 1.75,
+      "zone": "front-yard",
+      "anchorView": "front-low",
+      "anchorNormX": 0.734,
+      "anchorNormY": 0.668,
+      "grass": {
+        "enabled": true,
+        "color": [46, 125, 50],
+        "alpha": 160,
+        "radiusRatio": 0.08
+      }
+    }
+  ]
+}
