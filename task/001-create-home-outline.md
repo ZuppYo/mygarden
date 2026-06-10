@@ -23,7 +23,11 @@ Related: [task/index.md](index.md)
 
 ## Checklist
 
-- [ ] T001 [N] Create `outline/` directory
-- [ ] T002 [N] Create `outline/home.html` with grid layout structure and modern styles
-- [ ] T003 [N] Map and embed all 13 PNG images from `resources/` into the HTML page with labels in Thai/English
-- [ ] T004 [N] Add basic interactive filtering/navigation by section (Front, Back, Sides, Garage) for easier viewing
+- [x] T001 [N] Create `outline/` directory
+  - ✅ Directory created successfully.
+- [x] T002 [N] Create `outline/home.html` with grid layout structure and modern styles
+  - ✅ Template page created with responsive grid and dark obsidian glassmorphism.
+- [x] T003 [N] Map and embed all 13 PNG images from `resources/` into the HTML page with labels in Thai/English
+  - ✅ All 13 images embedded with relative paths and correct zone labels.
+- [x] T004 [N] Add basic interactive filtering/navigation by section (Front, Back, Sides, Garage) for easier viewing
+  - ✅ Interactive filtering (Tabs + Search input) and zoom preview modal implemented.
