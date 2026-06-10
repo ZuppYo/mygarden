@@ -32,6 +32,7 @@
 - Done: `003-add-front-right-lamsam-tree` — Add front-right Lamsam tree with Japanese grass on low/high front views.
 - Done: `004-improve-multi-view-plant-placement` — Placement registry, `place` command, 5-view compositing, Placement Picker UI.
 - Done: `005-hybrid-generative-blend` — 2-phase place guide + generate_image blend for all 5 front-yard views.
+- Done: `006-placement-picker-occlusion-3d` — Header picker UX, 13-view selector, occlusion system.
 - Reload: `[task/index.md](task/index.md)`
 
 ## Task state pointers

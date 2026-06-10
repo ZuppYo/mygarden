@@ -117,6 +117,37 @@ def _find_view(views_data, view_id):
     return None
 
 
+def _point_in_polygon(x, y, polygon):
+    inside = False
+    n = len(polygon)
+    j = n - 1
+    for i in range(n):
+        xi, yi = polygon[i]
+        xj, yj = polygon[j]
+        denom = (yj - yi) or 1e-12
+        if ((yi > y) != (yj > y)) and (x < (xj - xi) * (y - yi) / denom + xi):
+            inside = not inside
+        j = i
+    return inside
+
+
+def get_view_visibility(view_id, norm_x, norm_y, visibility_entry, occluders_data):
+    """Return full | partial | hidden for a placement anchor in normalized view coords."""
+    explicit = visibility_entry.get("viewVisibility", {}).get(view_id)
+    if explicit:
+        return explicit
+
+    hidden_ids = set(visibility_entry.get("hiddenViewIds", []))
+    if view_id in hidden_ids:
+        return "hidden"
+
+    view_occluders = occluders_data.get("views", {}).get(view_id, {}).get("occluders", [])
+    for occ in view_occluders:
+        if _point_in_polygon(norm_x, norm_y, occ["polygon"]):
+            return occ.get("effect", "hidden")
+    return "full"
+
+
 def _draw_grass_patch(base, anchor_x, anchor_y, radius, color, alpha):
     from PIL import ImageDraw
 
@@ -154,6 +185,8 @@ def do_place(args):
     placements_data = _load_json(design_dir / "placements.json")
     view_anchors_data = _load_json(design_dir / "view-anchors.json")
     visibility_data = _load_json(design_dir / "visibility-matrix.json")
+    occluders_path = design_dir / "occluders.json"
+    occluders_data = _load_json(occluders_path) if occluders_path.exists() else {"views": {}}
 
     placement = _find_placement(placements_data, args.placement)
     if not placement:
@@ -176,6 +209,7 @@ def do_place(args):
     grass_alpha = grass_cfg.get("alpha", 160)
 
     processed = []
+    skipped = []
     for view_id in visibility_entry["viewIds"]:
         view = _find_view(view_anchors_data, view_id)
         if not view:
@@ -186,6 +220,16 @@ def do_place(args):
         if not params:
             print(f"Warning: no placement params for '{args.placement}' in '{view_id}', skipping.", file=sys.stderr)
             continue
+
+        norm_x = params["anchorX"] / view["width"]
+        norm_y = params["anchorY"] / view["height"]
+        visibility = get_view_visibility(view_id, norm_x, norm_y, visibility_entry, occluders_data)
+        if visibility == "hidden":
+            print(f"Skipping '{view_id}' — occlusion: hidden")
+            skipped.append(view_id)
+            continue
+        if visibility == "partial":
+            print(f"Placing '{view_id}' — occlusion: partial (guide only)")
 
         base_path = resources_dir / view["file"]
         if not base_path.exists():
@@ -219,9 +263,67 @@ def do_place(args):
         print("Error: no views were processed.", file=sys.stderr)
         sys.exit(1)
 
-    print(f"Place complete: {len(processed)} view(s).")
+    print(f"Place complete: {len(processed)} view(s), skipped {len(skipped)} hidden.")
     for p in processed:
         print(f"  - {p}")
+
+
+def do_reset_hidden(args):
+    """Copy raw base images to *_designed.png for occluded views (no tree)."""
+    import shutil
+
+    workspace = Path(args.workspace).resolve()
+    design_dir = workspace / args.design_dir
+    resources_dir = workspace / args.resources_dir
+
+    view_anchors_data = _load_json(design_dir / "view-anchors.json")
+    visibility_data = _load_json(design_dir / "visibility-matrix.json")
+    visibility_entry = visibility_data.get("placements", {}).get(args.placement)
+    if not visibility_entry:
+        print(f"Error: no visibility entry for '{args.placement}'.", file=sys.stderr)
+        sys.exit(1)
+
+    hidden_ids = visibility_entry.get("hiddenViewIds", [])
+    reset = []
+    for view_id in hidden_ids:
+        view = _find_view(view_anchors_data, view_id)
+        if not view:
+            continue
+        src = resources_dir / view["file"]
+        dst = resources_dir / f"{Path(view['file']).stem}_designed.png"
+        if not src.exists():
+            print(f"Warning: missing {src}", file=sys.stderr)
+            continue
+        shutil.copy2(src, dst)
+        reset.append(str(dst.relative_to(workspace)))
+        print(f"Reset hidden view {view_id}: {dst.name} (= raw)")
+
+    print(f"Reset complete: {len(reset)} view(s).")
+
+
+def do_visibility_report(args):
+    workspace = Path(args.workspace).resolve()
+    design_dir = workspace / args.design_dir
+    view_anchors_data = _load_json(design_dir / "view-anchors.json")
+    visibility_data = _load_json(design_dir / "visibility-matrix.json")
+    occluders_data = _load_json(design_dir / "occluders.json")
+
+    visibility_entry = visibility_data.get("placements", {}).get(args.placement)
+    if not visibility_entry:
+        print(f"Error: no visibility entry for '{args.placement}'.", file=sys.stderr)
+        sys.exit(1)
+
+    print(f"Visibility report for '{args.placement}':")
+    for view in view_anchors_data.get("views", []):
+        view_id = view["viewId"]
+        params = view.get("placements", {}).get(args.placement)
+        if params:
+            norm_x = params["anchorX"] / view["width"]
+            norm_y = params["anchorY"] / view["height"]
+            vis = get_view_visibility(view_id, norm_x, norm_y, visibility_entry, occluders_data)
+        else:
+            vis = visibility_entry.get("viewVisibility", {}).get(view_id, "n/a")
+        print(f"  {view_id}: {vis}")
 
 
 def main():
@@ -287,6 +389,20 @@ def main():
         help="If set, write placement guides here (e.g. design/guides) instead of *_designed.png",
     )
 
+    reset_parser = subparsers.add_parser(
+        "reset-hidden",
+        help="Copy raw images to *_designed.png for hidden/occluded views",
+    )
+    reset_parser.add_argument("--placement", required=True)
+    reset_parser.add_argument("--workspace", default=".")
+    reset_parser.add_argument("--design-dir", default="design")
+    reset_parser.add_argument("--resources-dir", default="resources")
+
+    vis_parser = subparsers.add_parser("visibility", help="Print per-view visibility report")
+    vis_parser.add_argument("--placement", required=True)
+    vis_parser.add_argument("--workspace", default=".")
+    vis_parser.add_argument("--design-dir", default="design")
+
     args = parser.parse_args()
 
     if args.command == "crop":
@@ -299,6 +415,10 @@ def main():
         do_collage(args)
     elif args.command == "place":
         do_place(args)
+    elif args.command == "reset-hidden":
+        do_reset_hidden(args)
+    elif args.command == "visibility":
+        do_visibility_report(args)
 
 if __name__ == "__main__":
     main()

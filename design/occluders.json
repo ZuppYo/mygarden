@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "description": "Per-view opaque regions (normalized 0-1). Placement anchor inside occluder => hidden from that view.",
+  "views": {
+    "front-low": {
+      "occluders": [
+        {
+          "id": "house-mass",
+          "label": "House and carport",
+          "polygon": [[0.0, 0.0], [0.62, 0.0], [0.62, 0.72], [0.0, 0.72]]
+        }
+      ]
+    },
+    "front-high": {
+      "occluders": [
+        {
+          "id": "house-mass",
+          "label": "House footprint",
+          "polygon": [[0.0, 0.0], [0.58, 0.0], [0.58, 0.65], [0.0, 0.65]]
+        }
+      ]
+    },
+    "front-center": {
+      "occluders": [
+        {
+          "id": "house-mass",
+          "label": "House",
+          "polygon": [[0.0, 0.0], [0.6, 0.0], [0.6, 0.7], [0.0, 0.7]]
+        }
+      ]
+    },
+    "garage-front": {
+      "occluders": [
+        {
+          "id": "carport-pillar",
+          "label": "Carport structure (partial block)",
+          "polygon": [[0.0, 0.0], [0.45, 0.0], [0.45, 0.55], [0.0, 0.55]],
+          "effect": "partial"
+        }
+      ]
+    },
+    "garage-right": {
+      "occluders": [
+        {
+          "id": "perimeter-wall",
+          "label": "Front wall edge",
+          "polygon": [[0.0, 0.35], [0.35, 0.35], [0.35, 1.0], [0.0, 1.0]],
+          "effect": "partial"
+        }
+      ]
+    },
+    "garage-left": {
+      "occluders": [
+        {
+          "id": "house-block",
+          "label": "House blocks right yard from this angle",
+          "polygon": [[0.45, 0.0], [1.0, 0.0], [1.0, 1.0], [0.45, 1.0]]
+        }
+      ]
+    },
+    "left-front": {
+      "occluders": [{ "id": "full-block", "label": "Front yard not visible", "polygon": [[0.5, 0.0], [1.0, 0.0], [1.0, 1.0], [0.5, 1.0]] }]
+    },
+    "left-middle": {
+      "occluders": [{ "id": "full-block", "label": "Front yard not visible", "polygon": [[0.55, 0.0], [1.0, 0.0], [1.0, 1.0], [0.55, 1.0]] }]
+    },
+    "left-back": {
+      "occluders": [{ "id": "full-block", "label": "Front yard not visible", "polygon": [[0.5, 0.0], [1.0, 0.0], [1.0, 1.0], [0.5, 1.0]] }]
+    },
+    "back": {
+      "occluders": [{ "id": "full-block", "label": "Front yard not visible", "polygon": [[0.0, 0.0], [1.0, 0.0], [1.0, 0.45], [0.0, 0.45]] }]
+    },
+    "right-back": {
+      "occluders": [{ "id": "full-block", "label": "Front-right tree behind house", "polygon": [[0.0, 0.0], [0.7, 0.0], [0.7, 1.0], [0.0, 1.0]] }]
+    },
+    "right-middle": {
+      "occluders": [{ "id": "full-block", "label": "Front yard occluded", "polygon": [[0.0, 0.0], [0.55, 0.0], [0.55, 1.0], [0.0, 1.0]] }]
+    },
+    "right-general": {
+      "occluders": [{ "id": "partial-edge", "label": "Tree may peek at edge only", "polygon": [[0.0, 0.0], [0.4, 0.0], [0.4, 0.5], [0.0, 0.5]], "effect": "partial" }]
+    }
+  },
+  "worldSectorRules": {
+    "description": "Fallback when no per-view placement anchor: front-right yard tree (worldX>0.5) visible only from angles 150-200",
+    "frontYardRight": {
+      "worldXMin": 0.5,
+      "visibleAngleRanges": [[150, 200]],
+      "hiddenViewIds": ["garage-left", "left-front", "left-middle", "left-back", "back", "right-back", "right-middle", "right-general"]
+    }
+  }
+}

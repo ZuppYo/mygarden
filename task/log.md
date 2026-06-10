@@ -49,3 +49,11 @@ Activity log for project tasks.
 ## [2026-06-10 23:45] executed | 005-hybrid-generative-blend
 - completed: T001, T002, T003, T004, T005, T006
 - note: regenerated 5 _designed.png via hybrid pipeline; updated WORKFLOW, SKILL, AGENTS
+
+## [2026-06-11 00:15] created | 006-placement-picker-occlusion-3d
+- type: planning
+- note: fix Placement Picker button layout, multi-view picking, and 3D occlusion visibility per viewpoint
+
+## [2026-06-11 01:30] executed | 006-placement-picker-occlusion-3d
+- completed: T001, T002, T003, T004, T005, T006, T007, T008
+- note: header picker UX, 13-view selector, occluders.json, visibility/reset-hidden commands, partial blend regen

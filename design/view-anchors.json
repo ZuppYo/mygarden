@@ -1,94 +1,119 @@
 {
-  "version": 1,
+  "version": 2,
   "views": [
     {
+      "viewId": "front-center",
+      "name": "หน้าบ้าน ตรงกลาง",
+      "file": "หน้าบ้านตรงกลาง.png",
+      "width": 2147,
+      "height": 1221,
+      "placements": {
+        "lamsam-front-right": { "anchorX": 1560, "anchorY": 790, "scale": 0.32, "grassRadius": 120 }
+      }
+    },
+    {
       "viewId": "front-low",
+      "name": "หน้าบ้าน มุมต่ำ",
       "file": "หน้าบ้านมุมต่ำ.png",
       "width": 2153,
       "height": 1228,
-      "anchors": [
-        { "id": "gate-center", "worldX": 0.5, "worldY": 0.82, "pixelX": 1080, "pixelY": 900 },
-        { "id": "driveway-right", "worldX": 0.72, "worldY": 0.72, "pixelX": 1580, "pixelY": 860 },
-        { "id": "house-front-left", "worldX": 0.18, "worldY": 0.42, "pixelX": 400, "pixelY": 500 }
-      ],
       "placements": {
-        "lamsam-front-right": {
-          "anchorX": 1580,
-          "anchorY": 820,
-          "scale": 0.34,
-          "grassRadius": 130
-        }
+        "lamsam-front-right": { "anchorX": 1580, "anchorY": 820, "scale": 0.34, "grassRadius": 130 }
       }
     },
     {
       "viewId": "front-high",
+      "name": "หน้าบ้าน มุมสูง",
       "file": "หน้าบ้านมุมสูง.png",
       "width": 2035,
       "height": 1241,
-      "anchors": [
-        { "id": "gate-center", "worldX": 0.5, "worldY": 0.85, "pixelX": 1020, "pixelY": 1050 },
-        { "id": "driveway-right", "worldX": 0.72, "worldY": 0.7, "pixelX": 1480, "pixelY": 780 }
-      ],
       "placements": {
-        "lamsam-front-right": {
-          "anchorX": 1520,
-          "anchorY": 720,
-          "scale": 0.28,
-          "grassRadius": 110
-        }
-      }
-    },
-    {
-      "viewId": "front-center",
-      "file": "หน้าบ้านตรงกลาง.png",
-      "width": 2147,
-      "height": 1221,
-      "anchors": [
-        { "id": "gate-center", "worldX": 0.5, "worldY": 0.8, "pixelX": 1070, "pixelY": 880 },
-        { "id": "driveway-right", "worldX": 0.72, "worldY": 0.68, "pixelX": 1540, "pixelY": 800 }
-      ],
-      "placements": {
-        "lamsam-front-right": {
-          "anchorX": 1560,
-          "anchorY": 790,
-          "scale": 0.32,
-          "grassRadius": 120
-        }
+        "lamsam-front-right": { "anchorX": 1520, "anchorY": 720, "scale": 0.28, "grassRadius": 110 }
       }
     },
     {
       "viewId": "garage-front",
+      "name": "โรงจอดรถ ด้านหน้า",
       "file": "โรงจอดรถด้านหน้า.png",
       "width": 1995,
       "height": 1206,
-      "anchors": [
-        { "id": "driveway-right", "worldX": 0.72, "worldY": 0.65, "pixelX": 1380, "pixelY": 750 }
-      ],
       "placements": {
-        "lamsam-front-right": {
-          "anchorX": 1320,
-          "anchorY": 760,
-          "scale": 0.3,
-          "grassRadius": 100
-        }
+        "lamsam-front-right": { "anchorX": 1320, "anchorY": 760, "scale": 0.3, "grassRadius": 100 }
       }
     },
     {
+      "viewId": "garage-left",
+      "name": "โรงจอดรถ ด้านซ้าย",
+      "file": "โรงจอดรถด้านซ้าย.png",
+      "width": 1422,
+      "height": 1088,
+      "placements": {}
+    },
+    {
       "viewId": "garage-right",
+      "name": "โรงจอดรถ ด้านขวา",
       "file": "โรงจอดรถด้านขวา.png",
       "width": 1842,
       "height": 1129,
-      "anchors": [
-        { "id": "driveway-right", "worldX": 0.72, "worldY": 0.6, "pixelX": 1050, "pixelY": 680 }
-      ],
       "placements": {
-        "lamsam-front-right": {
-          "anchorX": 980,
-          "anchorY": 700,
-          "scale": 0.32,
-          "grassRadius": 105
-        }
+        "lamsam-front-right": { "anchorX": 980, "anchorY": 700, "scale": 0.32, "grassRadius": 105 }
       }
+    },
+    {
+      "viewId": "left-front",
+      "name": "ข้างบ้านฝั่งซ้าย ด้านหน้า",
+      "file": "ข้างบ้านฝั่งซ้ายด้านหน้า.png",
+      "width": 2153,
+      "height": 1206,
+      "placements": {}
+    },
+    {
+      "viewId": "left-middle",
+      "name": "ข้างบ้านฝั่งซ้าย ตรงกลาง",
+      "file": "ข้างบ้านฝั่งซ้ายตรงกลาง.png",
+      "width": 2106,
+      "height": 1233,
+      "placements": {}
+    },
+    {
+      "viewId": "left-back",
+      "name": "ข้างบ้านฝั่งซ้าย ด้านหลัง",
+      "file": "ข้างบ้านฝั่งซ้ายด้านหลัง.png",
+      "width": 2116,
+      "height": 1226,
+      "placements": {}
+    },
+    {
+      "viewId": "back",
+      "name": "หลังบ้าน",
+      "file": "หลังบ้าน.png",
+      "width": 2129,
+      "height": 1213,
+      "placements": {}
+    },
+    {
+      "viewId": "right-back",
+      "name": "ข้างบ้านฝั่งขวา ด้านหลัง",
+      "file": "ข้างบ้านฝั่งขวาด้านหลัง.png",
+      "width": 2149,
+      "height": 1215,
+      "placements": {}
+    },
+    {
+      "viewId": "right-middle",
+      "name": "ข้างบ้านฝั่งขวา",
+      "file": "ข้างบ้านฝั่งขวา.png",
+      "width": 2147,
+      "height": 1211,
+      "placements": {}
+    },
+    {
+      "viewId": "right-general",
+      "name": "ข้างบ้าน (ทั่วไป)",
+      "file": "ข้างบ้าน.png",
+      "width": 1590,
+      "height": 991,
+      "placements": {}
     }
   ]
 }

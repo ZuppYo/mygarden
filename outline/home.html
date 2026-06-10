@@ -760,7 +760,39 @@
             gap: 0.75rem;
             margin-top: 0.75rem;
             flex-wrap: wrap;
+            align-items: center;
         }
+
+        .placement-view-select {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            color: var(--text-main);
+            padding: 0.5rem 0.75rem;
+            font-size: 0.9rem;
+            font-family: var(--font-display);
+            min-width: 280px;
+        }
+
+        .placement-view-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .placement-visibility-badge {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        .placement-visibility-badge.full { color: #6ee7b7; border-color: #065f46; }
+        .placement-visibility-badge.partial { color: #fcd34d; border-color: #92400e; }
+        .placement-visibility-badge.hidden { color: #fca5a5; border-color: #991b1b; }
     </style>
 </head>
 <body>
@@ -777,6 +809,10 @@
                 <div class="stats-badge" style="padding: 3px; gap: 0; display: flex; align-items: center;">
                     <button id="btn-mode-designed" class="filter-btn active" style="border: none; padding: 0.4rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s;">🌳 แบบจัดสวน (Design)</button>
                     <button id="btn-mode-raw" class="filter-btn" style="border: none; padding: 0.4rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; cursor: pointer; background: transparent; color: var(--text-muted); transition: all 0.2s;">🏠 โครงสร้างดิบ (Raw)</button>
+                </div>
+
+                <div class="stats-badge" style="padding: 3px;">
+                    <button id="btn-toggle-placement" class="filter-btn" type="button" style="border: none; padding: 0.4rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; cursor: pointer; background: transparent; color: var(--text-muted); transition: all 0.2s; white-space: nowrap;">📍 Placement Picker</button>
                 </div>
                 
                 <div class="stats-badge">
@@ -817,14 +853,18 @@
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
                     <input type="text" class="search-input" id="search-input" placeholder="ค้นหาตามชื่อมุมมอง/ไฟล์...">
-                    <button class="filter-btn" id="btn-toggle-placement" type="button" style="white-space: nowrap;">📍 Placement Picker</button>
                 </div>
             </div>
 
-            <!-- Placement Picker (anchor view: front-low) -->
+            <!-- Placement Picker (all views) -->
             <div class="placement-panel" id="placement-panel">
-                <h3>📍 Placement Picker — หน้าบ้านมุมต่ำ (anchor view)</h3>
-                <p class="hint">คลิกบนรูปเพื่อระบุตำแหน่งต้นไม้ (bottom-center anchor) แล้วคัดลอก JSON ไปอัปเดต <code>design/placements.json</code> และ <code>design/view-anchors.json</code></p>
+                <h3>📍 Placement Picker</h3>
+                <p class="hint">เลือกมุมมอง → คลิกบนรูปเพื่อระบุตำแหน่ง (bottom-center anchor) → คัดลอก JSON ไปอัปเดต <code>design/view-anchors.json</code></p>
+                <div class="placement-view-row">
+                    <label for="placement-view-select" style="color: var(--text-muted); font-size: 0.9rem;">มุมมอง:</label>
+                    <select id="placement-view-select" class="placement-view-select"></select>
+                    <span id="placement-visibility-badge" class="placement-visibility-badge">—</span>
+                </div>
                 <div class="placement-canvas-wrap" id="placement-canvas">
                     <img id="placement-ref-img" src="../resources/หน้าบ้านมุมต่ำ.png" alt="Placement reference">
                     <div class="placement-marker" id="placement-marker"></div>
@@ -1634,7 +1674,38 @@
         btnModeDesigned.addEventListener('click', () => setGlobalMode('designed'));
         btnModeRaw.addEventListener('click', () => setGlobalMode('raw'));
 
-        // PLACEMENT PICKER
+        // PLACEMENT PICKER (all 13 views)
+        const PLACEMENT_ID = 'lamsam-front-right';
+        const PLACEMENT_VIEWS = [
+            { viewId: 'front-center', name: 'หน้าบ้าน ตรงกลาง', file: 'หน้าบ้านตรงกลาง.png', width: 2147, height: 1221, visibility: 'full' },
+            { viewId: 'front-low', name: 'หน้าบ้าน มุมต่ำ', file: 'หน้าบ้านมุมต่ำ.png', width: 2153, height: 1228, visibility: 'full' },
+            { viewId: 'front-high', name: 'หน้าบ้าน มุมสูง', file: 'หน้าบ้านมุมสูง.png', width: 2035, height: 1241, visibility: 'full' },
+            { viewId: 'garage-front', name: 'โรงจอดรถ ด้านหน้า', file: 'โรงจอดรถด้านหน้า.png', width: 1995, height: 1206, visibility: 'partial' },
+            { viewId: 'garage-left', name: 'โรงจอดรถ ด้านซ้าย', file: 'โรงจอดรถด้านซ้าย.png', width: 1422, height: 1088, visibility: 'hidden' },
+            { viewId: 'garage-right', name: 'โรงจอดรถ ด้านขวา', file: 'โรงจอดรถด้านขวา.png', width: 1842, height: 1129, visibility: 'partial' },
+            { viewId: 'left-front', name: 'ข้างบ้านฝั่งซ้าย ด้านหน้า', file: 'ข้างบ้านฝั่งซ้ายด้านหน้า.png', width: 2153, height: 1206, visibility: 'hidden' },
+            { viewId: 'left-middle', name: 'ข้างบ้านฝั่งซ้าย ตรงกลาง', file: 'ข้างบ้านฝั่งซ้ายตรงกลาง.png', width: 2106, height: 1233, visibility: 'hidden' },
+            { viewId: 'left-back', name: 'ข้างบ้านฝั่งซ้าย ด้านหลัง', file: 'ข้างบ้านฝั่งซ้ายด้านหลัง.png', width: 2116, height: 1226, visibility: 'hidden' },
+            { viewId: 'back', name: 'หลังบ้าน', file: 'หลังบ้าน.png', width: 2129, height: 1213, visibility: 'hidden' },
+            { viewId: 'right-back', name: 'ข้างบ้านฝั่งขวา ด้านหลัง', file: 'ข้างบ้านฝั่งขวาด้านหลัง.png', width: 2149, height: 1215, visibility: 'hidden' },
+            { viewId: 'right-middle', name: 'ข้างบ้านฝั่งขวา', file: 'ข้างบ้านฝั่งขวา.png', width: 2147, height: 1211, visibility: 'hidden' },
+            { viewId: 'right-general', name: 'ข้างบ้าน (ทั่วไป)', file: 'ข้างบ้าน.png', width: 1590, height: 991, visibility: 'hidden' },
+        ];
+        const PLACEMENT_DEFAULTS = {
+            'lamsam-front-right': { scale: 0.32, grassRadius: 120 },
+            'front-low': { scale: 0.34, grassRadius: 130 },
+            'front-high': { scale: 0.28, grassRadius: 110 },
+            'garage-front': { scale: 0.3, grassRadius: 100 },
+            'garage-right': { scale: 0.32, grassRadius: 105 },
+        };
+        const PLACEMENT_SAVED = {
+            'front-low': { anchorX: 1580, anchorY: 820 },
+            'front-high': { anchorX: 1520, anchorY: 720 },
+            'front-center': { anchorX: 1560, anchorY: 790 },
+            'garage-front': { anchorX: 1320, anchorY: 760 },
+            'garage-right': { anchorX: 980, anchorY: 700 },
+        };
+
         const btnTogglePlacement = document.getElementById('btn-toggle-placement');
         const placementPanel = document.getElementById('placement-panel');
         const placementCanvas = document.getElementById('placement-canvas');
@@ -1642,42 +1713,101 @@
         const placementMarker = document.getElementById('placement-marker');
         const placementOutput = document.getElementById('placement-output');
         const btnCopyPlacement = document.getElementById('btn-copy-placement');
-        const PLACEMENT_REF_WIDTH = 2153;
-        const PLACEMENT_REF_HEIGHT = 1228;
+        const placementViewSelect = document.getElementById('placement-view-select');
+        const placementVisibilityBadge = document.getElementById('placement-visibility-badge');
+
+        let currentPlacementView = PLACEMENT_VIEWS[1];
         let lastPlacementJson = '';
 
+        function getPlacementView(viewId) {
+            return PLACEMENT_VIEWS.find(v => v.viewId === viewId) || PLACEMENT_VIEWS[0];
+        }
+
+        function updatePlacementVisibilityBadge(view) {
+            const labels = { full: 'มองเห็นเต็ม (full)', partial: 'มองเห็นบางส่วน (partial)', hidden: 'ถูกบัง (hidden)' };
+            placementVisibilityBadge.textContent = labels[view.visibility] || view.visibility;
+            placementVisibilityBadge.className = `placement-visibility-badge ${view.visibility}`;
+        }
+
+        function loadPlacementView(view) {
+            currentPlacementView = view;
+            placementRefImg.src = `../resources/${view.file}`;
+            placementRefImg.alt = view.name;
+            updatePlacementVisibilityBadge(view);
+            placementMarker.style.display = 'none';
+            placementOutput.textContent = view.visibility === 'hidden'
+                ? `มุม "${view.name}" ถูกบังสำหรับต้นไม้นี้ — ไม่ต้องวางตำแหน่ง (ใช้ reset-hidden)`
+                : `คลิกบนรูป "${view.name}" เพื่อระบุตำแหน่ง…`;
+
+            const saved = PLACEMENT_SAVED[view.viewId];
+            if (saved) {
+                const relX = saved.anchorX / view.width;
+                const relY = saved.anchorY / view.height;
+                placementMarker.style.display = 'block';
+                placementMarker.style.left = `${relX * 100}%`;
+                placementMarker.style.top = `${relY * 100}%`;
+            }
+        }
+
+        PLACEMENT_VIEWS.forEach(v => {
+            const opt = document.createElement('option');
+            opt.value = v.viewId;
+            opt.textContent = `${v.name} (${v.viewId})`;
+            placementViewSelect.appendChild(opt);
+        });
+        placementViewSelect.value = 'front-low';
+        loadPlacementView(getPlacementView('front-low'));
+
+        placementViewSelect.addEventListener('change', () => {
+            loadPlacementView(getPlacementView(placementViewSelect.value));
+        });
+
         btnTogglePlacement.addEventListener('click', () => {
-            placementPanel.classList.toggle('active');
-            btnTogglePlacement.classList.toggle('active');
+            const isActive = placementPanel.classList.toggle('active');
+            btnTogglePlacement.classList.toggle('active', isActive);
+            if (isActive) {
+                btnTogglePlacement.style.background = '';
+                btnTogglePlacement.style.color = '';
+            } else {
+                btnTogglePlacement.style.background = 'transparent';
+                btnTogglePlacement.style.color = 'var(--text-muted)';
+            }
         });
 
         placementCanvas.addEventListener('click', (e) => {
+            const view = currentPlacementView;
+            if (view.visibility === 'hidden') {
+                placementOutput.textContent = 'มุมนี้ถูกบัง — ไม่ต้องกำหนดตำแหน่งต้นไม้';
+                return;
+            }
             const rect = placementRefImg.getBoundingClientRect();
             const relX = (e.clientX - rect.left) / rect.width;
             const relY = (e.clientY - rect.top) / rect.height;
-            const pixelX = Math.round(relX * PLACEMENT_REF_WIDTH);
-            const pixelY = Math.round(relY * PLACEMENT_REF_HEIGHT);
+            const pixelX = Math.round(relX * view.width);
+            const pixelY = Math.round(relY * view.height);
+            const def = PLACEMENT_DEFAULTS[view.viewId] || PLACEMENT_DEFAULTS['lamsam-front-right'];
 
             placementMarker.style.display = 'block';
             placementMarker.style.left = `${relX * 100}%`;
             placementMarker.style.top = `${relY * 100}%`;
 
             const snippet = {
-                placements_json: {
-                    anchorNormX: Number(relX.toFixed(3)),
-                    anchorNormY: Number(relY.toFixed(3)),
-                    worldX: Number(relX.toFixed(2)),
-                    worldY: Number(relY.toFixed(2)),
-                },
-                view_anchors_front_low: {
-                    'lamsam-front-right': {
+                viewId: view.viewId,
+                viewFile: view.file,
+                visibility: view.visibility,
+                view_anchors_update: {
+                    [PLACEMENT_ID]: {
                         anchorX: pixelX,
                         anchorY: pixelY,
-                        scale: 0.34,
-                        grassRadius: 130,
+                        scale: def.scale,
+                        grassRadius: def.grassRadius,
                     },
                 },
-                run: 'python .agents/skills/image-processor/scripts/process_image.py place --placement lamsam-front-right',
+                normalized: { normX: Number(relX.toFixed(3)), normY: Number(relY.toFixed(3)) },
+                commands: [
+                    'python .agents/skills/image-processor/scripts/process_image.py place --placement lamsam-front-right --guide-dir design/guides',
+                    'python .agents/skills/image-processor/scripts/process_image.py visibility --placement lamsam-front-right',
+                ],
             };
             lastPlacementJson = JSON.stringify(snippet, null, 2);
             placementOutput.textContent = lastPlacementJson;

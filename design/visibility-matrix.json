@@ -1,15 +1,29 @@
 {
-  "version": 1,
+  "version": 2,
   "zoneRules": [
     {
       "zone": "front-yard",
-      "description": "Front yard elements with worldX > 0.5 visible from front and garage-right sector",
-      "positionFilter": { "worldXMin": 0.5, "worldXMax": 1.0 },
-      "viewIds": ["front-low", "front-high", "front-center", "garage-front", "garage-right"]
+      "description": "Front yard elements with worldX > 0.5",
+      "positionFilter": { "worldXMin": 0.5, "worldXMax": 1.0 }
     }
   ],
   "placements": {
     "lamsam-front-right": {
+      "viewVisibility": {
+        "front-low": "full",
+        "front-high": "full",
+        "front-center": "full",
+        "garage-front": "partial",
+        "garage-right": "partial",
+        "garage-left": "hidden",
+        "left-front": "hidden",
+        "left-middle": "hidden",
+        "left-back": "hidden",
+        "back": "hidden",
+        "right-back": "hidden",
+        "right-middle": "hidden",
+        "right-general": "hidden"
+      },
       "viewIds": ["front-low", "front-high", "front-center", "garage-front", "garage-right"],
       "files": [
         "หน้าบ้านมุมต่ำ.png",
@@ -18,7 +32,8 @@
         "โรงจอดรถด้านหน้า.png",
         "โรงจอดรถด้านขวา.png"
       ],
-      "orbitViewpointIds": ["front-low", "front-high", "front-center", "garage-front", "garage-right"]
+      "orbitViewpointIds": ["front-low", "front-high", "front-center", "garage-front", "garage-right"],
+      "hiddenViewIds": ["garage-left", "left-front", "left-middle", "left-back", "back", "right-back", "right-middle", "right-general"]
     }
   }
 }

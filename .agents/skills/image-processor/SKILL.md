@@ -52,6 +52,16 @@ For exact, pixel-perfect composition (e.g., cropping a specific zone of a photo,
   python .agents/skills/image-processor/scripts/process_image.py place --placement <id>
   ```
 
+- **visibility**: Print per-view occlusion report (`full` | `partial` | `hidden`).
+  ```bash
+  python .agents/skills/image-processor/scripts/process_image.py visibility --placement <id>
+  ```
+
+- **reset-hidden**: Copy raw images to `*_designed.png` for occluded views (no tree).
+  ```bash
+  python .agents/skills/image-processor/scripts/process_image.py reset-hidden --placement <id>
+  ```
+
 ## 3. Hybrid workflow (required for new plants)
 
 **Phase 1 — Placement guide** (`place --guide-dir design/guides`): precise position marker.  
@@ -59,13 +69,14 @@ For exact, pixel-perfect composition (e.g., cropping a specific zone of a photo,
 
 1. Register element in `design/placements.json`.
 2. Set per-view anchors in `design/view-anchors.json` (Placement Picker in `outline/home.html`).
-3. Confirm visibility in `design/visibility-matrix.json`.
-4. Run `place --guide-dir design/guides` → guides for AI reference.
-5. Run `generate_image` per view with: **raw house** + **tree species ref** + **guide** + anchored prompt (`normX`/`normY`).
-6. Save Phase 2 output to `resources/*_designed.png`.
-7. Wire `designedSrc` in `outline/home.html` for all visibility-matrix views.
+3. Set `viewVisibility` in `design/visibility-matrix.json`; define occluders in `design/occluders.json`.
+4. Run `visibility --placement <id>` to verify.
+5. Run `place --guide-dir design/guides` → guides (skips `hidden`).
+6. Run `generate_image` per `full`/`partial` view; use occlusion prompts for `partial`.
+7. Run `reset-hidden` for `hidden` views.
+8. Wire `designedSrc` in `outline/home.html` only for visible views.
 
-**Rules:** `place` alone = position only (not final). `generate_image` alone without guide = imprecise position. Always use both phases.
+**Rules:** `place` = guide only. `generate_image` needs guide + coords. `hidden` views must use `reset-hidden`, never show tree.
 
 See [design/WORKFLOW.md](../../../design/WORKFLOW.md).
 

@@ -12,5 +12,6 @@ Read for **active** vs **archived** tasks. Use recent entries in `task/log.md` o
 | [003-add-front-right-lamsam-tree](./003-add-front-right-lamsam-tree.md) | Add front-right Lamsam tree | execution | design, resources, front-yard, tree | 2026-06-10 | done |
 | [004-improve-multi-view-plant-placement](./004-improve-multi-view-plant-placement.md) | Improve multi-view plant placement workflow | planning | workflow, multi-view, placement, 3d-view, research | 2026-06-10 | done |
 | [005-hybrid-generative-blend](./005-hybrid-generative-blend.md) | Hybrid generative blend pipeline | execution | design, generative, blend, placement, multi-view | 2026-06-10 | done |
+| [006-placement-picker-occlusion-3d](./006-placement-picker-occlusion-3d.md) | Placement picker UX and 3D occlusion | planning | placement, occlusion, 3d, ui, multi-view | 2026-06-10 | done |
 
 ## Archived (`task/archive/`)

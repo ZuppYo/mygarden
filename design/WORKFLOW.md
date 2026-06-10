@@ -1,60 +1,74 @@
 # Multi-View Plant Placement Workflow
 
-Coordinate-based + generative landscaping pipeline for this repo.
-
-## Problems solved
-
-| Gap | Fix |
-|-----|-----|
-| Imprecise position | Placement registry + Placement Picker |
-| Missing views | Visibility matrix + multi-view processing |
-| 3D 360 gap | `designedSrc` on all visible orbit viewpoints |
-| "Pasted photo" look | **Phase 2 generative blend** re-renders tree into CGI style |
+Coordinate-based + generative + occlusion-aware landscaping pipeline.
 
 ## Files
 
 | File | Role |
 |------|------|
-| `design/placements.json` | Canonical element position (world coords, asset, size) |
-| `design/view-anchors.json` | Per-view pixel anchors + overlay params |
-| `design/visibility-matrix.json` | Which views show each placement |
-| `design/guides/` | Phase 1 placement guides (not final output) |
+| `design/placements.json` | Canonical element position |
+| `design/view-anchors.json` | Per-view pixel anchors (all 13 views) |
+| `design/visibility-matrix.json` | Per-view `full` / `partial` / `hidden` |
+| `design/occluders.json` | Occluder polygons per view |
+| `design/guides/` | Phase 1 placement guides |
 
-## Mandatory 2-phase hybrid pipeline
+## Mandatory 3-step pipeline
 
 ```
-Phase 1 — Placement guide (precise position)
-  python process_image.py place --placement <id> --guide-dir design/guides
-  → Rough tree position + grass marker for AI reference
-
-Phase 2 — Generative blend (visual quality)
-  generate_image per view with:
-    - raw house PNG (Image 1)
-    - tree species reference PNG (Image 2)
-    - placement guide PNG (Image 3)
-  Prompt: integrate tree at guide coords in matching 3D CGI style
-  → Save as resources/<view>_designed.png
+1. Placement Picker (outline/home.html) — pick anchor per view
+2. Phase 1: place --guide-dir design/guides — position guides
+3. Phase 2: generate_image — blend into CGI (occlusion-aware prompts)
+4. reset-hidden — copy raw to *_designed.png for hidden views
 ```
 
-**Never use Phase 1 output as final** — guides are position hints only.  
-**Never use text-only generate_image for position** — always include guide + anchor coords.
+### Phase 1 — Placement guide
 
-## Coordinate system
+```bash
+python process_image.py place --placement <id> --guide-dir design/guides
+```
 
-- **Site plan:** `worldX`, `worldY` in `[0, 1]`
-- **View pixels:** `anchorX`, `anchorY` = bottom-center of tree on ground
-- **Normalized:** `normX = anchorX / width`, `normY = anchorY / height`
+Skips views marked `hidden` in visibility matrix.
 
-## Visibility rules (front-yard)
+### Phase 2 — Generative blend
 
-Element with `worldX > 0.5` visible from: `front-low`, `front-high`, `front-center`, `garage-front`, `garage-right`.
+Per view with `full` or `partial` visibility:
 
-## Asset requirements
+- Image 1: raw house PNG
+- Image 2: tree species reference
+- Image 3: guide PNG
+- Prompt: include `normX`/`normY`; for `partial` add occlusion hint (wall/pillar blocks)
 
-- Tree reference: `resources/tree/ต้นล่ำซำ-*.png` for species/style in Phase 2
-- Cutout assets (`*-cutout.png`) only for Phase 1 guides, not final renders
+### Occlusion — hidden views
+
+```bash
+python process_image.py reset-hidden --placement <id>
+```
+
+Copies raw `resources/<view>.png` → `<view>_designed.png` (no tree).
+
+```bash
+python process_image.py visibility --placement <id>
+```
+
+Prints per-view visibility report.
+
+## Visibility levels
+
+| Level | Guide | Generate | Output |
+|-------|-------|----------|--------|
+| `full` | yes | yes, standard prompt | blended `_designed.png` |
+| `partial` | yes | yes, occlusion prompt | blended with depth cues |
+| `hidden` | skip | skip | `reset-hidden` → raw copy |
+
+## Placement Picker (UI)
+
+- Toggle in **header** (next to Design/Raw mode)
+- Dropdown: all 13 views from `view-anchors.json`
+- Badge: full / partial / hidden per view
+- Export JSON keyed by `viewId`
 
 ## References
 
-- [004-improve-multi-view-plant-placement](../task/004-improve-multi-view-plant-placement.md)
-- [005-hybrid-generative-blend](../task/005-hybrid-generative-blend.md)
+- [004](../task/004-improve-multi-view-plant-placement.md) placement registry
+- [005](../task/005-hybrid-generative-blend.md) generative blend
+- [006](../task/006-placement-picker-occlusion-3d.md) picker UX + occlusion
