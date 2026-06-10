@@ -63,9 +63,9 @@ Prints per-view visibility report.
 ## Placement Picker (UI)
 
 - Toggle in **header** (next to Design/Raw mode)
-- Dropdown: all 13 views from `view-anchors.json`
-- Badge: full / partial / hidden per view
-- Export JSON keyed by `viewId`
+- Dropdown: all 13 views — **every view can set planting anchor** (click on image)
+- Badge: full / partial / hidden = **final render behavior only**, not picker restriction
+- Export JSON keyed by `viewId` → update `design/view-anchors.json`
 
 ## References
 

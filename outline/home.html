@@ -859,7 +859,7 @@
             <!-- Placement Picker (all views) -->
             <div class="placement-panel" id="placement-panel">
                 <h3>📍 Placement Picker</h3>
-                <p class="hint">เลือกมุมมอง → คลิกบนรูปเพื่อระบุตำแหน่ง (bottom-center anchor) → คัดลอก JSON ไปอัปเดต <code>design/view-anchors.json</code></p>
+                <p class="hint">เลือกมุมมอง → คลิกบนรูปเพื่อระบุ<strong>จุดปลูก</strong> (bottom-center anchor) ได้ทุกมุม → คัดลอก JSON ไปอัปเดต <code>design/view-anchors.json</code>. ป้าย full/partial/hidden บอกแค่ว่าภาพสุดท้ายจะแสดงต้นไม้อย่างไร ไม่ได้ห้ามกำหนดตำแหน่ง</p>
                 <div class="placement-view-row">
                     <label for="placement-view-select" style="color: var(--text-muted); font-size: 0.9rem;">มุมมอง:</label>
                     <select id="placement-view-select" class="placement-view-select"></select>
@@ -1724,7 +1724,7 @@
         }
 
         function updatePlacementVisibilityBadge(view) {
-            const labels = { full: 'มองเห็นเต็ม (full)', partial: 'มองเห็นบางส่วน (partial)', hidden: 'ถูกบัง (hidden)' };
+            const labels = { full: 'แสดงในภาพ: เต็ม (full)', partial: 'แสดงในภาพ: บางส่วน (partial)', hidden: 'แสดงในภาพ: ไม่แสดง (hidden)' };
             placementVisibilityBadge.textContent = labels[view.visibility] || view.visibility;
             placementVisibilityBadge.className = `placement-visibility-badge ${view.visibility}`;
         }
@@ -1735,9 +1735,13 @@
             placementRefImg.alt = view.name;
             updatePlacementVisibilityBadge(view);
             placementMarker.style.display = 'none';
-            placementOutput.textContent = view.visibility === 'hidden'
-                ? `มุม "${view.name}" ถูกบังสำหรับต้นไม้นี้ — ไม่ต้องวางตำแหน่ง (ใช้ reset-hidden)`
-                : `คลิกบนรูป "${view.name}" เพื่อระบุตำแหน่ง…`;
+            let hint = `คลิกบนรูป "${view.name}" เพื่อระบุจุดปลูก…`;
+            if (view.visibility === 'hidden') {
+                hint += ' (มุมนี้ถูกบัง — ภาพสุดท้ายใช้ reset-hidden ไม่แสดงต้นไม้ แต่ยังบันทึกพิกัดอ้างอิงได้)';
+            } else if (view.visibility === 'partial') {
+                hint += ' (มุมนี้มองเห็นบางส่วน — ใช้ occlusion prompt ตอน generate)';
+            }
+            placementOutput.textContent = hint;
 
             const saved = PLACEMENT_SAVED[view.viewId];
             if (saved) {
@@ -1776,10 +1780,6 @@
 
         placementCanvas.addEventListener('click', (e) => {
             const view = currentPlacementView;
-            if (view.visibility === 'hidden') {
-                placementOutput.textContent = 'มุมนี้ถูกบัง — ไม่ต้องกำหนดตำแหน่งต้นไม้';
-                return;
-            }
             const rect = placementRefImg.getBoundingClientRect();
             const relX = (e.clientX - rect.left) / rect.width;
             const relY = (e.clientY - rect.top) / rect.height;
