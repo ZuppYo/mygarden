@@ -1703,7 +1703,7 @@
             'front-high': { anchorX: 1520, anchorY: 720 },
             'front-center': { anchorX: 1560, anchorY: 790 },
             'garage-front': { anchorX: 1320, anchorY: 760 },
-            'garage-right': { anchorX: 980, anchorY: 700 },
+            'garage-right': { anchorX: 975, anchorY: 698 },
         };
 
         const btnTogglePlacement = document.getElementById('btn-toggle-placement');
@@ -1807,6 +1807,7 @@
                 commands: [
                     'python .agents/skills/image-processor/scripts/process_image.py place --placement lamsam-front-right --guide-dir design/guides',
                     'python .agents/skills/image-processor/scripts/process_image.py visibility --placement lamsam-front-right',
+                    'python .agents/skills/image-processor/scripts/process_image.py composite-foreground --view <viewId>',
                 ],
             };
             lastPlacementJson = JSON.stringify(snippet, null, 2);

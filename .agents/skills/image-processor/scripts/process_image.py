@@ -326,6 +326,62 @@ def do_visibility_report(args):
         print(f"  {view_id}: {vis}")
 
 
+def _build_foreground_mask(size, foreground_layers):
+    from PIL import ImageDraw
+
+    w, h = size
+    mask = Image.new("L", (w, h), 0)
+    draw = ImageDraw.Draw(mask)
+    for layer in foreground_layers:
+        poly = [(int(x * w), int(y * h)) for x, y in layer["polygon"]]
+        draw.polygon(poly, fill=255)
+    return mask
+
+
+def do_composite_foreground(args):
+    """Paste raw roof/structure pixels over designed image for 3D depth occlusion."""
+    workspace = Path(args.workspace).resolve()
+    design_dir = workspace / args.design_dir
+    resources_dir = workspace / args.resources_dir
+
+    occluders_data = _load_json(design_dir / "occluders.json")
+    view_anchors_data = _load_json(design_dir / "view-anchors.json")
+
+    view = _find_view(view_anchors_data, args.view)
+    if not view:
+        print(f"Error: view '{args.view}' not found.", file=sys.stderr)
+        sys.exit(1)
+
+    view_occluders = occluders_data.get("views", {}).get(args.view, {})
+    foreground_layers = view_occluders.get("foregroundLayers", [])
+    if not foreground_layers:
+        print(f"Error: no foregroundLayers for view '{args.view}'.", file=sys.stderr)
+        sys.exit(1)
+
+    raw_path = resources_dir / view["file"]
+    designed_path = resources_dir / f"{Path(view['file']).stem}_designed.png"
+    if not raw_path.exists():
+        print(f"Error: raw image missing: {raw_path}", file=sys.stderr)
+        sys.exit(1)
+    if not designed_path.exists():
+        print(f"Error: designed image missing: {designed_path}", file=sys.stderr)
+        sys.exit(1)
+
+    raw = Image.open(raw_path).convert("RGBA")
+    designed = Image.open(designed_path).convert("RGBA")
+    if raw.size != designed.size:
+        print(f"Resizing designed {designed.size} -> raw {raw.size} for mask alignment.")
+        designed = designed.resize(raw.size, Image.Resampling.LANCZOS)
+
+    mask = _build_foreground_mask(raw.size, foreground_layers)
+    result = Image.composite(raw, designed, mask)
+    result.convert("RGB").save(designed_path)
+
+    print(f"Composite foreground: {designed_path.name} ({len(foreground_layers)} layer(s) from raw)")
+    for layer in foreground_layers:
+        print(f"  - {layer['id']}: {layer.get('label', '')}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Programmatic Image manipulation tool utilizing Pillow.")
     subparsers = parser.add_subparsers(dest="command", required=True, help="Command to run")
@@ -403,6 +459,15 @@ def main():
     vis_parser.add_argument("--workspace", default=".")
     vis_parser.add_argument("--design-dir", default="design")
 
+    fg_parser = subparsers.add_parser(
+        "composite-foreground",
+        help="Paste raw foreground layers (roof/beams) over designed image for 3D occlusion",
+    )
+    fg_parser.add_argument("--view", required=True, help="viewId e.g. garage-right")
+    fg_parser.add_argument("--workspace", default=".")
+    fg_parser.add_argument("--design-dir", default="design")
+    fg_parser.add_argument("--resources-dir", default="resources")
+
     args = parser.parse_args()
 
     if args.command == "crop":
@@ -419,6 +484,8 @@ def main():
         do_reset_hidden(args)
     elif args.command == "visibility":
         do_visibility_report(args)
+    elif args.command == "composite-foreground":
+        do_composite_foreground(args)
 
 if __name__ == "__main__":
     main()

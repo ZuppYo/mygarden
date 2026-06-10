@@ -47,7 +47,28 @@
           "polygon": [[0.0, 0.35], [0.35, 0.35], [0.35, 1.0], [0.0, 1.0]],
           "effect": "partial"
         }
-      ]
+      ],
+      "foregroundLayers": [
+        {
+          "id": "carport-roof-zone",
+          "label": "Roof panels above floor (y < 0.52) — tree canopy must stay behind",
+          "polygon": [[0.0, 0.0], [0.88, 0.0], [0.88, 0.5], [0.0, 0.54]]
+        },
+        {
+          "id": "carport-front-beam",
+          "label": "Front horizontal beam",
+          "polygon": [[0.0, 0.32], [0.86, 0.28], [0.88, 0.42], [0.0, 0.48]]
+        },
+        {
+          "id": "carport-left-pillar",
+          "label": "Left pillar (full height)",
+          "polygon": [[0.0, 0.0], [0.1, 0.0], [0.12, 0.56], [0.0, 0.58]]
+        }
+      ],
+      "visibleFloorZone": {
+        "label": "Floor area where tree trunk/foliage may show (below roof)",
+        "polygon": [[0.35, 0.48], [0.72, 0.46], [0.75, 0.75], [0.32, 0.78]]
+      }
     },
     "garage-left": {
       "occluders": [

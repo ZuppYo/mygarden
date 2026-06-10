@@ -57,3 +57,18 @@ Activity log for project tasks.
 ## [2026-06-11 01:30] executed | 006-placement-picker-occlusion-3d
 - completed: T001, T002, T003, T004, T005, T006, T007, T008
 - note: header picker UX, 13-view selector, occluders.json, visibility/reset-hidden commands, partial blend regen
+
+## [2026-06-10 23:59] archived | 000-006 batch
+- moved: task/000-project-bootstrap.md → task/archive/2026-06-10/
+- moved: task/001-create-home-outline.md → task/archive/2026-06-10/
+- moved: task/002-implement-3d-360-view.md → task/archive/2026-06-10/
+- moved: task/003-add-front-right-lamsam-tree.md → task/archive/2026-06-10/
+- moved: task/004-improve-multi-view-plant-placement.md → task/archive/2026-06-10/
+- moved: task/005-hybrid-generative-blend.md → task/archive/2026-06-10/
+- moved: task/006-placement-picker-occlusion-3d.md → task/archive/2026-06-10/
+- note: session handoff — active task queue cleared; post-006 garage-right composite-foreground occlusion applied
+
+## [2026-06-10 23:59] handoff | session
+- placement: lamsam-front-right — full on front-low/high/center; partial garage-front/garage-right; hidden elsewhere
+- pipeline: place --guide-dir → generate_image → resize → composite-foreground (partial views with roof)
+- next: tune garage-right occluder masks; extend foreground occlusion to garage-front if needed; create 007 when ready

@@ -38,6 +38,16 @@ Per view with `full` or `partial` visibility:
 - Image 3: guide PNG
 - Prompt: include `normX`/`normY`; for `partial` add occlusion hint (wall/pillar blocks)
 
+### 3D foreground occlusion (roof/beams in front of tree)
+
+For `partial` views where structure blocks the tree (e.g. `garage-right` carport roof):
+
+```bash
+python process_image.py composite-foreground --view garage-right
+```
+
+Pastes roof/beam pixels from **raw** image over `_designed.png` using `foregroundLayers` polygons in `design/occluders.json`. Run after Phase 2 generative blend; resize designed to raw dimensions first if sizes differ.
+
 ### Occlusion — hidden views
 
 ```bash

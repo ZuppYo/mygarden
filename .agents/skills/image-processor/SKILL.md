@@ -62,6 +62,12 @@ For exact, pixel-perfect composition (e.g., cropping a specific zone of a photo,
   python .agents/skills/image-processor/scripts/process_image.py reset-hidden --placement <id>
   ```
 
+- **composite-foreground**: Paste raw roof/beam layers over designed image for 3D depth (tree behind structure).
+  ```bash
+  python .agents/skills/image-processor/scripts/process_image.py composite-foreground --view garage-right
+  ```
+  Requires `foregroundLayers` in `design/occluders.json`. Run after generative blend; resize designed to raw size if needed.
+
 ## 3. Hybrid workflow (required for new plants)
 
 **Phase 1 — Placement guide** (`place --guide-dir design/guides`): precise position marker.  
