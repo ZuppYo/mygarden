@@ -449,7 +449,6 @@
         .dial-svg {
             width: 100%;
             height: 100%;
-            transform: rotate(-90deg); /* align 0 deg to top (North) */
         }
 
         .dial-ring {
@@ -1042,39 +1041,41 @@
                                 
                                 <!-- Orientation Compass Ticks & Labels -->
                                 <!-- 0 deg (North / Back) -->
-                                <text class="dial-label" x="130" y="45" transform="rotate(90 130 45)">หลัง (0°)</text>
+                                <text class="dial-label" x="130" y="45">หลัง (0°)</text>
                                 <!-- 90 deg (East / Right Side) -->
-                                <text class="dial-label" x="215" y="130" transform="rotate(90 215 130)">ขวา (90°)</text>
+                                <text class="dial-label" x="215" y="130">ขวา (90°)</text>
                                 <!-- 180 deg (South / Front Center) -->
-                                <text class="dial-label" x="130" y="215" transform="rotate(90 130 215)">หน้า (180°)</text>
+                                <text class="dial-label" x="130" y="215">หน้า (180°)</text>
                                 <!-- 270 deg (West / Left Side) -->
-                                <text class="dial-label" x="45" y="130" transform="rotate(90 45 130)">ซ้าย (270°)</text>
+                                <text class="dial-label" x="45" y="130">ซ้าย (270°)</text>
                                 
                                 <!-- Viewpoint markers as dots on the ring -->
-                                <!-- Back: 0 -->
-                                <circle class="viewpoint-dot" cx="235" cy="130" r="5.5" data-angle="0" />
-                                <!-- Right-Back: 45 -->
-                                <circle class="viewpoint-dot" cx="204.2" cy="204.2" r="5.5" data-angle="45" />
-                                <!-- Right-Middle: 90 -->
-                                <circle class="viewpoint-dot" cx="130" cy="235" r="5.5" data-angle="90" />
-                                <!-- Right-General: 135 -->
-                                <circle class="viewpoint-dot" cx="55.8" cy="204.2" r="5.5" data-angle="135" />
-                                <!-- Garage Right: 155 -->
-                                <circle class="viewpoint-dot" cx="34.8" cy="174.4" r="5.5" data-angle="155" />
-                                <!-- Front/Garage Front: 180 -->
-                                <circle class="viewpoint-dot" cx="25" cy="130" r="5.5" data-angle="180" />
-                                <!-- Garage Left: 205 -->
-                                <circle class="viewpoint-dot" cx="34.8" cy="85.6" r="5.5" data-angle="205" />
-                                <!-- Left-Front: 225 -->
-                                <circle class="viewpoint-dot" cx="55.8" cy="55.8" r="5.5" data-angle="225" />
-                                <!-- Left-Middle: 270 -->
-                                <circle class="viewpoint-dot" cx="130" cy="25" r="5.5" data-angle="270" />
-                                <!-- Left-Back: 315 -->
-                                <circle class="viewpoint-dot" cx="204.2" cy="55.8" r="5.5" data-angle="315" />
+                                <!-- Back: 0° -->
+                                <circle class="viewpoint-dot" cx="130" cy="25" r="5.5" data-angle="0" />
+                                <!-- Right-Back: 45° -->
+                                <circle class="viewpoint-dot" cx="204.2" cy="55.8" r="5.5" data-angle="45" />
+                                <!-- Right-Middle: 90° -->
+                                <circle class="viewpoint-dot" cx="235" cy="130" r="5.5" data-angle="90" />
+                                <!-- Right-General: 135° -->
+                                <circle class="viewpoint-dot" cx="204.2" cy="204.2" r="5.5" data-angle="135" />
+                                <!-- Garage Right: 155° -->
+                                <circle class="viewpoint-dot" cx="174.4" cy="225.2" r="5.5" data-angle="155" />
+                                <!-- Garage Front: 170° -->
+                                <circle class="viewpoint-dot" cx="148.2" cy="233.4" r="5.5" data-angle="170" />
+                                <!-- Front Center: 180° -->
+                                <circle class="viewpoint-dot" cx="130" cy="235" r="5.5" data-angle="180" />
+                                <!-- Garage Left: 195° -->
+                                <circle class="viewpoint-dot" cx="102.8" cy="231.4" r="5.5" data-angle="195" />
+                                <!-- Left-Front: 225° -->
+                                <circle class="viewpoint-dot" cx="55.8" cy="204.2" r="5.5" data-angle="225" />
+                                <!-- Left-Middle: 270° -->
+                                <circle class="viewpoint-dot" cx="25" cy="130" r="5.5" data-angle="270" />
+                                <!-- Left-Back: 315° -->
+                                <circle class="viewpoint-dot" cx="55.8" cy="55.8" r="5.5" data-angle="315" />
 
                                 <!-- Pointer Needle -->
-                                <line class="dial-indicator-line" x1="130" y1="130" x2="25" y2="130" id="dial-needle" />
-                                <circle class="dial-pointer" cx="25" cy="130" r="10" id="dial-pointer-head" />
+                                <line class="dial-indicator-line" x1="130" y1="130" x2="130" y2="235" id="dial-needle" />
+                                <circle class="dial-pointer" cx="130" cy="235" r="10" id="dial-pointer-head" />
                                 
                                 <!-- Center Cap -->
                                 <circle class="dial-center-cap" cx="130" cy="130" r="22" />
@@ -1202,9 +1203,9 @@
             { id: 'front-low', angle: 180, level: 'low', name: 'หน้าบ้าน มุมต่ำ', zone: 'หน้าบ้าน', src: '../resources/หน้าบ้านมุมต่ำ.png' },
             { id: 'front-high', angle: 180, level: 'high', name: 'หน้าบ้าน มุมสูง', zone: 'หน้าบ้าน', src: '../resources/หน้าบ้านมุมสูง.png' },
             
-            { id: 'garage-front', angle: 180, level: 'normal', name: 'โรงจอดรถ ด้านหน้า', zone: 'โรงจอดรถ', src: '../resources/โรงจอดรถด้านหน้า.png' }, // map to 180
-            { id: 'garage-left', cxAngle: 205, angle: 205, level: 'normal', name: 'โรงจอดรถ ด้านซ้าย', zone: 'โรงจอดรถ', src: '../resources/โรงจอดรถด้านซ้าย.png' },
-            { id: 'garage-right', cxAngle: 155, angle: 155, level: 'normal', name: 'โรงจอดรถ ด้านขวา', zone: 'โรงจอดรถ', src: '../resources/โรงจอดรถด้านขวา.png' },
+            { id: 'garage-front', angle: 170, level: 'normal', name: 'โรงจอดรถ ด้านหน้า', zone: 'โรงจอดรถ', src: '../resources/โรงจอดรถด้านหน้า.png' },
+            { id: 'garage-left', angle: 195, level: 'normal', name: 'โรงจอดรถ ด้านซ้าย', zone: 'โรงจอดรถ', src: '../resources/โรงจอดรถด้านซ้าย.png' },
+            { id: 'garage-right', angle: 155, level: 'normal', name: 'โรงจอดรถ ด้านขวา', zone: 'โรงจอดรถ', src: '../resources/โรงจอดรถด้านขวา.png' },
             
             { id: 'left-front', angle: 225, level: 'normal', name: 'ข้างบ้านฝั่งซ้าย ด้านหน้า', zone: 'ข้างบ้านฝั่งซ้าย', src: '../resources/ข้างบ้านฝั่งซ้ายด้านหน้า.png' },
             { id: 'left-middle', angle: 270, level: 'normal', name: 'ข้างบ้านฝั่งซ้าย ตรงกลาง', zone: 'ข้างบ้านฝั่งซ้าย', src: '../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png' },
@@ -1218,7 +1219,7 @@
         ];
 
         // Unique angle list (sorted counter clockwise/clockwise)
-        const uniqueAngles = [0, 45, 90, 135, 155, 180, 205, 225, 270, 315];
+        const uniqueAngles = [0, 45, 90, 135, 155, 170, 180, 195, 225, 270, 315];
 
         let currentAngle = 180;
         let currentLevel = 'normal';
