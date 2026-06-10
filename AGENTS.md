@@ -27,6 +27,7 @@
 
 - Done: `000-project-bootstrap` — Bootstrap task system, setup persona rules, install Pillow, and verify image-processor skill.
 - Done: `001-create-home-outline` — Create layout template displaying all house images.
+- Done: `002-implement-3d-360-view` — Research and implement 3D pseudo-360 viewpoint switcher.
 - Next: Waiting for user gardening design instructions.
 - Reload: `[task/index.md](task/index.md)`
 

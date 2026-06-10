@@ -16,6 +16,7 @@
             --surface-hover: #1e2a41;
             --primary-color: #10b981; /* Emerald */
             --primary-glow: rgba(16, 185, 129, 0.15);
+            --accent-blue: #3b82f6;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
             --border-color: #243048;
@@ -51,7 +52,7 @@
             align-items: center;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 1.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .header-title h1 {
@@ -89,7 +90,56 @@
             font-weight: 700;
         }
 
-        /* Navigation / Filtering Controls */
+        /* Workspace Switcher Tabs */
+        .workspace-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.75rem;
+        }
+
+        .w-tab {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.5rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            transition: color var(--transition-speed);
+        }
+
+        .w-tab:hover {
+            color: var(--text-main);
+        }
+
+        .w-tab.active {
+            color: var(--primary-color);
+        }
+
+        .w-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.85rem;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        /* Section visibility */
+        .section-content {
+            display: none;
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        /* NAVIGATION / FILTER CONTROLS (Gallery Section) */
         .controls-row {
             display: flex;
             justify-content: space-between;
@@ -267,6 +317,290 @@
             opacity: 0.8;
         }
 
+        /* 3D ORBIT VIEW CONTAINER */
+        .orbit-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .orbit-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Left Column: Interactive Viewer Frame */
+        .orbit-viewer-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 1.25rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .orbit-viewer-frame {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            background-color: #05070c;
+            overflow: hidden;
+        }
+
+        .orbit-viewer-frame img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: opacity 0.25s ease-in-out;
+        }
+
+        .orbit-viewer-overlay {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .orbit-viewer-badge {
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--primary-color);
+            padding: 0.4rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .orbit-viewer-angle {
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--accent-blue);
+            padding: 0.4rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .orbit-viewer-details {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            background: linear-gradient(180deg, var(--surface-color) 0%, #0e1420 100%);
+        }
+
+        .orbit-viewer-details h2 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .orbit-viewer-details p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Right Column: Dial and Controls Dashboard */
+        .orbit-controls-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .controls-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 1.25rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .controls-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--primary-color);
+            padding-left: 0.5rem;
+            color: var(--text-main);
+        }
+
+        /* 3D DIAL COMPASS UI */
+        .dial-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, #192437 0%, #0c121e 100%);
+            border-radius: 50%;
+            border: 4px solid var(--border-color);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.6), 0 0 20px rgba(16, 185, 129, 0.05);
+            cursor: pointer;
+            user-select: none;
+            touch-action: none;
+        }
+
+        .dial-svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg); /* align 0 deg to top (North) */
+        }
+
+        .dial-ring {
+            fill: none;
+            stroke: var(--border-color);
+            stroke-width: 8;
+        }
+
+        .dial-indicator-line {
+            fill: none;
+            stroke: var(--primary-color);
+            stroke-width: 3;
+            stroke-dasharray: 4 4;
+        }
+
+        .dial-pointer {
+            fill: var(--primary-color);
+            stroke: #ffffff;
+            stroke-width: 2.5;
+            cursor: grab;
+            filter: drop-shadow(0 0 8px var(--primary-color));
+            transition: transform 0.15s cubic-bezier(0.1, 0.8, 0.3, 1);
+        }
+
+        .dial-center-cap {
+            fill: #0c121e;
+            stroke: var(--border-color);
+            stroke-width: 3;
+        }
+
+        .dial-label {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 700;
+            fill: var(--text-muted);
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+
+        .dial-label.active {
+            fill: var(--text-main);
+        }
+
+        .viewpoint-dot {
+            fill: var(--surface-color);
+            stroke: var(--text-muted);
+            stroke-width: 2;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .viewpoint-dot:hover {
+            fill: var(--accent-blue);
+            stroke: #ffffff;
+            r: 7;
+        }
+
+        .viewpoint-dot.active {
+            fill: var(--primary-color);
+            stroke: #ffffff;
+            r: 8;
+            filter: drop-shadow(0 0 5px var(--primary-color));
+        }
+
+        /* Tour controls & height selectors */
+        .tour-button-row {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tour-btn {
+            flex: 1;
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all var(--transition-speed);
+        }
+
+        .tour-btn:hover {
+            border-color: var(--primary-color);
+            background-color: var(--surface-hover);
+        }
+
+        .tour-btn.active-tour {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        /* Height Button Group */
+        .height-selector-group {
+            display: flex;
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+
+        .height-btn {
+            flex: 1;
+            background-color: var(--surface-color);
+            border: none;
+            color: var(--text-muted);
+            padding: 0.6rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .height-btn:not(:last-child) {
+            border-right: 1px solid var(--border-color);
+        }
+
+        .height-btn:hover:not(:disabled) {
+            color: var(--text-main);
+            background-color: var(--surface-hover);
+        }
+
+        .height-btn.active {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        .height-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        /* Directional compass text indicator */
+        .compass-indicator-text {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-top: 0.75rem;
+        }
+
+        .compass-indicator-text span {
+            color: var(--primary-color);
+        }
+
         /* Modal Overlay */
         .modal {
             position: fixed;
@@ -377,294 +711,403 @@
             </div>
         </header>
 
-        <!-- Controls Row -->
-        <div class="controls-row">
-            <div class="filter-tabs">
-                <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
-                <button class="filter-btn" data-filter="front">หน้าบ้าน (Front)</button>
-                <button class="filter-btn" data-filter="back">หลังบ้าน (Back)</button>
-                <button class="filter-btn" data-filter="left">ข้างบ้านฝั่งซ้าย (Left)</button>
-                <button class="filter-btn" data-filter="right">ข้างบ้านฝั่งขวา (Right)</button>
-                <button class="filter-btn" data-filter="garage">โรงจอดรถ (Garage)</button>
+        <!-- Workspace Tabs -->
+        <div class="workspace-tabs">
+            <button class="w-tab active" id="tab-gallery">🗂️ คลังรูปภาพ (Gallery View)</button>
+            <button class="w-tab" id="tab-orbit">🔄 มุมมอง 3D 360° (Orbit View)</button>
+        </div>
+
+        <!-- GALLERY SECTION (Active by default) -->
+        <div class="section-content active" id="gallery-section">
+            <!-- Controls Row -->
+            <div class="controls-row">
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
+                    <button class="filter-btn" data-filter="front">หน้าบ้าน (Front)</button>
+                    <button class="filter-btn" data-filter="back">หลังบ้าน (Back)</button>
+                    <button class="filter-btn" data-filter="left">ข้างบ้านฝั่งซ้าย (Left)</button>
+                    <button class="filter-btn" data-filter="right">ข้างบ้านฝั่งขวา (Right)</button>
+                    <button class="filter-btn" data-filter="garage">โรงจอดรถ (Garage)</button>
+                </div>
+                
+                <div class="search-box">
+                    <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" class="search-input" id="search-input" placeholder="ค้นหาตามชื่อมุมมอง/ไฟล์...">
+                </div>
             </div>
-            
-            <div class="search-box">
-                <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-                <input type="text" class="search-input" id="search-input" placeholder="ค้นหาตามชื่อมุมมอง/ไฟล์...">
+
+            <!-- Image Grid -->
+            <div class="image-grid" id="image-grid">
+                <!-- 1. หน้าบ้านตรงกลาง -->
+                <div class="image-card" data-zone="front" data-name="หน้าบ้าน ตรงกลาง front center center">
+                    <div class="image-wrapper" onclick="openModal('../resources/หน้าบ้านตรงกลาง.png', 'หน้าบ้าน ตรงกลาง (Front Center View)')">
+                        <span class="zone-badge">หน้าบ้าน</span>
+                        <img src="../resources/หน้าบ้านตรงกลาง.png" alt="หน้าบ้านตรงกลาง">
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <h3>หน้าบ้าน ตรงกลาง</h3>
+                            <p class="filename">หน้าบ้านตรงกลาง.png</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="view-btn" onclick="openModal('../resources/หน้าบ้านตรงกลาง.png', 'หน้าบ้าน ตรงกลาง (Front Center View)')">
+                                ขยายภาพ 
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. หน้าบ้านมุมต่ำ -->
+                <div class="image-card" data-zone="front" data-name="หน้าบ้าน มุมต่ำ low angle">
+                    <div class="image-wrapper" onclick="openModal('../resources/หน้าบ้านมุมต่ำ.png', 'หน้าบ้าน มุมต่ำ (Front Low Angle View)')">
+                        <span class="zone-badge">หน้าบ้าน</span>
+                        <img src="../resources/หน้าบ้านมุมต่ำ.png" alt="หน้าบ้านมุมต่ำ">
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <h3>หน้าบ้าน มุมต่ำ</h3>
+                            <p class="filename">หน้าบ้านมุมต่ำ.png</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="view-btn" onclick="openModal('../resources/หน้าบ้านมุมต่ำ.png', 'หน้าบ้าน มุมต่ำ (Front Low Angle View)')">
+                                ขยายภาพ
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. หน้าบ้านมุมสูง -->
+                <div class="image-card" data-zone="front" data-name="หน้าบ้าน มุมสูง high angle">
+                    <div class="image-wrapper" onclick="openModal('../resources/หน้าบ้านมุมสูง.png', 'หน้าบ้าน มุมสูง (Front High Angle View)')">
+                        <span class="zone-badge">หน้าบ้าน</span>
+                        <img src="../resources/หน้าบ้านมุมสูง.png" alt="หน้าบ้านมุมสูง">
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <h3>หน้าบ้าน มุมสูง</h3>
+                            <p class="filename">หน้าบ้านมุมสูง.png</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="view-btn" onclick="openModal('../resources/หน้าบ้านมุมสูง.png', 'หน้าบ้าน มุมสูง (Front High Angle View)')">
+                                ขยายภาพ
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. หลังบ้าน -->
+                <div class="image-card" data-zone="back" data-name="หลังบ้าน back yard back view">
+                    <div class="image-wrapper" onclick="openModal('../resources/หลังบ้าน.png', 'หลังบ้าน (Back Yard View)')">
+                        <span class="zone-badge">หลังบ้าน</span>
+                        <img src="../resources/หลังบ้าน.png" alt="หลังบ้าน">
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <h3>หลังบ้าน</h3>
+                            <p class="filename">หลังบ้าน.png</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="view-btn" onclick="openModal('../resources/หลังบ้าน.png', 'หลังบ้าน (Back Yard View)')">
+                                ขยายภาพ
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. ข้างบ้านฝั่งซ้าย ด้านหน้า -->
+                <div class="image-card" data-zone="left" data-name="ข้างบ้านฝั่งซ้าย ด้านหน้า left side front">
+                    <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายด้านหน้า.png', 'ข้างบ้านฝั่งซ้าย ด้านหน้า (Left Front View)')">
+                        <span class="zone-badge">ข้างบ้านฝั่งซ้าย</span>
+                        <img src="../resources/ข้างบ้านฝั่งซ้ายด้านหน้า.png" alt="ข้างบ้านฝั่งซ้ายด้านหน้า">
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <h3>ข้างบ้านฝั่งซ้าย ด้านหน้า</h3>
+                            <p class="filename">ข้างบ้านฝั่งซ้ายด้านหน้า.png</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="view-btn" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายด้านหน้า.png', 'ข้างบ้านฝั่งซ้าย ด้านหน้า (Left Front View)')">
+                                ขยายภาพ
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. ข้างบ้านฝั่งซ้าย ตรงกลาง -->
+                <div class="image-card" data-zone="left" data-name="ข้างบ้านฝั่งซ้าย ตรงกลาง left side middle center">
+                    <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png', 'ข้างบ้านฝั่งซ้าย ตรงกลาง (Left Middle View)')">
+                        <span class="zone-badge">ข้างบ้านฝั่งซ้าย</span>
+                        <img src="../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png" alt="ข้างบ้านฝั่งซ้ายตรงกลาง">
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <h3>ข้างบ้านฝั่งซ้าย ตรงกลาง</h3>
+                            <p class="filename">ข้างบ้านฝั่งซ้ายตรงกลาง.png</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="view-btn" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png', 'ข้างบ้านฝั่งซ้าย ตรงกลาง (Left Middle View)')">
+                                ขยายภาพ
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. ข้างบ้านฝั่งซ้าย ด้านหลัง -->
+                <div class="image-card" data-zone="left" data-name="ข้างบ้านฝั่งซ้าย ด้านหลัง left side back">
+                    <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายด้านหลัง.png', 'ข้างบ้านฝั่งซ้าย ด้านหลัง (Left Back View)')">
+                        <span class="zone-badge">ข้างบ้านฝั่งซ้าย</span>
+                        <img src="../resources/ข้างบ้านฝั่งซ้ายด้านหลัง.png" alt="ข้างบ้านฝั่งซ้ายด้านหลัง">
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <h3>ข้างบ้านฝั่งซ้าย ด้านหลัง</h3>
+                            <p class="filename">ข้างบ้านฝั่งซ้ายด้านหลัง.png</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="view-btn" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายด้านหลัง.png', 'ข้างบ้านฝั่งซ้าย ด้านหลัง (Left Back View)')">
+                                ขยายภาพ
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. ข้างบ้านฝั่งขวา ตรงกลาง -->
+                <div class="image-card" data-zone="right" data-name="ข้างบ้านฝั่งขวา right side center middle">
+                    <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้านฝั่งขวา.png', 'ข้างบ้านฝั่งขวา (Right Side View)')">
+                        <span class="zone-badge">ข้างบ้านฝั่งขวา</span>
+                        <img src="../resources/ข้างบ้านฝั่งขวา.png" alt="ข้างบ้านฝั่งขวา">
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <h3>ข้างบ้านฝั่งขวา</h3>
+                            <p class="filename">ข้างบ้านฝั่งขวา.png</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="view-btn" onclick="openModal('../resources/ข้างบ้านฝั่งขวา.png', 'ข้างบ้านฝั่งขวา (Right Side View)')">
+                                ขยายภาพ
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. ข้างบ้าน ทั่วไป -->
+                <div class="image-card" data-zone="right" data-name="ข้างบ้าน side view side layout general">
+                    <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้าน.png', 'ข้างบ้าน - มุมมองทั่วไป (General Side View)')">
+                        <span class="zone-badge">ข้างบ้านฝั่งขวา</span>
+                        <img src="../resources/ข้างบ้าน.png" alt="ข้างบ้าน">
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <h3>ข้างบ้าน (ทั่วไป)</h3>
+                            <p class="filename">ข้างบ้าน.png</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="view-btn" onclick="openModal('../resources/ข้างบ้าน.png', 'ข้างบ้าน - มุมมองทั่วไป (General Side View)')">
+                                ขยายภาพ
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. ข้างบ้านฝั่งขวา ด้านหลัง -->
+                <div class="image-card" data-zone="right" data-name="ข้างบ้านฝั่งขวา ด้านหลัง right side back">
+                    <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้านฝั่งขวาด้านหลัง.png', 'ข้างบ้านฝั่งขวา ด้านหลัง (Right Back View)')">
+                        <span class="zone-badge">ข้างบ้านฝั่งขวา</span>
+                        <img src="../resources/ข้างบ้านฝั่งขวาด้านหลัง.png" alt="ข้างบ้านฝั่งขวาด้านหลัง">
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <h3>ข้างบ้านฝั่งขวา ด้านหลัง</h3>
+                            <p class="filename">ข้างบ้านฝั่งขวาด้านหลัง.png</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="view-btn" onclick="openModal('../resources/ข้างบ้านฝั่งขวาด้านหลัง.png', 'ข้างบ้านฝั่งขวา ด้านหลัง (Right Back View)')">
+                                ขยายภาพ
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11. โรงจอดรถ ด้านหน้า -->
+                <div class="image-card" data-zone="garage" data-name="โรงจอดรถ ด้านหน้า garage front">
+                    <div class="image-wrapper" onclick="openModal('../resources/โรงจอดรถด้านหน้า.png', 'โรงจอดรถ ด้านหน้า (Garage Front View)')">
+                        <span class="zone-badge">โรงจอดรถ</span>
+                        <img src="../resources/โรงจอดรถด้านหน้า.png" alt="โรงจอดรถด้านหน้า">
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <h3>โรงจอดรถ ด้านหน้า</h3>
+                            <p class="filename">โรงจอดรถด้านหน้า.png</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="view-btn" onclick="openModal('../resources/โรงจอดรถด้านหน้า.png', 'โรงจอดรถ ด้านหน้า (Garage Front View)')">
+                                ขยายภาพ
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12. โรงจอดรถ ด้านซ้าย -->
+                <div class="image-card" data-zone="garage" data-name="โรงจอดรถ ด้านซ้าย garage left">
+                    <div class="image-wrapper" onclick="openModal('../resources/โรงจอดรถด้านซ้าย.png', 'โรงจอดรถ ด้านซ้าย (Garage Left View)')">
+                        <span class="zone-badge">โรงจอดรถ</span>
+                        <img src="../resources/โรงจอดรถด้านซ้าย.png" alt="โรงจอดรถด้านซ้าย">
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <h3>โรงจอดรถ ด้านซ้าย</h3>
+                            <p class="filename">โรงจอดรถด้านซ้าย.png</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="view-btn" onclick="openModal('../resources/โรงจอดรถด้านซ้าย.png', 'โรงจอดรถ ด้านซ้าย (Garage Left View)')">
+                                ขยายภาพ
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 13. โรงจอดรถ ด้านขวา -->
+                <div class="image-card" data-zone="garage" data-name="โรงจอดรถ ด้านขวา garage right">
+                    <div class="image-wrapper" onclick="openModal('../resources/โรงจอดรถด้านขวา.png', 'โรงจอดรถ ด้านขวา (Garage Right View)')">
+                        <span class="zone-badge">โรงจอดรถ</span>
+                        <img src="../resources/โรงจอดรถด้านขวา.png" alt="โรงจอดรถด้านขวา">
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <h3>โรงจอดรถ ด้านขวา</h3>
+                            <p class="filename">โรงจอดรถด้านขวา.png</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="view-btn" onclick="openModal('../resources/โรงจอดรถด้านขวา.png', 'โรงจอดรถ ด้านขวา (Garage Right View)')">
+                                ขยายภาพ
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- No Results message -->
+                <div class="no-results" id="no-results">
+                    <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <p>ไม่พบรูปภาพโครงร่างที่ตรงกับการค้นหา</p>
+                </div>
             </div>
         </div>
 
-        <!-- Image Grid -->
-        <div class="image-grid" id="image-grid">
-            <!-- 1. หน้าบ้านตรงกลาง -->
-            <div class="image-card" data-zone="front" data-name="หน้าบ้าน ตรงกลาง front center center">
-                <div class="image-wrapper" onclick="openModal('../resources/หน้าบ้านตรงกลาง.png', 'หน้าบ้าน ตรงกลาง (Front Center View)')">
-                    <span class="zone-badge">หน้าบ้าน</span>
-                    <img src="../resources/หน้าบ้านตรงกลาง.png" alt="หน้าบ้านตรงกลาง">
-                </div>
-                <div class="card-details">
-                    <div>
-                        <h3>หน้าบ้าน ตรงกลาง</h3>
-                        <p class="filename">หน้าบ้านตรงกลาง.png</p>
+        <!-- 3D ORBIT SECTION -->
+        <div class="section-content" id="orbit-section">
+            <div class="orbit-grid">
+                <!-- Viewer Card -->
+                <div class="orbit-viewer-card">
+                    <div class="orbit-viewer-frame">
+                        <img id="orbit-img" src="../resources/หน้าบ้านตรงกลาง.png" alt="Orbit Viewer">
+                        <div class="orbit-viewer-overlay">
+                            <span class="orbit-viewer-badge" id="orbit-badge-zone">หน้าบ้าน</span>
+                            <span class="orbit-viewer-angle" id="orbit-badge-angle">มุมมอง: 180°</span>
+                        </div>
                     </div>
-                    <div class="card-actions">
-                        <button class="view-btn" onclick="openModal('../resources/หน้าบ้านตรงกลาง.png', 'หน้าบ้าน ตรงกลาง (Front Center View)')">
-                            ขยายภาพ 
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                        </button>
+                    <div class="orbit-viewer-details">
+                        <h2 id="orbit-title">หน้าบ้าน ตรงกลาง</h2>
+                        <p id="orbit-filename">หน้าบ้านตรงกลาง.png</p>
                     </div>
                 </div>
-            </div>
 
-            <!-- 2. หน้าบ้านมุมต่ำ -->
-            <div class="image-card" data-zone="front" data-name="หน้าบ้าน มุมต่ำ low angle">
-                <div class="image-wrapper" onclick="openModal('../resources/หน้าบ้านมุมต่ำ.png', 'หน้าบ้าน มุมต่ำ (Front Low Angle View)')">
-                    <span class="zone-badge">หน้าบ้าน</span>
-                    <img src="../resources/หน้าบ้านมุมต่ำ.png" alt="หน้าบ้านมุมต่ำ">
-                </div>
-                <div class="card-details">
-                    <div>
-                        <h3>หน้าบ้าน มุมต่ำ</h3>
-                        <p class="filename">หน้าบ้านมุมต่ำ.png</p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="view-btn" onclick="openModal('../resources/หน้าบ้านมุมต่ำ.png', 'หน้าบ้าน มุมต่ำ (Front Low Angle View)')">
-                            ขยายภาพ
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
+                <!-- Controls Panel -->
+                <div class="orbit-controls-panel">
+                    <!-- Dial Controller -->
+                    <div class="controls-card">
+                        <h3>หมุนกล้องรอบตัวบ้าน (360° Compass Dial)</h3>
+                        
+                        <div class="dial-container" id="dial-container">
+                            <svg class="dial-svg" viewBox="0 0 260 260">
+                                <!-- Outer track -->
+                                <circle class="dial-ring" cx="130" cy="130" r="105" />
+                                
+                                <!-- Orientation Compass Ticks & Labels -->
+                                <!-- 0 deg (North / Back) -->
+                                <text class="dial-label" x="130" y="45" transform="rotate(90 130 45)">หลัง (0°)</text>
+                                <!-- 90 deg (East / Right Side) -->
+                                <text class="dial-label" x="215" y="130" transform="rotate(90 215 130)">ขวา (90°)</text>
+                                <!-- 180 deg (South / Front Center) -->
+                                <text class="dial-label" x="130" y="215" transform="rotate(90 130 215)">หน้า (180°)</text>
+                                <!-- 270 deg (West / Left Side) -->
+                                <text class="dial-label" x="45" y="130" transform="rotate(90 45 130)">ซ้าย (270°)</text>
+                                
+                                <!-- Viewpoint markers as dots on the ring -->
+                                <!-- Back: 0 -->
+                                <circle class="viewpoint-dot" cx="235" cy="130" r="5.5" data-angle="0" />
+                                <!-- Right-Back: 45 -->
+                                <circle class="viewpoint-dot" cx="204.2" cy="204.2" r="5.5" data-angle="45" />
+                                <!-- Right-Middle: 90 -->
+                                <circle class="viewpoint-dot" cx="130" cy="235" r="5.5" data-angle="90" />
+                                <!-- Right-General: 135 -->
+                                <circle class="viewpoint-dot" cx="55.8" cy="204.2" r="5.5" data-angle="135" />
+                                <!-- Garage Right: 155 -->
+                                <circle class="viewpoint-dot" cx="34.8" cy="174.4" r="5.5" data-angle="155" />
+                                <!-- Front/Garage Front: 180 -->
+                                <circle class="viewpoint-dot" cx="25" cy="130" r="5.5" data-angle="180" />
+                                <!-- Garage Left: 205 -->
+                                <circle class="viewpoint-dot" cx="34.8" cy="85.6" r="5.5" data-angle="205" />
+                                <!-- Left-Front: 225 -->
+                                <circle class="viewpoint-dot" cx="55.8" cy="55.8" r="5.5" data-angle="225" />
+                                <!-- Left-Middle: 270 -->
+                                <circle class="viewpoint-dot" cx="130" cy="25" r="5.5" data-angle="270" />
+                                <!-- Left-Back: 315 -->
+                                <circle class="viewpoint-dot" cx="204.2" cy="55.8" r="5.5" data-angle="315" />
 
-            <!-- 3. หน้าบ้านมุมสูง -->
-            <div class="image-card" data-zone="front" data-name="หน้าบ้าน มุมสูง high angle">
-                <div class="image-wrapper" onclick="openModal('../resources/หน้าบ้านมุมสูง.png', 'หน้าบ้าน มุมสูง (Front High Angle View)')">
-                    <span class="zone-badge">หน้าบ้าน</span>
-                    <img src="../resources/หน้าบ้านมุมสูง.png" alt="หน้าบ้านมุมสูง">
-                </div>
-                <div class="card-details">
-                    <div>
-                        <h3>หน้าบ้าน มุมสูง</h3>
-                        <p class="filename">หน้าบ้านมุมสูง.png</p>
+                                <!-- Pointer Needle -->
+                                <line class="dial-indicator-line" x1="130" y1="130" x2="25" y2="130" id="dial-needle" />
+                                <circle class="dial-pointer" cx="25" cy="130" r="10" id="dial-pointer-head" />
+                                
+                                <!-- Center Cap -->
+                                <circle class="dial-center-cap" cx="130" cy="130" r="22" />
+                            </svg>
+                        </div>
+                        
+                        <div class="compass-indicator-text" id="compass-indicator-text">
+                            องศา: <span id="current-angle-val">180°</span> | มุมมอง: <span id="current-direction-val">หน้าบ้าน</span>
+                        </div>
                     </div>
-                    <div class="card-actions">
-                        <button class="view-btn" onclick="openModal('../resources/หน้าบ้านมุมสูง.png', 'หน้าบ้าน มุมสูง (Front High Angle View)')">
-                            ขยายภาพ
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
 
-            <!-- 4. หลังบ้าน -->
-            <div class="image-card" data-zone="back" data-name="หลังบ้าน back yard back view">
-                <div class="image-wrapper" onclick="openModal('../resources/หลังบ้าน.png', 'หลังบ้าน (Back Yard View)')">
-                    <span class="zone-badge">หลังบ้าน</span>
-                    <img src="../resources/หลังบ้าน.png" alt="หลังบ้าน">
-                </div>
-                <div class="card-details">
-                    <div>
-                        <h3>หลังบ้าน</h3>
-                        <p class="filename">หลังบ้าน.png</p>
+                    <!-- Level & Height Toggles -->
+                    <div class="controls-card">
+                        <h3>ความสูงระดับสายตา (Camera Height)</h3>
+                        <div class="height-selector-group">
+                            <button class="height-btn" id="height-low" data-level="low">มุมมองต่ำ (Low)</button>
+                            <button class="height-btn active" id="height-normal" data-level="normal">ระดับสายตา (Normal)</button>
+                            <button class="height-btn" id="height-high" data-level="high">มุมมองสูง (High)</button>
+                        </div>
                     </div>
-                    <div class="card-actions">
-                        <button class="view-btn" onclick="openModal('../resources/หลังบ้าน.png', 'หลังบ้าน (Back Yard View)')">
-                            ขยายภาพ
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
 
-            <!-- 5. ข้างบ้านฝั่งซ้าย ด้านหน้า -->
-            <div class="image-card" data-zone="left" data-name="ข้างบ้านฝั่งซ้าย ด้านหน้า left side front">
-                <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายด้านหน้า.png', 'ข้างบ้านฝั่งซ้าย ด้านหน้า (Left Front View)')">
-                    <span class="zone-badge">ข้างบ้านฝั่งซ้าย</span>
-                    <img src="../resources/ข้างบ้านฝั่งซ้ายด้านหน้า.png" alt="ข้างบ้านฝั่งซ้ายด้านหน้า">
-                </div>
-                <div class="card-details">
-                    <div>
-                        <h3>ข้างบ้านฝั่งซ้าย ด้านหน้า</h3>
-                        <p class="filename">ข้างบ้านฝั่งซ้ายด้านหน้า.png</p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="view-btn" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายด้านหน้า.png', 'ข้างบ้านฝั่งซ้าย ด้านหน้า (Left Front View)')">
-                            ขยายภาพ
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                        </button>
+                    <!-- Auto Tour controls -->
+                    <div class="controls-card">
+                        <h3>ทัวร์ชมรอบบ้านแบบออโต้</h3>
+                        <div class="tour-button-row">
+                            <button class="tour-btn" id="btn-play-tour">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" id="play-icon"><path d="M8 5v14l11-7z"/></svg>
+                                <span>เริ่มหมุนออโต้ (Play Tour)</span>
+                            </button>
+                        </div>
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">* ระบบจะหมุนกล้องปรับทิศทางโดยรอบ 360 องศาเพื่อแสดงทัศนียภาพของบ้านในทุกๆ มุมมองโดยอัตโนมัติ</p>
                     </div>
                 </div>
-            </div>
-
-            <!-- 6. ข้างบ้านฝั่งซ้าย ตรงกลาง -->
-            <div class="image-card" data-zone="left" data-name="ข้างบ้านฝั่งซ้าย ตรงกลาง left side middle center">
-                <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png', 'ข้างบ้านฝั่งซ้าย ตรงกลาง (Left Middle View)')">
-                    <span class="zone-badge">ข้างบ้านฝั่งซ้าย</span>
-                    <img src="../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png" alt="ข้างบ้านฝั่งซ้ายตรงกลาง">
-                </div>
-                <div class="card-details">
-                    <div>
-                        <h3>ข้างบ้านฝั่งซ้าย ตรงกลาง</h3>
-                        <p class="filename">ข้างบ้านฝั่งซ้ายตรงกลาง.png</p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="view-btn" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png', 'ข้างบ้านฝั่งซ้าย ตรงกลาง (Left Middle View)')">
-                            ขยายภาพ
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 7. ข้างบ้านฝั่งซ้าย ด้านหลัง -->
-            <div class="image-card" data-zone="left" data-name="ข้างบ้านฝั่งซ้าย ด้านหลัง left side back">
-                <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายด้านหลัง.png', 'ข้างบ้านฝั่งซ้าย ด้านหลัง (Left Back View)')">
-                    <span class="zone-badge">ข้างบ้านฝั่งซ้าย</span>
-                    <img src="../resources/ข้างบ้านฝั่งซ้ายด้านหลัง.png" alt="ข้างบ้านฝั่งซ้ายด้านหลัง">
-                </div>
-                <div class="card-details">
-                    <div>
-                        <h3>ข้างบ้านฝั่งซ้าย ด้านหลัง</h3>
-                        <p class="filename">ข้างบ้านฝั่งซ้ายด้านหลัง.png</p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="view-btn" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายด้านหลัง.png', 'ข้างบ้านฝั่งซ้าย ด้านหลัง (Left Back View)')">
-                            ขยายภาพ
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 8. ข้างบ้านฝั่งขวา ตรงกลาง -->
-            <div class="image-card" data-zone="right" data-name="ข้างบ้านฝั่งขวา right side center middle">
-                <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้านฝั่งขวา.png', 'ข้างบ้านฝั่งขวา (Right Side View)')">
-                    <span class="zone-badge">ข้างบ้านฝั่งขวา</span>
-                    <img src="../resources/ข้างบ้านฝั่งขวา.png" alt="ข้างบ้านฝั่งขวา">
-                </div>
-                <div class="card-details">
-                    <div>
-                        <h3>ข้างบ้านฝั่งขวา</h3>
-                        <p class="filename">ข้างบ้านฝั่งขวา.png</p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="view-btn" onclick="openModal('../resources/ข้างบ้านฝั่งขวา.png', 'ข้างบ้านฝั่งขวา (Right Side View)')">
-                            ขยายภาพ
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 9. ข้างบ้าน ทั่วไป -->
-            <div class="image-card" data-zone="right" data-name="ข้างบ้าน side view side layout general">
-                <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้าน.png', 'ข้างบ้าน - มุมมองทั่วไป (General Side View)')">
-                    <span class="zone-badge">ข้างบ้านฝั่งขวา</span>
-                    <img src="../resources/ข้างบ้าน.png" alt="ข้างบ้าน">
-                </div>
-                <div class="card-details">
-                    <div>
-                        <h3>ข้างบ้าน (ทั่วไป)</h3>
-                        <p class="filename">ข้างบ้าน.png</p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="view-btn" onclick="openModal('../resources/ข้างบ้าน.png', 'ข้างบ้าน - มุมมองทั่วไป (General Side View)')">
-                            ขยายภาพ
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 10. ข้างบ้านฝั่งขวา ด้านหลัง -->
-            <div class="image-card" data-zone="right" data-name="ข้างบ้านฝั่งขวา ด้านหลัง right side back">
-                <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้านฝั่งขวาด้านหลัง.png', 'ข้างบ้านฝั่งขวา ด้านหลัง (Right Back View)')">
-                    <span class="zone-badge">ข้างบ้านฝั่งขวา</span>
-                    <img src="../resources/ข้างบ้านฝั่งขวาด้านหลัง.png" alt="ข้างบ้านฝั่งขวาด้านหลัง">
-                </div>
-                <div class="card-details">
-                    <div>
-                        <h3>ข้างบ้านฝั่งขวา ด้านหลัง</h3>
-                        <p class="filename">ข้างบ้านฝั่งขวาด้านหลัง.png</p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="view-btn" onclick="openModal('../resources/ข้างบ้านฝั่งขวาด้านหลัง.png', 'ข้างบ้านฝั่งขวา ด้านหลัง (Right Back View)')">
-                            ขยายภาพ
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 11. โรงจอดรถ ด้านหน้า -->
-            <div class="image-card" data-zone="garage" data-name="โรงจอดรถ ด้านหน้า garage front">
-                <div class="image-wrapper" onclick="openModal('../resources/โรงจอดรถด้านหน้า.png', 'โรงจอดรถ ด้านหน้า (Garage Front View)')">
-                    <span class="zone-badge">โรงจอดรถ</span>
-                    <img src="../resources/โรงจอดรถด้านหน้า.png" alt="โรงจอดรถด้านหน้า">
-                </div>
-                <div class="card-details">
-                    <div>
-                        <h3>โรงจอดรถ ด้านหน้า</h3>
-                        <p class="filename">โรงจอดรถด้านหน้า.png</p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="view-btn" onclick="openModal('../resources/โรงจอดรถด้านหน้า.png', 'โรงจอดรถ ด้านหน้า (Garage Front View)')">
-                            ขยายภาพ
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 12. โรงจอดรถ ด้านซ้าย -->
-            <div class="image-card" data-zone="garage" data-name="โรงจอดรถ ด้านซ้าย garage left">
-                <div class="image-wrapper" onclick="openModal('../resources/โรงจอดรถด้านซ้าย.png', 'โรงจอดรถ ด้านซ้าย (Garage Left View)')">
-                    <span class="zone-badge">โรงจอดรถ</span>
-                    <img src="../resources/โรงจอดรถด้านซ้าย.png" alt="โรงจอดรถด้านซ้าย">
-                </div>
-                <div class="card-details">
-                    <div>
-                        <h3>โรงจอดรถ ด้านซ้าย</h3>
-                        <p class="filename">โรงจอดรถด้านซ้าย.png</p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="view-btn" onclick="openModal('../resources/โรงจอดรถด้านซ้าย.png', 'โรงจอดรถ ด้านซ้าย (Garage Left View)')">
-                            ขยายภาพ
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 13. โรงจอดรถ ด้านขวา -->
-            <div class="image-card" data-zone="garage" data-name="โรงจอดรถ ด้านขวา garage right">
-                <div class="image-wrapper" onclick="openModal('../resources/โรงจอดรถด้านขวา.png', 'โรงจอดรถ ด้านขวา (Garage Right View)')">
-                    <span class="zone-badge">โรงจอดรถ</span>
-                    <img src="../resources/โรงจอดรถด้านขวา.png" alt="โรงจอดรถด้านขวา">
-                </div>
-                <div class="card-details">
-                    <div>
-                        <h3>โรงจอดรถ ด้านขวา</h3>
-                        <p class="filename">โรงจอดรถด้านขวา.png</p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="view-btn" onclick="openModal('../resources/โรงจอดรถด้านขวา.png', 'โรงจอดรถ ด้านขวา (Garage Right View)')">
-                            ขยายภาพ
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- No Results message -->
-            <div class="no-results" id="no-results">
-                <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                <p>ไม่พบรูปภาพโครงร่างที่ตรงกับการค้นหา</p>
             </div>
         </div>
     </div>
@@ -683,26 +1126,44 @@
 
     <!-- Interactive Scripting -->
     <script>
+        // TAB SWITCHER
+        const tabGallery = document.getElementById('tab-gallery');
+        const tabOrbit = document.getElementById('tab-orbit');
+        const gallerySection = document.getElementById('gallery-section');
+        const orbitSection = document.getElementById('orbit-section');
+
+        tabGallery.addEventListener('click', () => {
+            tabGallery.classList.add('active');
+            tabOrbit.classList.remove('active');
+            gallerySection.classList.add('active');
+            orbitSection.classList.remove('active');
+            stopTour();
+        });
+
+        tabOrbit.addEventListener('click', () => {
+            tabOrbit.classList.add('active');
+            tabGallery.classList.remove('active');
+            orbitSection.classList.add('active');
+            gallerySection.classList.remove('active');
+            // Select default view
+            selectViewpoint(180, 'normal');
+        });
+
+        // --- GALLERY VIEW CONTROLS ---
         const searchInput = document.getElementById('search-input');
         const filterButtons = document.querySelectorAll('.filter-btn');
         const imageCards = document.querySelectorAll('.image-card');
         const totalCountSpan = document.getElementById('total-count');
         const noResultsDiv = document.getElementById('no-results');
-        const modal = document.getElementById('image-modal');
-        const modalImg = document.getElementById('modal-img');
-        const modalTitle = document.getElementById('modal-title');
-        const modalFilename = document.getElementById('modal-filename');
 
         let activeFilter = 'all';
         let searchQuery = '';
 
-        // Search filter logic
         searchInput.addEventListener('input', (e) => {
             searchQuery = e.target.value.toLowerCase().trim();
             applyFilters();
         });
 
-        // Tab filter logic
         filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterButtons.forEach(b => b.classList.remove('active'));
@@ -731,25 +1192,267 @@
             });
 
             totalCountSpan.textContent = visibleCount;
+            noResultsDiv.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
 
-            if (visibleCount === 0) {
-                noResultsDiv.style.display = 'block';
-            } else {
-                noResultsDiv.style.display = 'none';
+        // --- ORBIT 3D VIEW CONTROLS ---
+        // Viewpoints DB mapping coordinates to layout PNGs
+        const viewpoints = [
+            { id: 'front-center', angle: 180, level: 'normal', name: 'หน้าบ้าน ตรงกลาง', zone: 'หน้าบ้าน', src: '../resources/หน้าบ้านตรงกลาง.png' },
+            { id: 'front-low', angle: 180, level: 'low', name: 'หน้าบ้าน มุมต่ำ', zone: 'หน้าบ้าน', src: '../resources/หน้าบ้านมุมต่ำ.png' },
+            { id: 'front-high', angle: 180, level: 'high', name: 'หน้าบ้าน มุมสูง', zone: 'หน้าบ้าน', src: '../resources/หน้าบ้านมุมสูง.png' },
+            
+            { id: 'garage-front', angle: 180, level: 'normal', name: 'โรงจอดรถ ด้านหน้า', zone: 'โรงจอดรถ', src: '../resources/โรงจอดรถด้านหน้า.png' }, // map to 180
+            { id: 'garage-left', cxAngle: 205, angle: 205, level: 'normal', name: 'โรงจอดรถ ด้านซ้าย', zone: 'โรงจอดรถ', src: '../resources/โรงจอดรถด้านซ้าย.png' },
+            { id: 'garage-right', cxAngle: 155, angle: 155, level: 'normal', name: 'โรงจอดรถ ด้านขวา', zone: 'โรงจอดรถ', src: '../resources/โรงจอดรถด้านขวา.png' },
+            
+            { id: 'left-front', angle: 225, level: 'normal', name: 'ข้างบ้านฝั่งซ้าย ด้านหน้า', zone: 'ข้างบ้านฝั่งซ้าย', src: '../resources/ข้างบ้านฝั่งซ้ายด้านหน้า.png' },
+            { id: 'left-middle', angle: 270, level: 'normal', name: 'ข้างบ้านฝั่งซ้าย ตรงกลาง', zone: 'ข้างบ้านฝั่งซ้าย', src: '../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png' },
+            { id: 'left-back', angle: 315, level: 'normal', name: 'ข้างบ้านฝั่งซ้าย ด้านหลัง', zone: 'ข้างบ้านฝั่งซ้าย', src: '../resources/ข้างบ้านฝั่งซ้ายด้านหลัง.png' },
+            
+            { id: 'back', angle: 0, level: 'normal', name: 'หลังบ้าน', zone: 'หลังบ้าน', src: '../resources/หลังบ้าน.png' },
+            
+            { id: 'right-back', angle: 45, level: 'normal', name: 'ข้างบ้านฝั่งขวา ด้านหลัง', zone: 'ข้างบ้านฝั่งขวา', src: '../resources/ข้างบ้านฝั่งขวาด้านหลัง.png' },
+            { id: 'right-middle', angle: 90, level: 'normal', name: 'ข้างบ้านฝั่งขวา', zone: 'ข้างบ้านฝั่งขวา', src: '../resources/ข้างบ้านฝั่งขวา.png' },
+            { id: 'right-general', angle: 135, level: 'normal', name: 'ข้างบ้าน (ทั่วไป)', zone: 'ข้างบ้านฝั่งขวา', src: '../resources/ข้างบ้าน.png' }
+        ];
+
+        // Unique angle list (sorted counter clockwise/clockwise)
+        const uniqueAngles = [0, 45, 90, 135, 155, 180, 205, 225, 270, 315];
+
+        let currentAngle = 180;
+        let currentLevel = 'normal';
+        let tourInterval = null;
+        let isTourRunning = false;
+
+        const orbitImg = document.getElementById('orbit-img');
+        const orbitBadgeZone = document.getElementById('orbit-badge-zone');
+        const orbitBadgeAngle = document.getElementById('orbit-badge-angle');
+        const orbitTitle = document.getElementById('orbit-title');
+        const orbitFilename = document.getElementById('orbit-filename');
+        
+        const dialContainer = document.getElementById('dial-container');
+        const dialNeedle = document.getElementById('dial-needle');
+        const dialPointerHead = document.getElementById('dial-pointer-head');
+        
+        const currentAngleVal = document.getElementById('current-angle-val');
+        const currentDirectionVal = document.getElementById('current-direction-val');
+        
+        const heightLow = document.getElementById('height-low');
+        const heightNormal = document.getElementById('height-normal');
+        const heightHigh = document.getElementById('height-high');
+        
+        const btnPlayTour = document.getElementById('btn-play-tour');
+        const playIcon = document.getElementById('play-icon');
+
+        // Select dots in SVG
+        const dots = document.querySelectorAll('.viewpoint-dot');
+
+        // Initial setup
+        function selectViewpoint(angle, level) {
+            currentAngle = angle;
+            currentLevel = level;
+
+            // Find matching photo in database
+            let match = viewpoints.find(v => v.angle === angle && v.level === level);
+            
+            // Fallback if that level doesn't exist
+            if (!match) {
+                match = viewpoints.find(v => v.angle === angle && v.level === 'normal');
+                if (match) currentLevel = 'normal';
+            }
+
+            if (match) {
+                // Fade effect
+                orbitImg.style.opacity = '0.3';
+                setTimeout(() => {
+                    orbitImg.src = match.src;
+                    orbitImg.style.opacity = '1';
+                }, 100);
+
+                // Update text overlays
+                orbitBadgeZone.textContent = match.zone;
+                orbitBadgeAngle.textContent = `มุมมอง: ${match.angle}°`;
+                orbitTitle.textContent = match.name;
+                orbitFilename.textContent = match.src.split('/').pop();
+
+                currentAngleVal.textContent = `${match.angle}°`;
+                currentDirectionVal.textContent = match.name;
+
+                // Update UI Dial pointer positions
+                updateDialPointer(match.angle);
+
+                // Highlight correct dot
+                dots.forEach(dot => {
+                    const dotAngle = parseInt(dot.getAttribute('data-angle'));
+                    if (dotAngle === match.angle) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+
+                // Update Camera Height Buttons state
+                updateHeightButtons(match.angle);
             }
         }
 
-        // Modal triggers
+        function updateDialPointer(angle) {
+            // Convert angle to radians for SVG coordinates
+            // Our SVG has 0° at the top (North), which mathematically is -90 deg.
+            const angleRad = (angle - 90) * (Math.PI / 180);
+            const r = 105; // radius of track
+            const cx = 130;
+            const cy = 130;
+
+            const pointerX = cx + r * Math.cos(angleRad);
+            const pointerY = cy + r * Math.sin(angleRad);
+
+            // Update line needle
+            dialNeedle.setAttribute('x2', pointerX);
+            dialNeedle.setAttribute('y2', pointerY);
+
+            // Update pointer head
+            dialPointerHead.setAttribute('cx', pointerX);
+            dialPointerHead.setAttribute('cy', pointerY);
+        }
+
+        function updateHeightButtons(angle) {
+            // Check what heights are available for this angle
+            const availableLevels = viewpoints.filter(v => v.angle === angle).map(v => v.level);
+
+            heightLow.disabled = !availableLevels.includes('low');
+            heightNormal.disabled = !availableLevels.includes('normal');
+            heightHigh.disabled = !availableLevels.includes('high');
+
+            // Highlight active height
+            heightLow.classList.remove('active');
+            heightNormal.classList.remove('active');
+            heightHigh.classList.remove('active');
+
+            if (currentLevel === 'low') heightLow.classList.add('active');
+            else if (currentLevel === 'high') heightHigh.classList.add('active');
+            else heightNormal.classList.add('active');
+        }
+
+        // Height buttons click handlers
+        [heightLow, heightNormal, heightHigh].forEach(btn => {
+            btn.addEventListener('click', () => {
+                const level = btn.getAttribute('data-level');
+                selectViewpoint(currentAngle, level);
+            });
+        });
+
+        // Dots click handlers
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const dotAngle = parseInt(dot.getAttribute('data-angle'));
+                selectViewpoint(dotAngle, 'normal');
+            });
+        });
+
+        // Drag handler on Dial
+        let isDragging = false;
+
+        dialContainer.addEventListener('mousedown', startDrag);
+        dialContainer.addEventListener('mousemove', dragMove);
+        window.addEventListener('mouseup', endDrag);
+
+        dialContainer.addEventListener('touchstart', startDrag, { passive: true });
+        dialContainer.addEventListener('touchmove', dragMove, { passive: false });
+        window.addEventListener('touchend', endDrag);
+
+        function startDrag(e) {
+            isDragging = true;
+            stopTour();
+            dragMove(e);
+        }
+
+        function dragMove(e) {
+            if (!isDragging) return;
+            
+            // Prevent scrolling on mobile when dragging
+            if (e.cancelable) e.preventDefault();
+
+            const rect = dialContainer.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            const dx = clientX - centerX;
+            const dy = clientY - centerY;
+
+            // Angle in degrees (0 to 360)
+            // atan2 returns angle relative to X-axis (+East). We shift by 90 degrees to align 0 deg to top (+North)
+            let angleDeg = Math.round(Math.atan2(dy, dx) * (180 / Math.PI)) + 90;
+            
+            if (angleDeg < 0) angleDeg += 360;
+            if (angleDeg >= 360) angleDeg -= 360;
+
+            // Find closest available angle
+            const closestAngle = uniqueAngles.reduce((prev, curr) => {
+                // Handle wrap-around diff (e.g. 355 is closer to 0 than 270)
+                const diffPrev = Math.min(Math.abs(prev - angleDeg), 360 - Math.abs(prev - angleDeg));
+                const diffCurr = Math.min(Math.abs(curr - angleDeg), 360 - Math.abs(curr - angleDeg));
+                return diffCurr < diffPrev ? curr : prev;
+            });
+
+            if (closestAngle !== currentAngle) {
+                selectViewpoint(closestAngle, currentLevel);
+            }
+        }
+
+        function endDrag() {
+            isDragging = false;
+        }
+
+        // AUTO ROTATION TOUR LOGIC
+        btnPlayTour.addEventListener('click', () => {
+            if (isTourRunning) {
+                stopTour();
+            } else {
+                startTour();
+            }
+        });
+
+        function startTour() {
+            isTourRunning = true;
+            btnPlayTour.classList.add('active-tour');
+            btnPlayTour.querySelector('span').textContent = 'หยุดหมุน (Pause)';
+            playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>'; // pause icon
+            
+            // Cycle through angles sequentially
+            tourInterval = setInterval(() => {
+                let currIdx = uniqueAngles.indexOf(currentAngle);
+                let nextIdx = (currIdx + 1) % uniqueAngles.length;
+                selectViewpoint(uniqueAngles[nextIdx], 'normal'); // keep at eye level during tour
+            }, 1800); // switch frame every 1.8 seconds
+        }
+
+        function stopTour() {
+            if (!isTourRunning) return;
+            isTourRunning = false;
+            clearInterval(tourInterval);
+            btnPlayTour.classList.remove('active-tour');
+            btnPlayTour.querySelector('span').textContent = 'เริ่มหมุนออโต้ (Play Tour)';
+            playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>'; // play icon
+        }
+
+        // --- EXPANDED IMAGE MODAL CONTROLS ---
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalFilename = document.getElementById('modal-filename');
+
         function openModal(imgSrc, titleText) {
             modalImg.src = imgSrc;
             modalTitle.textContent = titleText;
-            
-            // Extract filename
-            const filename = imgSrc.split('/').pop();
-            modalFilename.textContent = decodeURIComponent(filename);
+            modalFilename.textContent = decodeURIComponent(imgSrc.split('/').pop());
 
             modal.style.display = 'flex';
-            // Force redraw for opacity transition
             setTimeout(() => {
                 modal.classList.add('show');
             }, 10);
@@ -762,7 +1465,6 @@
             }, 300);
         }
 
-        // Keyboard close modal
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.classList.contains('show')) {
                 closeModal();

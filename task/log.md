@@ -17,3 +17,11 @@ Activity log for project tasks.
 ## [2026-06-10 14:03] executed | 001-create-home-outline
 - completed: T001, T002, T003, T004
 - note: created outline/home.html displaying all 13 images and verified functionality in browser
+
+## [2026-06-10 14:07] created | 002-implement-3d-360-view
+- author: agent
+- note: create task for 3D/360-degree interactive viewpoint switcher in outline/home.html
+
+## [2026-06-10 15:05] executed | 002-implement-3d-360-view
+- completed: T001, T002, T003, T004, T005
+- note: implemented SVG dial rotation and height controls for pseudo-360 view inside home.html
