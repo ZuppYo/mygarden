@@ -25,3 +25,7 @@ Activity log for project tasks.
 ## [2026-06-10 15:05] executed | 002-implement-3d-360-view
 - completed: T001, T002, T003, T004, T005
 - note: implemented SVG dial rotation and height controls for pseudo-360 view inside home.html
+
+## [2026-06-10 19:00] created | 003-add-front-right-lamsam-tree
+- type: execution
+- note: add a 2-2.5m Lamsam tree on the front-right side of the yard with Japanese grass ground cover

@@ -698,14 +698,22 @@
                 <h1>Home Layout Workspace</h1>
                 <p>มุมมองรูปภาพโครงสร้างบ้านสำหรับใช้วางแผนออกแบบจัดสวนและภูมิทัศน์</p>
             </div>
-            <div class="stats-badge">
-                <div class="stat-item">
-                    <span>ภาพทั้งหมด:</span>
-                    <span class="number" id="total-count">13</span>
+            <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                <!-- Mode Toggle -->
+                <div class="stats-badge" style="padding: 3px; gap: 0; display: flex; align-items: center;">
+                    <button id="btn-mode-designed" class="filter-btn active" style="border: none; padding: 0.4rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s;">🌳 แบบจัดสวน (Design)</button>
+                    <button id="btn-mode-raw" class="filter-btn" style="border: none; padding: 0.4rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; cursor: pointer; background: transparent; color: var(--text-muted); transition: all 0.2s;">🏠 โครงสร้างดิบ (Raw)</button>
                 </div>
-                <div class="stat-item">
-                    <span>โซนพื้นที่:</span>
-                    <span class="number">5</span>
+                
+                <div class="stats-badge">
+                    <div class="stat-item">
+                        <span>ภาพทั้งหมด:</span>
+                        <span class="number" id="total-count">13</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>โซนพื้นที่:</span>
+                        <span class="number">5</span>
+                    </div>
                 </div>
             </div>
         </header>
@@ -762,17 +770,18 @@
 
                 <!-- 2. หน้าบ้านมุมต่ำ -->
                 <div class="image-card" data-zone="front" data-name="หน้าบ้าน มุมต่ำ low angle">
-                    <div class="image-wrapper" onclick="openModal('../resources/หน้าบ้านมุมต่ำ.png', 'หน้าบ้าน มุมต่ำ (Front Low Angle View)')">
+                    <div class="image-wrapper" id="wrapper-front-low" onclick="openModal('../resources/หน้าบ้านมุมต่ำ_designed.png', 'หน้าบ้าน มุมต่ำ (หลังจัดสวน)')">
                         <span class="zone-badge">หน้าบ้าน</span>
-                        <img src="../resources/หน้าบ้านมุมต่ำ.png" alt="หน้าบ้านมุมต่ำ">
+                        <img id="img-front-low" src="../resources/หน้าบ้านมุมต่ำ_designed.png" alt="หน้าบ้านมุมต่ำ">
+                        <span id="badge-front-low" class="zone-badge" style="left: auto; right: 0.75rem; background-color: var(--primary-color); color: #fff;">🌳 จัดสวนแล้ว</span>
                     </div>
                     <div class="card-details">
                         <div>
                             <h3>หน้าบ้าน มุมต่ำ</h3>
-                            <p class="filename">หน้าบ้านมุมต่ำ.png</p>
+                            <p class="filename" id="filename-front-low">หน้าบ้านมุมต่ำ_designed.png</p>
                         </div>
                         <div class="card-actions">
-                            <button class="view-btn" onclick="openModal('../resources/หน้าบ้านมุมต่ำ.png', 'หน้าบ้าน มุมต่ำ (Front Low Angle View)')">
+                            <button id="btn-front-low" class="view-btn" onclick="openModal('../resources/หน้าบ้านมุมต่ำ_designed.png', 'หน้าบ้าน มุมต่ำ (หลังจัดสวน)')">
                                 ขยายภาพ
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
                             </button>
@@ -782,17 +791,18 @@
 
                 <!-- 3. หน้าบ้านมุมสูง -->
                 <div class="image-card" data-zone="front" data-name="หน้าบ้าน มุมสูง high angle">
-                    <div class="image-wrapper" onclick="openModal('../resources/หน้าบ้านมุมสูง.png', 'หน้าบ้าน มุมสูง (Front High Angle View)')">
+                    <div class="image-wrapper" id="wrapper-front-high" onclick="openModal('../resources/หน้าบ้านมุมสูง_designed.png', 'หน้าบ้าน มุมสูง (หลังจัดสวน)')">
                         <span class="zone-badge">หน้าบ้าน</span>
-                        <img src="../resources/หน้าบ้านมุมสูง.png" alt="หน้าบ้านมุมสูง">
+                        <img id="img-front-high" src="../resources/หน้าบ้านมุมสูง_designed.png" alt="หน้าบ้านมุมสูง">
+                        <span id="badge-front-high" class="zone-badge" style="left: auto; right: 0.75rem; background-color: var(--primary-color); color: #fff;">🌳 จัดสวนแล้ว</span>
                     </div>
                     <div class="card-details">
                         <div>
                             <h3>หน้าบ้าน มุมสูง</h3>
-                            <p class="filename">หน้าบ้านมุมสูง.png</p>
+                            <p class="filename" id="filename-front-high">หน้าบ้านมุมสูง_designed.png</p>
                         </div>
                         <div class="card-actions">
-                            <button class="view-btn" onclick="openModal('../resources/หน้าบ้านมุมสูง.png', 'หน้าบ้าน มุมสูง (Front High Angle View)')">
+                            <button id="btn-front-high" class="view-btn" onclick="openModal('../resources/หน้าบ้านมุมสูง_designed.png', 'หน้าบ้าน มุมสูง (หลังจัดสวน)')">
                                 ขยายภาพ
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
                             </button>
@@ -1200,8 +1210,8 @@
         // Viewpoints DB mapping coordinates to layout PNGs
         const viewpoints = [
             { id: 'front-center', angle: 180, level: 'normal', name: 'หน้าบ้าน ตรงกลาง', zone: 'หน้าบ้าน', src: '../resources/หน้าบ้านตรงกลาง.png' },
-            { id: 'front-low', angle: 180, level: 'low', name: 'หน้าบ้าน มุมต่ำ', zone: 'หน้าบ้าน', src: '../resources/หน้าบ้านมุมต่ำ.png' },
-            { id: 'front-high', angle: 180, level: 'high', name: 'หน้าบ้าน มุมสูง', zone: 'หน้าบ้าน', src: '../resources/หน้าบ้านมุมสูง.png' },
+            { id: 'front-low', angle: 180, level: 'low', name: 'หน้าบ้าน มุมต่ำ', zone: 'หน้าบ้าน', src: '../resources/หน้าบ้านมุมต่ำ.png', designedSrc: '../resources/หน้าบ้านมุมต่ำ_designed.png' },
+            { id: 'front-high', angle: 180, level: 'high', name: 'หน้าบ้าน มุมสูง', zone: 'หน้าบ้าน', src: '../resources/หน้าบ้านมุมสูง.png', designedSrc: '../resources/หน้าบ้านมุมสูง_designed.png' },
             
             { id: 'garage-front', angle: 170, level: 'normal', name: 'โรงจอดรถ ด้านหน้า', zone: 'โรงจอดรถ', src: '../resources/โรงจอดรถด้านหน้า.png' },
             { id: 'garage-left', angle: 195, level: 'normal', name: 'โรงจอดรถ ด้านซ้าย', zone: 'โรงจอดรถ', src: '../resources/โรงจอดรถด้านซ้าย.png' },
@@ -1221,6 +1231,7 @@
         // Unique angle list (sorted counter clockwise/clockwise)
         const uniqueAngles = [0, 45, 90, 135, 155, 170, 180, 195, 225, 270, 315];
 
+        let globalMode = 'designed'; // 'designed' or 'raw'
         let currentAngle = 180;
         let currentLevel = 'normal';
         let tourInterval = null;
@@ -1264,10 +1275,16 @@
             }
 
             if (match) {
+                // Determine source path based on mode and whether designed version exists
+                let srcToUse = match.src;
+                if (globalMode === 'designed' && match.designedSrc) {
+                    srcToUse = match.designedSrc;
+                }
+
                 // Fade effect
                 orbitImg.style.opacity = '0.3';
                 setTimeout(() => {
-                    orbitImg.src = match.src;
+                    orbitImg.src = srcToUse;
                     orbitImg.style.opacity = '1';
                 }, 100);
 
@@ -1275,7 +1292,7 @@
                 orbitBadgeZone.textContent = match.zone;
                 orbitBadgeAngle.textContent = `มุมมอง: ${match.angle}°`;
                 orbitTitle.textContent = match.name;
-                orbitFilename.textContent = match.src.split('/').pop();
+                orbitFilename.textContent = srcToUse.split('/').pop();
 
                 currentAngleVal.textContent = `${match.angle}°`;
                 currentDirectionVal.textContent = match.name;
@@ -1471,6 +1488,76 @@
                 closeModal();
             }
         });
+
+        // DESIGN/RAW GLOBAL MODE SWITCHER
+        const btnModeDesigned = document.getElementById('btn-mode-designed');
+        const btnModeRaw = document.getElementById('btn-mode-raw');
+
+        function setGlobalMode(mode) {
+            globalMode = mode;
+            if (mode === 'designed') {
+                btnModeDesigned.classList.add('active');
+                btnModeDesigned.style.background = '';
+                btnModeDesigned.style.color = '';
+                
+                btnModeRaw.classList.remove('active');
+                btnModeRaw.style.background = 'transparent';
+                btnModeRaw.style.color = 'var(--text-muted)';
+            } else {
+                btnModeRaw.classList.add('active');
+                btnModeRaw.style.background = '';
+                btnModeRaw.style.color = '';
+                
+                btnModeDesigned.classList.remove('active');
+                btnModeDesigned.style.background = 'transparent';
+                btnModeDesigned.style.color = 'var(--text-muted)';
+            }
+
+            // Update Gallery images
+            const frontLowImg = document.getElementById('img-front-low');
+            const frontLowWrapper = document.getElementById('wrapper-front-low');
+            const frontLowBtn = document.getElementById('btn-front-low');
+            const frontLowBadge = document.getElementById('badge-front-low');
+            const frontLowFilename = document.getElementById('filename-front-low');
+
+            const frontHighImg = document.getElementById('img-front-high');
+            const frontHighWrapper = document.getElementById('wrapper-front-high');
+            const frontHighBtn = document.getElementById('btn-front-high');
+            const frontHighBadge = document.getElementById('badge-front-high');
+            const frontHighFilename = document.getElementById('filename-front-high');
+
+            if (mode === 'designed') {
+                if (frontLowImg) frontLowImg.src = '../resources/หน้าบ้านมุมต่ำ_designed.png';
+                if (frontLowWrapper) frontLowWrapper.setAttribute('onclick', "openModal('../resources/หน้าบ้านมุมต่ำ_designed.png', 'หน้าบ้าน มุมต่ำ (หลังจัดสวน)')");
+                if (frontLowBtn) frontLowBtn.setAttribute('onclick', "openModal('../resources/หน้าบ้านมุมต่ำ_designed.png', 'หน้าบ้าน มุมต่ำ (หลังจัดสวน)')");
+                if (frontLowBadge) frontLowBadge.style.display = 'block';
+                if (frontLowFilename) frontLowFilename.textContent = 'หน้าบ้านมุมต่ำ_designed.png';
+
+                if (frontHighImg) frontHighImg.src = '../resources/หน้าบ้านมุมสูง_designed.png';
+                if (frontHighWrapper) frontHighWrapper.setAttribute('onclick', "openModal('../resources/หน้าบ้านมุมสูง_designed.png', 'หน้าบ้าน มุมสูง (หลังจัดสวน)')");
+                if (frontHighBtn) frontHighBtn.setAttribute('onclick', "openModal('../resources/หน้าบ้านมุมสูง_designed.png', 'หน้าบ้าน มุมสูง (หลังจัดสวน)')");
+                if (frontHighBadge) frontHighBadge.style.display = 'block';
+                if (frontHighFilename) frontHighFilename.textContent = 'หน้าบ้านมุมสูง_designed.png';
+            } else {
+                if (frontLowImg) frontLowImg.src = '../resources/หน้าบ้านมุมต่ำ.png';
+                if (frontLowWrapper) frontLowWrapper.setAttribute('onclick', "openModal('../resources/หน้าบ้านมุมต่ำ.png', 'หน้าบ้าน มุมต่ำ (โครงสร้างเดิม)')");
+                if (frontLowBtn) frontLowBtn.setAttribute('onclick', "openModal('../resources/หน้าบ้านมุมต่ำ.png', 'หน้าบ้าน มุมต่ำ (โครงสร้างเดิม)')");
+                if (frontLowBadge) frontLowBadge.style.display = 'none';
+                if (frontLowFilename) frontLowFilename.textContent = 'หน้าบ้านมุมต่ำ.png';
+
+                if (frontHighImg) frontHighImg.src = '../resources/หน้าบ้านมุมสูง.png';
+                if (frontHighWrapper) frontHighWrapper.setAttribute('onclick', "openModal('../resources/หน้าบ้านมุมสูง.png', 'หน้าบ้าน มุมสูง (โครงสร้างเดิม)')");
+                if (frontHighBtn) frontHighBtn.setAttribute('onclick', "openModal('../resources/หน้าบ้านมุมสูง.png', 'หน้าบ้าน มุมสูง (โครงสร้างเดิม)')");
+                if (frontHighBadge) frontHighBadge.style.display = 'none';
+                if (frontHighFilename) frontHighFilename.textContent = 'หน้าบ้านมุมสูง.png';
+            }
+
+            // Update Orbit view if active
+            selectViewpoint(currentAngle, currentLevel);
+        }
+
+        btnModeDesigned.addEventListener('click', () => setGlobalMode('designed'));
+        btnModeRaw.addEventListener('click', () => setGlobalMode('raw'));
     </script>
 </body>
 </html>
