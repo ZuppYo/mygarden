@@ -26,8 +26,8 @@
 ### Snapshot (2026-06-10)
 
 - Done: `000-project-bootstrap` — Bootstrap task system, setup persona rules, install Pillow, and verify image-processor skill.
-- Next: Analyze house photos in `resources/` and design the garden.
-- Reload: `[task/index.md](task/index.md)`
+- Next: `[001-create-home-outline.md](task/001-create-home-outline.md)` — Create layout template displaying all house images.
+- Reload: `[001-create-home-outline.md](task/001-create-home-outline.md)`
 
 ## Task state pointers
 

@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Layout Workspace - Landscaping Assistant</title>
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --surface-color: #161f30;
+            --surface-hover: #1e2a41;
+            --primary-color: #10b981; /* Emerald */
+            --primary-glow: rgba(16, 185, 129, 0.15);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: #243048;
+            --transition-speed: 0.3s;
+            --font-display: 'Outfit', 'Sarabun', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-display);
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Container Layout */
+        .workspace-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header UI */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .header-title h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.25rem;
+        }
+
+        .header-title p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .stats-badge {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 9999px;
+            padding: 0.5rem 1.25rem;
+            font-size: 0.9rem;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-item span.number {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* Navigation / Filtering Controls */
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary-color);
+            background-color: var(--surface-hover);
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .search-box {
+            position: relative;
+            min-width: 300px;
+        }
+
+        .search-input {
+            width: 100%;
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 0.6rem 1rem 0.6rem 2.5rem;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        /* Image Grid Layout */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Card Design */
+        .image-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .image-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 15px var(--primary-glow);
+        }
+
+        .image-wrapper {
+            position: relative;
+            padding-top: 66.67%; /* 3:2 Aspect Ratio */
+            background-color: #000;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .image-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .image-card:hover .image-wrapper img {
+            transform: scale(1.06);
+        }
+
+        .zone-badge {
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
+            background-color: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+        }
+
+        .card-details {
+            padding: 1.25rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-details h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .card-details p.filename {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            word-break: break-all;
+        }
+
+        .card-actions {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .view-btn {
+            background: transparent;
+            border: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: opacity var(--transition-speed);
+        }
+
+        .view-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* Modal Overlay */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(5, 7, 12, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content-wrapper {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .modal-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-caption {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .modal-caption h2 {
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin-bottom: 0.25rem;
+        }
+
+        .modal-caption p {
+            color: var(--text-muted);
+            font-family: monospace;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -2.5rem;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color var(--transition-speed);
+        }
+
+        .close-modal:hover {
+            color: var(--primary-color);
+        }
+
+        /* No results state */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 2rem;
+            background-color: var(--surface-color);
+            border-radius: 1rem;
+            border: 1px dashed var(--border-color);
+            color: var(--text-muted);
+            display: none;
+        }
+
+        .no-results svg {
+            margin-bottom: 1rem;
+            color: var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="workspace-container">
+        <!-- Header -->
+        <header>
+            <div class="header-title">
+                <h1>Home Layout Workspace</h1>
+                <p>มุมมองรูปภาพโครงสร้างบ้านสำหรับใช้วางแผนออกแบบจัดสวนและภูมิทัศน์</p>
+            </div>
+            <div class="stats-badge">
+                <div class="stat-item">
+                    <span>ภาพทั้งหมด:</span>
+                    <span class="number" id="total-count">13</span>
+                </div>
+                <div class="stat-item">
+                    <span>โซนพื้นที่:</span>
+                    <span class="number">5</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Controls Row -->
+        <div class="controls-row">
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
+                <button class="filter-btn" data-filter="front">หน้าบ้าน (Front)</button>
+                <button class="filter-btn" data-filter="back">หลังบ้าน (Back)</button>
+                <button class="filter-btn" data-filter="left">ข้างบ้านฝั่งซ้าย (Left)</button>
+                <button class="filter-btn" data-filter="right">ข้างบ้านฝั่งขวา (Right)</button>
+                <button class="filter-btn" data-filter="garage">โรงจอดรถ (Garage)</button>
+            </div>
+            
+            <div class="search-box">
+                <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="search-input" id="search-input" placeholder="ค้นหาตามชื่อมุมมอง/ไฟล์...">
+            </div>
+        </div>
+
+        <!-- Image Grid -->
+        <div class="image-grid" id="image-grid">
+            <!-- 1. หน้าบ้านตรงกลาง -->
+            <div class="image-card" data-zone="front" data-name="หน้าบ้าน ตรงกลาง front center center">
+                <div class="image-wrapper" onclick="openModal('../resources/หน้าบ้านตรงกลาง.png', 'หน้าบ้าน ตรงกลาง (Front Center View)')">
+                    <span class="zone-badge">หน้าบ้าน</span>
+                    <img src="../resources/หน้าบ้านตรงกลาง.png" alt="หน้าบ้านตรงกลาง">
+                </div>
+                <div class="card-details">
+                    <div>
+                        <h3>หน้าบ้าน ตรงกลาง</h3>
+                        <p class="filename">หน้าบ้านตรงกลาง.png</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="view-btn" onclick="openModal('../resources/หน้าบ้านตรงกลาง.png', 'หน้าบ้าน ตรงกลาง (Front Center View)')">
+                            ขยายภาพ 
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. หน้าบ้านมุมต่ำ -->
+            <div class="image-card" data-zone="front" data-name="หน้าบ้าน มุมต่ำ low angle">
+                <div class="image-wrapper" onclick="openModal('../resources/หน้าบ้านมุมต่ำ.png', 'หน้าบ้าน มุมต่ำ (Front Low Angle View)')">
+                    <span class="zone-badge">หน้าบ้าน</span>
+                    <img src="../resources/หน้าบ้านมุมต่ำ.png" alt="หน้าบ้านมุมต่ำ">
+                </div>
+                <div class="card-details">
+                    <div>
+                        <h3>หน้าบ้าน มุมต่ำ</h3>
+                        <p class="filename">หน้าบ้านมุมต่ำ.png</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="view-btn" onclick="openModal('../resources/หน้าบ้านมุมต่ำ.png', 'หน้าบ้าน มุมต่ำ (Front Low Angle View)')">
+                            ขยายภาพ
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. หน้าบ้านมุมสูง -->
+            <div class="image-card" data-zone="front" data-name="หน้าบ้าน มุมสูง high angle">
+                <div class="image-wrapper" onclick="openModal('../resources/หน้าบ้านมุมสูง.png', 'หน้าบ้าน มุมสูง (Front High Angle View)')">
+                    <span class="zone-badge">หน้าบ้าน</span>
+                    <img src="../resources/หน้าบ้านมุมสูง.png" alt="หน้าบ้านมุมสูง">
+                </div>
+                <div class="card-details">
+                    <div>
+                        <h3>หน้าบ้าน มุมสูง</h3>
+                        <p class="filename">หน้าบ้านมุมสูง.png</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="view-btn" onclick="openModal('../resources/หน้าบ้านมุมสูง.png', 'หน้าบ้าน มุมสูง (Front High Angle View)')">
+                            ขยายภาพ
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. หลังบ้าน -->
+            <div class="image-card" data-zone="back" data-name="หลังบ้าน back yard back view">
+                <div class="image-wrapper" onclick="openModal('../resources/หลังบ้าน.png', 'หลังบ้าน (Back Yard View)')">
+                    <span class="zone-badge">หลังบ้าน</span>
+                    <img src="../resources/หลังบ้าน.png" alt="หลังบ้าน">
+                </div>
+                <div class="card-details">
+                    <div>
+                        <h3>หลังบ้าน</h3>
+                        <p class="filename">หลังบ้าน.png</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="view-btn" onclick="openModal('../resources/หลังบ้าน.png', 'หลังบ้าน (Back Yard View)')">
+                            ขยายภาพ
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. ข้างบ้านฝั่งซ้าย ด้านหน้า -->
+            <div class="image-card" data-zone="left" data-name="ข้างบ้านฝั่งซ้าย ด้านหน้า left side front">
+                <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายด้านหน้า.png', 'ข้างบ้านฝั่งซ้าย ด้านหน้า (Left Front View)')">
+                    <span class="zone-badge">ข้างบ้านฝั่งซ้าย</span>
+                    <img src="../resources/ข้างบ้านฝั่งซ้ายด้านหน้า.png" alt="ข้างบ้านฝั่งซ้ายด้านหน้า">
+                </div>
+                <div class="card-details">
+                    <div>
+                        <h3>ข้างบ้านฝั่งซ้าย ด้านหน้า</h3>
+                        <p class="filename">ข้างบ้านฝั่งซ้ายด้านหน้า.png</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="view-btn" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายด้านหน้า.png', 'ข้างบ้านฝั่งซ้าย ด้านหน้า (Left Front View)')">
+                            ขยายภาพ
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. ข้างบ้านฝั่งซ้าย ตรงกลาง -->
+            <div class="image-card" data-zone="left" data-name="ข้างบ้านฝั่งซ้าย ตรงกลาง left side middle center">
+                <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png', 'ข้างบ้านฝั่งซ้าย ตรงกลาง (Left Middle View)')">
+                    <span class="zone-badge">ข้างบ้านฝั่งซ้าย</span>
+                    <img src="../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png" alt="ข้างบ้านฝั่งซ้ายตรงกลาง">
+                </div>
+                <div class="card-details">
+                    <div>
+                        <h3>ข้างบ้านฝั่งซ้าย ตรงกลาง</h3>
+                        <p class="filename">ข้างบ้านฝั่งซ้ายตรงกลาง.png</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="view-btn" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png', 'ข้างบ้านฝั่งซ้าย ตรงกลาง (Left Middle View)')">
+                            ขยายภาพ
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. ข้างบ้านฝั่งซ้าย ด้านหลัง -->
+            <div class="image-card" data-zone="left" data-name="ข้างบ้านฝั่งซ้าย ด้านหลัง left side back">
+                <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายด้านหลัง.png', 'ข้างบ้านฝั่งซ้าย ด้านหลัง (Left Back View)')">
+                    <span class="zone-badge">ข้างบ้านฝั่งซ้าย</span>
+                    <img src="../resources/ข้างบ้านฝั่งซ้ายด้านหลัง.png" alt="ข้างบ้านฝั่งซ้ายด้านหลัง">
+                </div>
+                <div class="card-details">
+                    <div>
+                        <h3>ข้างบ้านฝั่งซ้าย ด้านหลัง</h3>
+                        <p class="filename">ข้างบ้านฝั่งซ้ายด้านหลัง.png</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="view-btn" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายด้านหลัง.png', 'ข้างบ้านฝั่งซ้าย ด้านหลัง (Left Back View)')">
+                            ขยายภาพ
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. ข้างบ้านฝั่งขวา ตรงกลาง -->
+            <div class="image-card" data-zone="right" data-name="ข้างบ้านฝั่งขวา right side center middle">
+                <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้านฝั่งขวา.png', 'ข้างบ้านฝั่งขวา (Right Side View)')">
+                    <span class="zone-badge">ข้างบ้านฝั่งขวา</span>
+                    <img src="../resources/ข้างบ้านฝั่งขวา.png" alt="ข้างบ้านฝั่งขวา">
+                </div>
+                <div class="card-details">
+                    <div>
+                        <h3>ข้างบ้านฝั่งขวา</h3>
+                        <p class="filename">ข้างบ้านฝั่งขวา.png</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="view-btn" onclick="openModal('../resources/ข้างบ้านฝั่งขวา.png', 'ข้างบ้านฝั่งขวา (Right Side View)')">
+                            ขยายภาพ
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. ข้างบ้าน ทั่วไป -->
+            <div class="image-card" data-zone="right" data-name="ข้างบ้าน side view side layout general">
+                <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้าน.png', 'ข้างบ้าน - มุมมองทั่วไป (General Side View)')">
+                    <span class="zone-badge">ข้างบ้านฝั่งขวา</span>
+                    <img src="../resources/ข้างบ้าน.png" alt="ข้างบ้าน">
+                </div>
+                <div class="card-details">
+                    <div>
+                        <h3>ข้างบ้าน (ทั่วไป)</h3>
+                        <p class="filename">ข้างบ้าน.png</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="view-btn" onclick="openModal('../resources/ข้างบ้าน.png', 'ข้างบ้าน - มุมมองทั่วไป (General Side View)')">
+                            ขยายภาพ
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. ข้างบ้านฝั่งขวา ด้านหลัง -->
+            <div class="image-card" data-zone="right" data-name="ข้างบ้านฝั่งขวา ด้านหลัง right side back">
+                <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้านฝั่งขวาด้านหลัง.png', 'ข้างบ้านฝั่งขวา ด้านหลัง (Right Back View)')">
+                    <span class="zone-badge">ข้างบ้านฝั่งขวา</span>
+                    <img src="../resources/ข้างบ้านฝั่งขวาด้านหลัง.png" alt="ข้างบ้านฝั่งขวาด้านหลัง">
+                </div>
+                <div class="card-details">
+                    <div>
+                        <h3>ข้างบ้านฝั่งขวา ด้านหลัง</h3>
+                        <p class="filename">ข้างบ้านฝั่งขวาด้านหลัง.png</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="view-btn" onclick="openModal('../resources/ข้างบ้านฝั่งขวาด้านหลัง.png', 'ข้างบ้านฝั่งขวา ด้านหลัง (Right Back View)')">
+                            ขยายภาพ
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. โรงจอดรถ ด้านหน้า -->
+            <div class="image-card" data-zone="garage" data-name="โรงจอดรถ ด้านหน้า garage front">
+                <div class="image-wrapper" onclick="openModal('../resources/โรงจอดรถด้านหน้า.png', 'โรงจอดรถ ด้านหน้า (Garage Front View)')">
+                    <span class="zone-badge">โรงจอดรถ</span>
+                    <img src="../resources/โรงจอดรถด้านหน้า.png" alt="โรงจอดรถด้านหน้า">
+                </div>
+                <div class="card-details">
+                    <div>
+                        <h3>โรงจอดรถ ด้านหน้า</h3>
+                        <p class="filename">โรงจอดรถด้านหน้า.png</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="view-btn" onclick="openModal('../resources/โรงจอดรถด้านหน้า.png', 'โรงจอดรถ ด้านหน้า (Garage Front View)')">
+                            ขยายภาพ
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12. โรงจอดรถ ด้านซ้าย -->
+            <div class="image-card" data-zone="garage" data-name="โรงจอดรถ ด้านซ้าย garage left">
+                <div class="image-wrapper" onclick="openModal('../resources/โรงจอดรถด้านซ้าย.png', 'โรงจอดรถ ด้านซ้าย (Garage Left View)')">
+                    <span class="zone-badge">โรงจอดรถ</span>
+                    <img src="../resources/โรงจอดรถด้านซ้าย.png" alt="โรงจอดรถด้านซ้าย">
+                </div>
+                <div class="card-details">
+                    <div>
+                        <h3>โรงจอดรถ ด้านซ้าย</h3>
+                        <p class="filename">โรงจอดรถด้านซ้าย.png</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="view-btn" onclick="openModal('../resources/โรงจอดรถด้านซ้าย.png', 'โรงจอดรถ ด้านซ้าย (Garage Left View)')">
+                            ขยายภาพ
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 13. โรงจอดรถ ด้านขวา -->
+            <div class="image-card" data-zone="garage" data-name="โรงจอดรถ ด้านขวา garage right">
+                <div class="image-wrapper" onclick="openModal('../resources/โรงจอดรถด้านขวา.png', 'โรงจอดรถ ด้านขวา (Garage Right View)')">
+                    <span class="zone-badge">โรงจอดรถ</span>
+                    <img src="../resources/โรงจอดรถด้านขวา.png" alt="โรงจอดรถด้านขวา">
+                </div>
+                <div class="card-details">
+                    <div>
+                        <h3>โรงจอดรถ ด้านขวา</h3>
+                        <p class="filename">โรงจอดรถด้านขวา.png</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="view-btn" onclick="openModal('../resources/โรงจอดรถด้านขวา.png', 'โรงจอดรถ ด้านขวา (Garage Right View)')">
+                            ขยายภาพ
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Results message -->
+            <div class="no-results" id="no-results">
+                <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <p>ไม่พบรูปภาพโครงร่างที่ตรงกับการค้นหา</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal View -->
+    <div class="modal" id="image-modal" onclick="closeModal()">
+        <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <img src="" alt="Expanded View" class="modal-img" id="modal-img">
+            <div class="modal-caption">
+                <h2 id="modal-title"></h2>
+                <p id="modal-filename"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Scripting -->
+    <script>
+        const searchInput = document.getElementById('search-input');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const imageCards = document.querySelectorAll('.image-card');
+        const totalCountSpan = document.getElementById('total-count');
+        const noResultsDiv = document.getElementById('no-results');
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalFilename = document.getElementById('modal-filename');
+
+        let activeFilter = 'all';
+        let searchQuery = '';
+
+        // Search filter logic
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.toLowerCase().trim();
+            applyFilters();
+        });
+
+        // Tab filter logic
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeFilter = btn.getAttribute('data-filter');
+                applyFilters();
+            });
+        });
+
+        function applyFilters() {
+            let visibleCount = 0;
+
+            imageCards.forEach(card => {
+                const zone = card.getAttribute('data-zone');
+                const name = card.getAttribute('data-name');
+                
+                const matchesFilter = activeFilter === 'all' || zone === activeFilter;
+                const matchesSearch = searchQuery === '' || name.includes(searchQuery);
+
+                if (matchesFilter && matchesSearch) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            totalCountSpan.textContent = visibleCount;
+
+            if (visibleCount === 0) {
+                noResultsDiv.style.display = 'block';
+            } else {
+                noResultsDiv.style.display = 'none';
+            }
+        }
+
+        // Modal triggers
+        function openModal(imgSrc, titleText) {
+            modalImg.src = imgSrc;
+            modalTitle.textContent = titleText;
+            
+            // Extract filename
+            const filename = imgSrc.split('/').pop();
+            modalFilename.textContent = decodeURIComponent(filename);
+
+            modal.style.display = 'flex';
+            // Force redraw for opacity transition
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+
+        function closeModal() {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Keyboard close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('show')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
