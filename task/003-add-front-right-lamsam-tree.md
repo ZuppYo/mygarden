@@ -27,7 +27,11 @@ Related: [task/index.md](index.md)
 
 ## Checklist
 
-- [ ] T001 [N] Backup original `resources/หน้าบ้านมุมต่ำ.png` and `resources/หน้าบ้านมุมสูง.png` to `resources/backup/`
-- [ ] T002 [N] Generate design concept image for front low angle with Lamsam tree and Japanese grass using `generate_image`
-- [ ] T003 [N] Generate design concept image for front high angle with Lamsam tree and Japanese grass using `generate_image`
-- [ ] T004 [U] Update `outline/home.html` to show the designed views and ensure the switcher maps them correctly
+- [x] T001 [N] Backup original `resources/หน้าบ้านมุมต่ำ.png` and `resources/หน้าบ้านมุมสูง.png` to `resources/backup/`
+  - ✅ Backups verified in `resources/backup/` (MD5 match with originals); originals preserved at `resources/`.
+- [x] T002 [N] Generate design concept image for front low angle with Lamsam tree and Japanese grass using `generate_image`
+  - ✅ Generated `resources/หน้าบ้านมุมต่ำ_designed.png` — Lamsam tree on front-right, Japanese grass ground cover.
+- [x] T003 [N] Generate design concept image for front high angle with Lamsam tree and Japanese grass using `generate_image`
+  - ✅ Generated `resources/หน้าบ้านมุมสูง_designed.png` — Lamsam tree on front-right, Japanese grass lawn.
+- [x] T004 [U] Update `outline/home.html` to show the designed views and ensure the switcher maps them correctly
+  - ✅ Gallery cards, Design/Raw toggle, and Orbit `designedSrc` mapping verified for both front viewpoints.

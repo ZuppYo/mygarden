@@ -29,3 +29,7 @@ Activity log for project tasks.
 ## [2026-06-10 19:00] created | 003-add-front-right-lamsam-tree
 - type: execution
 - note: add a 2-2.5m Lamsam tree on the front-right side of the yard with Japanese grass ground cover
+
+## [2026-06-10 20:15] executed | 003-add-front-right-lamsam-tree
+- completed: T001, T002, T003, T004
+- note: backed up originals, generated low/high designed views with Lamsam tree and Japanese grass, verified home.html switcher

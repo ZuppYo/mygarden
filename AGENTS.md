@@ -19,7 +19,7 @@
 - `[AGENTS.md](AGENTS.md)`
 - `[task/index.md](task/index.md)`
 - `[task/log.md](task/log.md)`
-- Active Task: `[003-add-front-right-lamsam-tree.md](task/003-add-front-right-lamsam-tree.md)`
+- Active Task: none (await next task)
 
 ## Continuity — latest activity
 
@@ -28,7 +28,7 @@
 - Done: `000-project-bootstrap` — Bootstrap task system, setup persona rules, install Pillow, and verify image-processor skill.
 - Done: `001-create-home-outline` — Create layout template displaying all house images.
 - Done: `002-implement-3d-360-view` — Research and implement 3D pseudo-360 viewpoint switcher.
-- Next: `003-add-front-right-lamsam-tree` — Add front-right Lamsam tree.
+- Done: `003-add-front-right-lamsam-tree` — Add front-right Lamsam tree with Japanese grass on low/high front views.
 - Reload: `[task/index.md](task/index.md)`
 
 ## Task state pointers
