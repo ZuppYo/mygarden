@@ -34,6 +34,27 @@
       ],
       "orbitViewpointIds": ["front-low", "front-high", "front-center", "garage-front", "garage-right"],
       "hiddenViewIds": ["garage-left", "left-front", "left-middle", "left-back", "back", "right-back", "right-middle", "right-general"]
+    },
+    "makhom-thesedang-front-center": {
+      "viewVisibility": {
+        "front-center": "full",
+        "front-low": "hidden",
+        "front-high": "hidden",
+        "garage-front": "hidden",
+        "garage-right": "hidden",
+        "garage-left": "hidden",
+        "left-front": "hidden",
+        "left-middle": "hidden",
+        "left-back": "hidden",
+        "back": "hidden",
+        "right-back": "hidden",
+        "right-middle": "hidden",
+        "right-general": "hidden"
+      },
+      "viewIds": ["front-center"],
+      "files": ["หน้าบ้านตรงกลาง.png"],
+      "orbitViewpointIds": ["front-center"],
+      "hiddenViewIds": ["front-low", "front-high", "garage-front", "garage-right", "garage-left", "left-front", "left-middle", "left-back", "back", "right-back", "right-middle", "right-general"]
     }
   }
 }

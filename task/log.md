@@ -72,3 +72,11 @@ Activity log for project tasks.
 - placement: lamsam-front-right — full on front-low/high/center; partial garage-front/garage-right; hidden elsewhere
 - pipeline: place --guide-dir → generate_image → resize → composite-foreground (partial views with roof)
 - next: tune garage-right occluder masks; extend foreground occlusion to garage-front if needed; create 007 when ready
+
+## [2026-06-10] handoff | session (makhom placement)
+- added: `makhom-thesedang-front-center` — มะขามเทศด่าง 1.5m, ornamental base; asset `resources/tree/มะขามเทศด่าง-cutout.png`
+- anchor: front-center `1012,891` scale 0.32 grassRadius 120 (norm 0.472, 0.73) — repositioned closer to house
+- output: `resources/หน้าบ้านตรงกลาง_designed.png` (both Lamsam right + Makhom center); guide `design/guides/front-center_guide.png`
+- visibility: makhom front-center full only; lamsam unchanged on 5 views
+- active task: none — ad-hoc work, no `007` file yet
+- next: multi-view makhom anchors; garage-front composite-foreground; create `007` to track remaining plants/occlusion

@@ -8,7 +8,8 @@
       "width": 2147,
       "height": 1221,
       "placements": {
-        "lamsam-front-right": { "anchorX": 1560, "anchorY": 790, "scale": 0.32, "grassRadius": 120 }
+        "lamsam-front-right": { "anchorX": 1560, "anchorY": 790, "scale": 0.32, "grassRadius": 120 },
+        "makhom-thesedang-front-center": { "anchorX": 1012, "anchorY": 891, "scale": 0.32, "grassRadius": 120 }
       }
     },
     {

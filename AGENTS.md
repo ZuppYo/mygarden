@@ -28,10 +28,11 @@
 
 ### Snapshot (2026-06-10)
 
-- Done: `000–006` archived — bootstrap, home.html, 3D orbit, Lamsam placement registry, hybrid blend, picker + occlusion (`task/archive/2026-06-10/`).
-- Done: post-006 `garage-right` — `composite-foreground` masks roof over tree under carport (`design/occluders.json`).
-- Next: tune occluder polygons or create `007` for remaining 3D layering (`garage-front`, other partial views).
-- Reload: `[task/index.md](task/index.md)`
+- Done: `000–006` archived (`task/archive/2026-06-10/`); Lamsam `lamsam-front-right` on 5 views + garage-right `composite-foreground`.
+- Done: `makhom-thesedang-front-center` — มะขามเทศด่าง ~1.5m, front-center only (`anchor 1012,891` norm 0.472,0.73); cutout `resources/tree/มะขามเทศด่าง-cutout.png`; blend `resources/หน้าบ้านตรงกลาง_designed.png` (Lamsam right + Makhom center, ornamental base).
+- Registry: 2 elements in `design/placements.json`; makhom visibility = `front-center` full, all else hidden.
+- Next: extend makhom to other views if needed; tune occluders / `007` for garage-front 3D layering; formalize ad-hoc plant work as numbered task.
+- Reload: `[task/index.md](task/index.md)`, `[design/placements.json](design/placements.json)`, `[design/view-anchors.json](design/view-anchors.json)`
 
 ## Task state pointers
 

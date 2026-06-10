@@ -24,6 +24,27 @@
         "alpha": 160,
         "radiusRatio": 0.08
       }
+    },
+    {
+      "id": "makhom-thesedang-front-center",
+      "species": "Variegated Manila Tamarind",
+      "speciesTh": "มะขามเทศด่าง",
+      "asset": "resources/tree/มะขามเทศด่าง-cutout.png",
+      "worldX": 0.472,
+      "worldY": 0.73,
+      "heightM": 1.5,
+      "canopyM": 1.2,
+      "zone": "front-yard",
+      "anchorView": "front-center",
+      "anchorNormX": 0.472,
+      "anchorNormY": 0.73,
+      "grass": {
+        "enabled": true,
+        "color": [46, 125, 50],
+        "alpha": 140,
+        "radiusRatio": 0.06
+      },
+      "baseOrnamentals": true
     }
   ]
 }
