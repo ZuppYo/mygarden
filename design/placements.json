@@ -45,6 +45,26 @@
         "radiusRatio": 0.06
       },
       "baseOrnamentals": true
+    },
+    {
+      "id": "jikraya-left-middle",
+      "species": "Chik Raya",
+      "speciesTh": "จิกระย้า",
+      "asset": "resources/tree/ต้าจิกระย้า-cutout.png",
+      "worldX": 0.485,
+      "worldY": 0.815,
+      "heightM": 2.5,
+      "canopyM": 2.0,
+      "zone": "side-yard-left",
+      "anchorView": "left-middle",
+      "anchorNormX": 0.485,
+      "anchorNormY": 0.815,
+      "grass": {
+        "enabled": true,
+        "color": [46, 125, 50],
+        "alpha": 150,
+        "radiusRatio": 0.07
+      }
     }
   ]
 }

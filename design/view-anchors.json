@@ -74,7 +74,9 @@
       "file": "ข้างบ้านฝั่งซ้ายตรงกลาง.png",
       "width": 2106,
       "height": 1233,
-      "placements": {}
+      "placements": {
+        "jikraya-left-middle": { "anchorX": 1021, "anchorY": 1005, "scale": 0.32, "grassRadius": 120 }
+      }
     },
     {
       "viewId": "left-back",

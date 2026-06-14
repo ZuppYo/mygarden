@@ -55,6 +55,27 @@
       "files": ["หน้าบ้านตรงกลาง.png"],
       "orbitViewpointIds": ["front-center"],
       "hiddenViewIds": ["front-low", "front-high", "garage-front", "garage-right", "garage-left", "left-front", "left-middle", "left-back", "back", "right-back", "right-middle", "right-general"]
+    },
+    "jikraya-left-middle": {
+      "viewVisibility": {
+        "left-middle": "full",
+        "front-low": "hidden",
+        "front-high": "hidden",
+        "front-center": "hidden",
+        "garage-front": "hidden",
+        "garage-right": "hidden",
+        "garage-left": "hidden",
+        "left-front": "hidden",
+        "left-back": "hidden",
+        "back": "hidden",
+        "right-back": "hidden",
+        "right-middle": "hidden",
+        "right-general": "hidden"
+      },
+      "viewIds": ["left-middle"],
+      "files": ["ข้างบ้านฝั่งซ้ายตรงกลาง.png"],
+      "orbitViewpointIds": ["left-middle"],
+      "hiddenViewIds": ["front-low", "front-high", "front-center", "garage-front", "garage-right", "garage-left", "left-front", "left-back", "back", "right-back", "right-middle", "right-general"]
     }
   }
 }

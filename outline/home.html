@@ -982,17 +982,18 @@
 
                 <!-- 6. ข้างบ้านฝั่งซ้าย ตรงกลาง -->
                 <div class="image-card" data-zone="left" data-name="ข้างบ้านฝั่งซ้าย ตรงกลาง left side middle center">
-                    <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png', 'ข้างบ้านฝั่งซ้าย ตรงกลาง (Left Middle View)')">
+                    <div class="image-wrapper" id="wrapper-left-middle" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายตรงกลาง_designed.png', 'ข้างบ้านฝั่งซ้าย ตรงกลาง (หลังจัดสวน)')">
                         <span class="zone-badge">ข้างบ้านฝั่งซ้าย</span>
-                        <img src="../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png" alt="ข้างบ้านฝั่งซ้ายตรงกลาง">
+                        <img id="img-left-middle" src="../resources/ข้างบ้านฝั่งซ้ายตรงกลาง_designed.png" alt="ข้างบ้านฝั่งซ้ายตรงกลาง">
+                        <span id="badge-left-middle" class="zone-badge" style="left: auto; right: 0.75rem; background-color: var(--primary-color); color: #fff;">🌳 จัดสวนแล้ว</span>
                     </div>
                     <div class="card-details">
                         <div>
                             <h3>ข้างบ้านฝั่งซ้าย ตรงกลาง</h3>
-                            <p class="filename">ข้างบ้านฝั่งซ้ายตรงกลาง.png</p>
+                            <p class="filename" id="filename-left-middle">ข้างบ้านฝั่งซ้ายตรงกลาง_designed.png</p>
                         </div>
                         <div class="card-actions">
-                            <button class="view-btn" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png', 'ข้างบ้านฝั่งซ้าย ตรงกลาง (Left Middle View)')">
+                            <button id="btn-left-middle" class="view-btn" onclick="openModal('../resources/ข้างบ้านฝั่งซ้ายตรงกลาง_designed.png', 'ข้างบ้านฝั่งซ้าย ตรงกลาง (หลังจัดสวน)')">
                                 ขยายภาพ
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
                             </button>
@@ -1350,7 +1351,7 @@
             { id: 'garage-right', angle: 155, level: 'normal', name: 'โรงจอดรถ ด้านขวา', zone: 'โรงจอดรถ', src: '../resources/โรงจอดรถด้านขวา.png', designedSrc: '../resources/โรงจอดรถด้านขวา_designed.png' },
             
             { id: 'left-front', angle: 225, level: 'normal', name: 'ข้างบ้านฝั่งซ้าย ด้านหน้า', zone: 'ข้างบ้านฝั่งซ้าย', src: '../resources/ข้างบ้านฝั่งซ้ายด้านหน้า.png' },
-            { id: 'left-middle', angle: 270, level: 'normal', name: 'ข้างบ้านฝั่งซ้าย ตรงกลาง', zone: 'ข้างบ้านฝั่งซ้าย', src: '../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png' },
+            { id: 'left-middle', angle: 270, level: 'normal', name: 'ข้างบ้านฝั่งซ้าย ตรงกลาง', zone: 'ข้างบ้านฝั่งซ้าย', src: '../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png', designedSrc: '../resources/ข้างบ้านฝั่งซ้ายตรงกลาง_designed.png' },
             { id: 'left-back', angle: 315, level: 'normal', name: 'ข้างบ้านฝั่งซ้าย ด้านหลัง', zone: 'ข้างบ้านฝั่งซ้าย', src: '../resources/ข้างบ้านฝั่งซ้ายด้านหลัง.png' },
             
             { id: 'back', angle: 0, level: 'normal', name: 'หลังบ้าน', zone: 'หลังบ้าน', src: '../resources/หลังบ้าน.png' },
@@ -1631,6 +1632,7 @@
             { prefix: 'front-high', raw: '../resources/หน้าบ้านมุมสูง.png', designed: '../resources/หน้าบ้านมุมสูง_designed.png', designedTitle: 'หน้าบ้าน มุมสูง (หลังจัดสวน)', rawTitle: 'หน้าบ้าน มุมสูง (โครงสร้างเดิม)', designedFile: 'หน้าบ้านมุมสูง_designed.png', rawFile: 'หน้าบ้านมุมสูง.png' },
             { prefix: 'garage-front', raw: '../resources/โรงจอดรถด้านหน้า.png', designed: '../resources/โรงจอดรถด้านหน้า_designed.png', designedTitle: 'โรงจอดรถ ด้านหน้า (หลังจัดสวน)', rawTitle: 'โรงจอดรถ ด้านหน้า (โครงสร้างเดิม)', designedFile: 'โรงจอดรถด้านหน้า_designed.png', rawFile: 'โรงจอดรถด้านหน้า.png' },
             { prefix: 'garage-right', raw: '../resources/โรงจอดรถด้านขวา.png', designed: '../resources/โรงจอดรถด้านขวา_designed.png', designedTitle: 'โรงจอดรถ ด้านขวา (หลังจัดสวน)', rawTitle: 'โรงจอดรถ ด้านขวา (โครงสร้างเดิม)', designedFile: 'โรงจอดรถด้านขวา_designed.png', rawFile: 'โรงจอดรถด้านขวา.png' },
+            { prefix: 'left-middle', raw: '../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png', designed: '../resources/ข้างบ้านฝั่งซ้ายตรงกลาง_designed.png', designedTitle: 'ข้างบ้านฝั่งซ้าย ตรงกลาง (หลังจัดสวน)', rawTitle: 'ข้างบ้านฝั่งซ้าย ตรงกลาง (โครงสร้างเดิม)', designedFile: 'ข้างบ้านฝั่งซ้ายตรงกลาง_designed.png', rawFile: 'ข้างบ้านฝั่งซ้ายตรงกลาง.png' },
         ];
 
         function setGlobalMode(mode) {
