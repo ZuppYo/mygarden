@@ -59,6 +59,7 @@
     "jikraya-left-middle": {
       "viewVisibility": {
         "left-middle": "full",
+        "right-general": "partial",
         "front-low": "hidden",
         "front-high": "hidden",
         "front-center": "hidden",
@@ -69,13 +70,12 @@
         "left-back": "hidden",
         "back": "hidden",
         "right-back": "hidden",
-        "right-middle": "hidden",
-        "right-general": "hidden"
+        "right-middle": "hidden"
       },
-      "viewIds": ["left-middle"],
-      "files": ["ข้างบ้านฝั่งซ้ายตรงกลาง.png"],
-      "orbitViewpointIds": ["left-middle"],
-      "hiddenViewIds": ["front-low", "front-high", "front-center", "garage-front", "garage-right", "garage-left", "left-front", "left-back", "back", "right-back", "right-middle", "right-general"]
+      "viewIds": ["left-middle", "right-general"],
+      "files": ["ข้างบ้านฝั่งซ้ายตรงกลาง.png", "ข้างบ้าน.png"],
+      "orbitViewpointIds": ["left-middle", "right-general"],
+      "hiddenViewIds": ["front-low", "front-high", "front-center", "garage-front", "garage-right", "garage-left", "left-front", "left-back", "back", "right-back", "right-middle"]
     }
   }
 }

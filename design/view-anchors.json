@@ -116,7 +116,9 @@
       "file": "ข้างบ้าน.png",
       "width": 1590,
       "height": 991,
-      "placements": {}
+      "placements": {
+        "jikraya-left-middle": { "anchorX": 329, "anchorY": 642, "scale": 0.30, "grassRadius": 90 }
+      }
     }
   ]
 }

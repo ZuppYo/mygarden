@@ -98,7 +98,35 @@
       "occluders": [{ "id": "full-block", "label": "Front yard occluded", "polygon": [[0.0, 0.0], [0.55, 0.0], [0.55, 1.0], [0.0, 1.0]] }]
     },
     "right-general": {
-      "occluders": [{ "id": "partial-edge", "label": "Tree may peek at edge only", "polygon": [[0.0, 0.0], [0.4, 0.0], [0.4, 0.5], [0.0, 0.5]], "effect": "partial" }]
+      "occluders": [
+        {
+          "id": "house-blocks-tree",
+          "label": "House left wing blocks tree trunk and left canopy",
+          "polygon": [[0.0, 0.0], [0.38, 0.0], [0.44, 0.22], [0.40, 0.52], [0.28, 0.58], [0.0, 0.62]],
+          "effect": "partial"
+        }
+      ],
+      "foregroundLayers": [
+        {
+          "id": "house-upper-left",
+          "label": "Upper left house roof and second floor — in front of tree",
+          "polygon": [[0.0, 0.0], [0.34, 0.0], [0.37, 0.16], [0.30, 0.30], [0.0, 0.32]]
+        },
+        {
+          "id": "house-mid-wall",
+          "label": "Mid house wall blocking left canopy",
+          "polygon": [[0.0, 0.24], [0.22, 0.22], [0.25, 0.44], [0.0, 0.46]]
+        },
+        {
+          "id": "house-deck-corner",
+          "label": "Deck and corner wall occluding tree trunk base",
+          "polygon": [[0.0, 0.38], [0.20, 0.36], [0.23, 0.56], [0.0, 0.58]]
+        }
+      ],
+      "visibleTreeZone": {
+        "label": "Tree canopy/trunk may show right of house corner",
+        "polygon": [[0.22, 0.48], [0.42, 0.44], [0.46, 0.78], [0.18, 0.82]]
+      }
     }
   },
   "worldSectorRules": {

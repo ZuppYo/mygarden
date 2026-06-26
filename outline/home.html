@@ -1043,17 +1043,18 @@
 
                 <!-- 9. ข้างบ้าน ทั่วไป -->
                 <div class="image-card" data-zone="right" data-name="ข้างบ้าน side view side layout general">
-                    <div class="image-wrapper" onclick="openModal('../resources/ข้างบ้าน.png', 'ข้างบ้าน - มุมมองทั่วไป (General Side View)')">
+                    <div class="image-wrapper" id="wrapper-right-general" onclick="openModal('../resources/ข้างบ้าน_designed.png', 'ข้างบ้าน (หลังจัดสวน)')">
                         <span class="zone-badge">ข้างบ้านฝั่งขวา</span>
-                        <img src="../resources/ข้างบ้าน.png" alt="ข้างบ้าน">
+                        <img id="img-right-general" src="../resources/ข้างบ้าน_designed.png" alt="ข้างบ้าน">
+                        <span id="badge-right-general" class="zone-badge" style="left: auto; right: 0.75rem; background-color: var(--primary-color); color: #fff;">🌳 จัดสวนแล้ว</span>
                     </div>
                     <div class="card-details">
                         <div>
                             <h3>ข้างบ้าน (ทั่วไป)</h3>
-                            <p class="filename">ข้างบ้าน.png</p>
+                            <p class="filename" id="filename-right-general">ข้างบ้าน_designed.png</p>
                         </div>
                         <div class="card-actions">
-                            <button class="view-btn" onclick="openModal('../resources/ข้างบ้าน.png', 'ข้างบ้าน - มุมมองทั่วไป (General Side View)')">
+                            <button id="btn-right-general" class="view-btn" onclick="openModal('../resources/ข้างบ้าน_designed.png', 'ข้างบ้าน (หลังจัดสวน)')">
                                 ขยายภาพ
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
                             </button>
@@ -1358,7 +1359,7 @@
             
             { id: 'right-back', angle: 45, level: 'normal', name: 'ข้างบ้านฝั่งขวา ด้านหลัง', zone: 'ข้างบ้านฝั่งขวา', src: '../resources/ข้างบ้านฝั่งขวาด้านหลัง.png' },
             { id: 'right-middle', angle: 90, level: 'normal', name: 'ข้างบ้านฝั่งขวา', zone: 'ข้างบ้านฝั่งขวา', src: '../resources/ข้างบ้านฝั่งขวา.png' },
-            { id: 'right-general', angle: 135, level: 'normal', name: 'ข้างบ้าน (ทั่วไป)', zone: 'ข้างบ้านฝั่งขวา', src: '../resources/ข้างบ้าน.png' }
+            { id: 'right-general', angle: 135, level: 'normal', name: 'ข้างบ้าน (ทั่วไป)', zone: 'ข้างบ้านฝั่งขวา', src: '../resources/ข้างบ้าน.png', designedSrc: '../resources/ข้างบ้าน_designed.png' }
         ];
 
         // Unique angle list (sorted counter clockwise/clockwise)
@@ -1633,6 +1634,7 @@
             { prefix: 'garage-front', raw: '../resources/โรงจอดรถด้านหน้า.png', designed: '../resources/โรงจอดรถด้านหน้า_designed.png', designedTitle: 'โรงจอดรถ ด้านหน้า (หลังจัดสวน)', rawTitle: 'โรงจอดรถ ด้านหน้า (โครงสร้างเดิม)', designedFile: 'โรงจอดรถด้านหน้า_designed.png', rawFile: 'โรงจอดรถด้านหน้า.png' },
             { prefix: 'garage-right', raw: '../resources/โรงจอดรถด้านขวา.png', designed: '../resources/โรงจอดรถด้านขวา_designed.png', designedTitle: 'โรงจอดรถ ด้านขวา (หลังจัดสวน)', rawTitle: 'โรงจอดรถ ด้านขวา (โครงสร้างเดิม)', designedFile: 'โรงจอดรถด้านขวา_designed.png', rawFile: 'โรงจอดรถด้านขวา.png' },
             { prefix: 'left-middle', raw: '../resources/ข้างบ้านฝั่งซ้ายตรงกลาง.png', designed: '../resources/ข้างบ้านฝั่งซ้ายตรงกลาง_designed.png', designedTitle: 'ข้างบ้านฝั่งซ้าย ตรงกลาง (หลังจัดสวน)', rawTitle: 'ข้างบ้านฝั่งซ้าย ตรงกลาง (โครงสร้างเดิม)', designedFile: 'ข้างบ้านฝั่งซ้ายตรงกลาง_designed.png', rawFile: 'ข้างบ้านฝั่งซ้ายตรงกลาง.png' },
+            { prefix: 'right-general', raw: '../resources/ข้างบ้าน.png', designed: '../resources/ข้างบ้าน_designed.png', designedTitle: 'ข้างบ้าน (หลังจัดสวน)', rawTitle: 'ข้างบ้าน (โครงสร้างเดิม)', designedFile: 'ข้างบ้าน_designed.png', rawFile: 'ข้างบ้าน.png' },
         ];
 
         function setGlobalMode(mode) {
