@@ -6,7 +6,7 @@ Read for **active** vs **archived** tasks. Use recent entries in `task/log.md` o
 
 | Slug | Title | Type | Tags | Updated | Status |
 |------|-------|------|------|---------|--------|
-| — | *(none)* | — | — | — | — |
+| [007-analyze-landscaping-quotation](./007-analyze-landscaping-quotation.md) | วิเคราะห์ใบเสนอราคางานจัดสวน | planning | quotation, landscaping, pricing, pdf, web-research | 2026-06-26 | done |
 
 ## Archived (`task/archive/`)
 

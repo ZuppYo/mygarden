@@ -80,3 +80,11 @@ Activity log for project tasks.
 - visibility: makhom front-center full only; lamsam unchanged on 5 views
 - active task: none — ad-hoc work, no `007` file yet
 - next: multi-view makhom anchors; garage-front composite-foreground; create `007` to track remaining plants/occlusion
+
+## [2026-06-26 18:23] created | 007-analyze-landscaping-quotation
+- type: planning
+- note: analyze landscaping quotation PDF with web research and recommend PDF/OCR tools
+
+## [2026-06-26 18:27] executed | 007-analyze-landscaping-quotation
+- completed: T001, T002, T003, T004, T005, T006
+- note: extracted quotation data, benchmarked landscaping prices, recommended Thai PDF/OCR tools, and added Thai analysis report
