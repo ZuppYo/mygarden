@@ -88,3 +88,20 @@ Activity log for project tasks.
 ## [2026-06-26 18:27] executed | 007-analyze-landscaping-quotation
 - completed: T001, T002, T003, T004, T005, T006
 - note: extracted quotation data, benchmarked landscaping prices, recommended Thai PDF/OCR tools, and added Thai analysis report
+
+## [2026-06-26 18:35] created | 008-create-benchmark-landscaping-quotation
+- type: execution
+- note: create benchmark landscaping quotation for comparison with actual vendor quote
+
+## [2026-06-26 18:40] updated | 008-create-benchmark-landscaping-quotation
+- note: changed benchmark quotation output from markdown to HTML (`benchmark-quotation.html`)
+
+## [2026-06-26 18:41] executed | 008-create-benchmark-landscaping-quotation
+- completed: T001, T002, T003, T004, T005, T006
+- note: created `resources/quotation/benchmark-quotation.html`; benchmark total 120,120 THB vs actual 178,750 THB, difference 58,630 THB
+
+## [2026-06-26 18:45] handoff | session
+- done: `007-analyze-landscaping-quotation` and `008-create-benchmark-landscaping-quotation`
+- output: `resources/quotation/benchmark-quotation.html`
+- summary: actual quote `178,750` THB; benchmark `120,120` THB; difference `58,630` THB (+48.8%)
+- next: confirm vendor specs/quantities (especially grass line), then optionally archive done tasks or revise benchmark after contractor clarification

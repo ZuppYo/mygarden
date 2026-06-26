@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ใบเสนอราคาอ้างอิงราคากลาง - งานจัดสวน</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17211b;
+      --muted: #667166;
+      --line: #d9e1d8;
+      --soft: #f4f7f2;
+      --accent: #2f6f45;
+      --warn: #9a5b00;
+      --danger: #a33a32;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #eef2ec;
+      color: var(--ink);
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      line-height: 1.55;
+    }
+
+    .page {
+      width: min(1080px, calc(100% - 32px));
+      margin: 24px auto;
+      padding: 36px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(23, 33, 27, 0.08);
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      align-items: start;
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 22px;
+      margin-bottom: 24px;
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: 30px;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin: 28px 0 12px;
+      color: var(--accent);
+    }
+
+    h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .subtle {
+      color: var(--muted);
+    }
+
+    .meta {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .meta div {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      padding: 6px 0;
+    }
+
+    .meta div:last-child {
+      border-bottom: 0;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 20px 0 28px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      background: var(--soft);
+    }
+
+    .card .label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .card .value {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 22px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      vertical-align: top;
+    }
+
+    th {
+      background: #e8f0e6;
+      color: #18351f;
+      text-align: left;
+    }
+
+    td.num, th.num {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    tfoot td {
+      font-weight: 700;
+      background: #f8faf7;
+    }
+
+    .note {
+      border-left: 4px solid var(--warn);
+      background: #fff8e8;
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin: 16px 0;
+    }
+
+    .risk {
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    .ok {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    ul {
+      padding-left: 22px;
+    }
+
+    .signature {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 36px;
+    }
+
+    .sig-box {
+      border-top: 1px solid var(--ink);
+      padding-top: 8px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .page {
+        width: 100%;
+        margin: 0;
+        padding: 18mm;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .card, .meta, .note {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <section>
+        <h1>ใบเสนอราคาอ้างอิงราคากลาง<br>งานจัดสวนและปรับภูมิทัศน์</h1>
+        <p class="subtle">จัดทำเพื่อเปรียบเทียบกับใบเสนอราคาจริงจากบ้านสวนธรรมรัตน์ ไม่ใช่ใบเสนอราคาจากผู้รับเหมาจริง</p>
+      </section>
+      <section class="meta" aria-label="ข้อมูลเอกสาร">
+        <div><span>วันที่จัดทำ</span><strong>26/06/2569</strong></div>
+        <div><span>อ้างอิงใบเสนอราคา</span><strong>20/06/2569</strong></div>
+        <div><span>ลูกค้า</span><strong>คุณเก๋</strong></div>
+        <div><span>สถานที่</span><strong>สทิงพระ</strong></div>
+      </section>
+    </header>
+
+    <section class="summary-grid" aria-label="สรุปยอดรวม">
+      <div class="card">
+        <div class="label">ยอดรวมราคากลาง</div>
+        <div class="value">120,120 บาท</div>
+      </div>
+      <div class="card">
+        <div class="label">มัดจำ 50%</div>
+        <div class="value">60,060 บาท</div>
+      </div>
+      <div class="card">
+        <div class="label">ส่วนต่างจากใบเสนอราคาจริง</div>
+        <div class="value">58,630 บาท</div>
+      </div>
+    </section>
+
+    <div class="note">
+      <strong>สมมติฐาน:</strong> ใช้จำนวนตามใบเสนอราคาจริงทั้งหมด ได้แก่ หญ้า 10 ตร.ม., หินเกล็ดดำ 210 ตร.ม., ปูพื้นภายนอก 34 ตร.ม., คอนกรีต 54 ตร.ม., และแผ่นทางเดิน 34 แผ่น ราคานี้เป็นค่ากลางสำหรับเปรียบเทียบเท่านั้น ควรยืนยันสเปกวัสดุและหน้างานจริงก่อนตัดสินใจ
+    </div>
+
+    <h2>ใบเสนอราคาอ้างอิงราคากลาง</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>รายการ</th>
+          <th>สเปกมาตรฐานที่ใช้คำนวณ</th>
+          <th class="num">จำนวน</th>
+          <th class="num">ราคากลาง/หน่วย</th>
+          <th class="num">ราคารวม</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>หญ้า</td>
+          <td>หญ้าจริงรวมปูและปรับพื้นเบื้องต้น</td>
+          <td class="num">10 ตร.ม.</td>
+          <td class="num">120 บาท/ตร.ม.</td>
+          <td class="num">1,200 บาท</td>
+        </tr>
+        <tr>
+          <td>หินเกล็ดดำ</td>
+          <td>โรยหินรวมปรับระดับ/อัดบดเบื้องต้น</td>
+          <td class="num">210 ตร.ม.</td>
+          <td class="num">300 บาท/ตร.ม.</td>
+          <td class="num">63,000 บาท</td>
+        </tr>
+        <tr>
+          <td>งานปูพื้นภายนอก</td>
+          <td>งานปูพื้นภายนอกมาตรฐาน รวมค่าแรงและวัสดุพื้นฐาน</td>
+          <td class="num">34 ตร.ม.</td>
+          <td class="num">750 บาท/ตร.ม.</td>
+          <td class="num">25,500 บาท</td>
+        </tr>
+        <tr>
+          <td>งานเทคอนกรีตหน้าบ้าน</td>
+          <td>คอนกรีตหนา 10 ซม. รวมแรงและวัสดุพื้นฐาน</td>
+          <td class="num">54 ตร.ม.</td>
+          <td class="num">450 บาท/ตร.ม.</td>
+          <td class="num">24,300 บาท</td>
+        </tr>
+        <tr>
+          <td>แผ่นทางเดินทรายล้าง 40x80 ซม.</td>
+          <td>แผ่นทรายล้างเกรดมาตรฐาน ไม่รวมงานพิเศษ</td>
+          <td class="num">34 แผ่น</td>
+          <td class="num">180 บาท/แผ่น</td>
+          <td class="num">6,120 บาท</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4" class="num">ราคารวมราคากลาง</td>
+          <td class="num">120,120 บาท</td>
+        </tr>
+        <tr>
+          <td colspan="4" class="num">ยอดมัดจำ 50%</td>
+          <td class="num">60,060 บาท</td>
+        </tr>
+        <tr>
+          <td colspan="4" class="num">ยอดคงเหลือหลังส่งงาน 50%</td>
+          <td class="num">60,060 บาท</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <h2>ตารางเปรียบเทียบกับใบเสนอราคาจริง</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>รายการ</th>
+          <th class="num">ราคาจริง/หน่วย</th>
+          <th class="num">ราคากลาง/หน่วย</th>
+          <th class="num">ราคารวมจริง</th>
+          <th class="num">ราคารวมกลาง</th>
+          <th class="num">ส่วนต่าง</th>
+          <th>ประเมิน</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>หญ้า</td>
+          <td class="num">1,575 บาท/ตร.ม.</td>
+          <td class="num">120 บาท/ตร.ม.</td>
+          <td class="num">15,750 บาท</td>
+          <td class="num">1,200 บาท</td>
+          <td class="num">+14,550 บาท (+1,212.5%)</td>
+          <td><span class="risk">สูงผิดปกติ</span> ควรตรวจจำนวนพื้นที่หรือรายการที่รวมอยู่</td>
+        </tr>
+        <tr>
+          <td>หินเกล็ดดำ</td>
+          <td class="num">300 บาท/ตร.ม.</td>
+          <td class="num">300 บาท/ตร.ม.</td>
+          <td class="num">63,000 บาท</td>
+          <td class="num">63,000 บาท</td>
+          <td class="num">0 บาท (0%)</td>
+          <td><span class="ok">สอดคล้องราคากลาง</span> หากรวมปรับพื้น/โรยหินแล้ว</td>
+        </tr>
+        <tr>
+          <td>งานปูพื้นภายนอก</td>
+          <td class="num">1,500 บาท/ตร.ม.</td>
+          <td class="num">750 บาท/ตร.ม.</td>
+          <td class="num">51,000 บาท</td>
+          <td class="num">25,500 บาท</td>
+          <td class="num">+25,500 บาท (+100%)</td>
+          <td><span class="risk">สูง</span> ต้องขอสเปกวัสดุ ชั้นพื้น และงานเตรียมพื้น</td>
+        </tr>
+        <tr>
+          <td>งานเทคอนกรีตหน้าบ้าน</td>
+          <td class="num">750 บาท/ตร.ม.</td>
+          <td class="num">450 บาท/ตร.ม.</td>
+          <td class="num">40,500 บาท</td>
+          <td class="num">24,300 บาท</td>
+          <td class="num">+16,200 บาท (+66.7%)</td>
+          <td><span class="risk">สูงกว่าค่ากลาง</span> ต้องยืนยันความหนา KSC ไวร์เมช และงานขัด/บดอัด</td>
+        </tr>
+        <tr>
+          <td>แผ่นทางเดินทรายล้าง 40x80 ซม.</td>
+          <td class="num">250 บาท/แผ่น</td>
+          <td class="num">180 บาท/แผ่น</td>
+          <td class="num">8,500 บาท</td>
+          <td class="num">6,120 บาท</td>
+          <td class="num">+2,380 บาท (+38.9%)</td>
+          <td>สูงเล็กน้อยถึงปานกลาง หากรวมขนส่ง/ติดตั้งอาจรับได้</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" class="num">ราคารวม</td>
+          <td class="num">178,750 บาท</td>
+          <td class="num">120,120 บาท</td>
+          <td class="num">+58,630 บาท (+48.8%)</td>
+          <td>ใบเสนอราคาจริงสูงกว่าราคากลางประมาณ 48.8%</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <h2>ช่วงราคากลางที่ควรใช้ต่อรอง</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>รายการ</th>
+          <th class="num">ช่วงราคาตลาด</th>
+          <th>หมายเหตุ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>หญ้า</td>
+          <td class="num">80-150 บาท/ตร.ม.</td>
+          <td>ถ้าเป็นหญ้าจริงพร้อมปูและปรับพื้นเบื้องต้น</td>
+        </tr>
+        <tr>
+          <td>หินเกล็ดดำ</td>
+          <td class="num">250-350 บาท/ตร.ม.</td>
+          <td>เมื่อรวมปรับพื้น/อัดบด/โรยหินแบบเหมางาน</td>
+        </tr>
+        <tr>
+          <td>งานปูพื้นภายนอก</td>
+          <td class="num">450-900 บาท/ตร.ม.</td>
+          <td>ขึ้นกับวัสดุจริง หากเป็นหินหรือวัสดุพรีเมียมอาจสูงกว่านี้</td>
+        </tr>
+        <tr>
+          <td>งานเทคอนกรีตหน้าบ้าน</td>
+          <td class="num">300-500 บาท/ตร.ม.</td>
+          <td>สำหรับคอนกรีตหนา 10 ซม. รวมแรงและวัสดุพื้นฐาน</td>
+        </tr>
+        <tr>
+          <td>แผ่นทางเดินทรายล้าง 40x80 ซม.</td>
+          <td class="num">120-235 บาท/แผ่น</td>
+          <td>ยังไม่รวมเงื่อนไขขนส่งหรือติดตั้งพิเศษ</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>ข้อควรยืนยันก่อนใช้เปรียบเทียบจริง</h2>
+    <ul>
+      <li>ตรวจบรรทัดหญ้าเป็นอันดับแรก เพราะราคา 1,575 บาท/ตร.ม. สูงกว่าราคากลางมาก อาจเกิดจากจำนวนพื้นที่ผิดหรือรวมงานอื่นไว้ในรายการเดียว</li>
+      <li>ขอสเปกงานปูพื้นภายนอก เช่น ชนิดวัสดุ รุ่น ขนาด ความหนา ปูนทราย ยาแนว และงานเตรียมพื้น</li>
+      <li>ขอสเปกคอนกรีต เช่น ความหนา กำลังอัด KSC ไวร์เมช ทรายรองพื้น การบดอัด slope ระบายน้ำ และงานขัดผิว</li>
+      <li>ขอแยกค่าแรง วัสดุ ขนส่ง และค่าเครื่องมือ เพื่อเปรียบเทียบกับราคากลางได้แม่นขึ้น</li>
+      <li>ควรต่อรองเงื่อนไขมัดจำจาก 50% แบบไม่คืน เป็นแบ่งจ่ายตาม milestone หรือมัดจำตามค่าวัสดุจริง</li>
+    </ul>
+
+    <div class="signature">
+      <div class="sig-box">ผู้จัดทำเอกสารเปรียบเทียบ</div>
+      <div class="sig-box">ผู้ตรวจสอบ/ผู้ตัดสินใจ</div>
+    </div>
+  </main>
+</body>
+</html>

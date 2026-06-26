@@ -26,13 +26,13 @@
 
 ## Continuity — latest activity
 
-### Snapshot (2026-06-10)
+### Snapshot (2026-06-26)
 
-- Done: `000–006` archived (`task/archive/2026-06-10/`); Lamsam `lamsam-front-right` on 5 views + garage-right `composite-foreground`.
-- Done: `makhom-thesedang-front-center` — มะขามเทศด่าง ~1.5m, front-center only (`anchor 1012,891` norm 0.472,0.73); cutout `resources/tree/มะขามเทศด่าง-cutout.png`; blend `resources/หน้าบ้านตรงกลาง_designed.png` (Lamsam right + Makhom center, ornamental base).
-- Registry: 2 elements in `design/placements.json`; makhom visibility = `front-center` full, all else hidden.
-- Next: extend makhom to other views if needed; tune occluders / `007` for garage-front 3D layering; formalize ad-hoc plant work as numbered task.
-- Reload: `[task/index.md](task/index.md)`, `[design/placements.json](design/placements.json)`, `[design/view-anchors.json](design/view-anchors.json)`
+- Done: `000–006` archived (`task/archive/2026-06-10/`); garden design state unchanged from prior snapshot (Lamsam + Makhom placements remain in `design/placements.json`).
+- Done: `007-analyze-landscaping-quotation` analyzed `resources/quotation/quotation.pdf`; key risk = grass line price unusually high; actual quote total `178,750` THB.
+- Done: `008-create-benchmark-landscaping-quotation` created `resources/quotation/benchmark-quotation.html`; benchmark total `120,120` THB, deposit `60,060` THB, actual quote higher by `58,630` THB (+48.8%).
+- Active Task: none; `007` and `008` are done but not archived.
+- Reload: `[task/index.md](task/index.md)`, `[task/log.md](task/log.md)`, `[resources/quotation/benchmark-quotation.html](resources/quotation/benchmark-quotation.html)`
 
 ## Task state pointers
 
