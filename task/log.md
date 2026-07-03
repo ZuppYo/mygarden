@@ -127,3 +127,9 @@ Activity log for project tasks.
 ## [2026-07-03 21:52] executed | 010-plan-2-area-quotation-qt-v1
 - completed: T001, T002, T003, T004, T005, T006, T007
 - note: grass 177.3, gravel 83.7, paving 38.6, concrete 102.0, carport 36.5 sqm; benchmark 121,266 THB vs vendor 438,818 THB; output in `resources/quotation/qt-v1/`
+
+## [2026-07-03 22:27] handoff | session
+- done: `010-plan-2-area-quotation-qt-v1`; qt-v1 HTML inline CSS; `vendor-quotation-back-gravel.html` (back yard 12.88×12.35 → gravel)
+- output: `resources/quotation/qt-v1/` — benchmark-quotation.html, vendor-quotation.html, vendor-quotation-back-gravel.html, comparison.html, area-breakdown.md
+- summary: plan-2 vendor 438,818 THB (plan areas × PDF units); back-gravel alt 235,965 THB (−46%); benchmark back-gravel alt ~149,874 THB; grass PDF line (10 sqm @ 1,575) still suspicious
+- next: archive 007–010; confirm vendor on back-gravel option + stepping stones; optional benchmark-back-gravel HTML

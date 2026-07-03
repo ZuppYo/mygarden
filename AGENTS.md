@@ -28,12 +28,11 @@
 
 ### Snapshot (2026-07-03)
 
-- Done: `000–006` archived; garden design state unchanged (Lamsam + Makhom in `design/placements.json`).
-- Done: `007` analyzed `resources/quotation/quotation.pdf`; actual quote `178,750` THB; grass line suspicious.
-- Done: `008` created `resources/quotation/benchmark-quotation.html`; benchmark `120,120` THB (+48.8% vs actual).
-- Done: `009` analyzed `resources/quotation/plan.jpg`; created `resources/quotation/benchmark-quotation-v2.html` (v1 untouched); red-box gravel `93.3` sqm, grass `306.6` sqm; v2 total `64,782` THB (grass+gravel vs actual `78,750` THB).
-- Active Task: none; `007–009` done but not archived.
-- Reload: `[task/index.md](task/index.md)`, `[task/log.md](task/log.md)`, `[resources/quotation/benchmark-quotation-v2.html](resources/quotation/benchmark-quotation-v2.html)`, `[resources/quotation/plan.jpg](resources/quotation/plan.jpg)`
+- Done: `000–006` archived; garden design unchanged (Lamsam + Makhom in `design/placements.json`).
+- Done: `007–010` quotation work — PDF `178,750` THB; plan.jpg v2 gravel `93.3` / grass `306.6` sqm; plan-2 qt-v1 areas grass `177.3`, gravel `83.7`, paving `38.6`, concrete `102.0`, carport `36.5` sqm.
+- qt-v1: benchmark `121,266` THB vs vendor plan areas `438,818` THB; vendor alt back-gravel `235,965` THB (`12.88×12.35` → stone).
+- Active Task: none; `007–010` done, not archived.
+- Reload: `[task/index.md](task/index.md)`, `[task/log.md](task/log.md)`, `[resources/quotation/qt-v1/](resources/quotation/qt-v1/)`, `[resources/quotation/plan-2.jpg](resources/quotation/plan-2.jpg)`
 
 ## Task state pointers
 
