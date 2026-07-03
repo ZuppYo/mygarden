@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>เปรียบเทียบราคา — plan-2 (qt-v1)</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17211b;
+      --muted: #667166;
+      --line: #d9e1d8;
+      --soft: #f4f7f2;
+      --accent: #2f6f45;
+      --warn: #9a5b00;
+      --danger: #a33a32;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #eef2ec;
+      color: var(--ink);
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      line-height: 1.55;
+    }
+    .page {
+      width: min(1100px, calc(100% - 32px));
+      margin: 24px auto;
+      padding: 36px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(23, 33, 27, 0.08);
+    }
+    header {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 22px;
+      margin-bottom: 16px;
+    }
+    h1 { font-size: 26px; line-height: 1.25; margin: 0 0 10px; }
+    h2 { font-size: 20px; margin: 28px 0 12px; color: var(--accent); }
+    .subtle { color: var(--muted); font-size: 14px; }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .badge-bench { background: #e8f0e6; color: var(--accent); }
+    .badge-vendor { background: #fff3e0; color: var(--warn); }
+    .badge-compare { background: #e8eef8; color: #2a4a8a; }
+    .meta {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .meta div {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      padding: 6px 0;
+    }
+    .meta div:last-child { border-bottom: 0; }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .nav-links a {
+      color: var(--accent);
+      text-decoration: none;
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .nav-links a:hover { background: var(--soft); }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 20px 0 28px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      background: var(--soft);
+    }
+    .card .label { color: var(--muted); font-size: 13px; margin-bottom: 4px; }
+    .card .value { font-size: 22px; font-weight: 700; }
+    .highlight-warn { color: var(--warn); }
+    .plan-wrap {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 16px 0 24px;
+    }
+    .plan-wrap img { display: block; width: 100%; height: auto; }
+    .plan-caption {
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 22px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      vertical-align: top;
+    }
+    th { background: #e8f0e6; text-align: left; }
+    td.num, th.num { text-align: right; white-space: nowrap; }
+    tfoot td { font-weight: 700; background: #f8faf7; }
+    tr.optional { background: #fafcff; }
+    .swatch {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      vertical-align: middle;
+      margin-right: 4px;
+      border: 1px solid rgba(0,0,0,.15);
+    }
+    .swatch.green { background: #4caf50; }
+    .swatch.red { background: #e53935; }
+    .swatch.yellow { background: #fdd835; }
+    .swatch.grey { background: #9e9e9e; }
+    .swatch.blue { background: #1e88e5; }
+    .note {
+      border-left: 4px solid var(--warn);
+      background: #fff8e8;
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin: 16px 0;
+    }
+    .note.warn { border-color: var(--danger); background: #fff0ee; }
+    .formula {
+      background: #f8faf7;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+      margin: 10px 0;
+    }
+    .risk { color: var(--danger); font-weight: 700; }
+    .ok { color: var(--accent); font-weight: 700; }
+    .muted { color: var(--muted); }
+    .bar-chart { margin: 20px 0; }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 140px 1fr 80px;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+    .bar-track {
+      height: 22px;
+      background: #eef2ec;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .bar-fill-bench { height: 100%; background: var(--accent); border-radius: 6px; }
+    .bar-fill-vendor { height: 100%; background: var(--warn); border-radius: 6px; }
+    ul { padding-left: 22px; }
+    @media (max-width: 900px) {
+      header, .summary-grid { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 1fr; }
+    }
+    @media print {
+      body { background: white; }
+      .page { width: 100%; margin: 0; padding: 18mm; border: 0; box-shadow: none; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <section>
+        <span class="badge badge-compare">เปรียบเทียบ</span>
+        <h1>เปรียบเทียบราคากลาง vs บริษัท<br>ฐานพื้นที่ plan-2.jpg</h1>
+        <p class="subtle">พื้นที่เดียวกันทุกรายการ — ต่างกันที่ราคา/หน่วยเท่านั้น</p>
+      </section>
+      <section class="meta">
+        <div><span>วันที่จัดทำ</span><strong>03/07/2569</strong></div>
+        <div><span>แผนอ้างอิง</span><strong>plan-2.jpg</strong></div>
+        <div><span>ราคาบริษัทจาก</span><strong>quotation.pdf</strong></div>
+        <div><span>ราคากลางจาก</span><strong>task 007/008</strong></div>
+      </section>
+    </header>
+
+    <nav class="nav-links">
+      <a href="benchmark-quotation.html">ราคากลาง</a>
+      <a href="vendor-quotation.html">ราคาบริษัท</a>
+      <a href="area-breakdown.md">สรุปพื้นที่</a>
+    </nav>
+
+    <section class="summary-grid">
+      <div class="card">
+        <div class="label">ราคากลาง (4 รายการ)</div>
+        <div class="value ok">121,266 บาท</div>
+      </div>
+      <div class="card">
+        <div class="label">ราคาบริษัท (4 รายการ)</div>
+        <div class="value risk">438,818 บาท</div>
+      </div>
+      <div class="card">
+        <div class="label">ส่วนต่าง</div>
+        <div class="value risk">+317,552 บาท</div>
+      </div>
+      <div class="card">
+        <div class="label">บริษัทสูงกว่า</div>
+        <div class="value risk">+262%</div>
+      </div>
+    </section>
+
+    <figure class="plan-wrap">
+      <img src="../plan-2.jpg" alt="แผน plan-2">
+      <figcaption class="plan-caption">ฐานพื้นที่ร่วม — 401.6 ตร.ม. (4 รายการหลัก)</figcaption>
+    </figure>
+
+    <h2>เปรียบเทียบรายการ × พื้นที่แผน</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>สี</th>
+          <th>รายการ</th>
+          <th class="num">ตร.ม.</th>
+          <th class="num">กลาง/ตร.ม.</th>
+          <th class="num">บริษัท/ตร.ม.</th>
+          <th class="num">ส่วนต่าง/ตร.ม.</th>
+          <th class="num">รวมกลาง</th>
+          <th class="num">รวมบริษัท</th>
+          <th class="num">ส่วนต่าง</th>
+          <th class="num">%</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="swatch green"></span></td>
+          <td>หญ้านวลน้อย</td>
+          <td class="num">177.3</td>
+          <td class="num">120</td>
+          <td class="num">1,575</td>
+          <td class="num risk">+1,455</td>
+          <td class="num">21,276</td>
+          <td class="num">279,248</td>
+          <td class="num risk">+257,972</td>
+          <td class="num risk">+1,213%</td>
+        </tr>
+        <tr>
+          <td><span class="swatch red"></span></td>
+          <td>หินเกล็ดดำ</td>
+          <td class="num">83.7</td>
+          <td class="num">300</td>
+          <td class="num">300</td>
+          <td class="num ok">0</td>
+          <td class="num">25,110</td>
+          <td class="num">25,110</td>
+          <td class="num ok">0</td>
+          <td class="num ok">0%</td>
+        </tr>
+        <tr>
+          <td><span class="swatch yellow"></span></td>
+          <td>ปูพื้นภายนอก</td>
+          <td class="num">38.6</td>
+          <td class="num">750</td>
+          <td class="num">1,500</td>
+          <td class="num risk">+750</td>
+          <td class="num">28,980</td>
+          <td class="num">57,960</td>
+          <td class="num risk">+28,980</td>
+          <td class="num risk">+100%</td>
+        </tr>
+        <tr>
+          <td><span class="swatch grey"></span></td>
+          <td>เทคอนกรีตหน้าบ้าน</td>
+          <td class="num">102.0</td>
+          <td class="num">450</td>
+          <td class="num">750</td>
+          <td class="num risk">+300</td>
+          <td class="num">45,900</td>
+          <td class="num">76,500</td>
+          <td class="num risk">+30,600</td>
+          <td class="num risk">+67%</td>
+        </tr>
+        <tr class="optional">
+          <td><span class="swatch blue"></span></td>
+          <td>โรงจอดรถ</td>
+          <td class="num">36.5</td>
+          <td class="num">450</td>
+          <td class="num">—</td>
+          <td class="num muted">N/A</td>
+          <td class="num">16,416</td>
+          <td class="num muted">ไม่มี</td>
+          <td class="num muted">—</td>
+          <td class="num muted">—</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="6" class="num">รวม 4 รายการหลัก</td>
+          <td class="num ok">121,266</td>
+          <td class="num risk">438,818</td>
+          <td class="num risk">+317,552</td>
+          <td class="num risk">+262%</td>
+        </tr>
+        <tr>
+          <td colspan="6" class="num">รวมทั้งหมด (+ carport กลาง)</td>
+          <td class="num">137,682</td>
+          <td class="num">438,818</td>
+          <td class="num risk">+301,136</td>
+          <td class="num risk">+219%</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <h2>กราฟส่วนต่างราคารวม (4 รายการ)</h2>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <span>หญ้า</span>
+        <div class="bar-track"><div class="bar-fill-vendor" style="width:100%"></div></div>
+        <span class="risk">279,248</span>
+      </div>
+      <div class="bar-row">
+        <span>หญ้า (กลาง)</span>
+        <div class="bar-track"><div class="bar-fill-bench" style="width:7.6%"></div></div>
+        <span class="ok">21,276</span>
+      </div>
+      <div class="bar-row">
+        <span>ปูพื้น</span>
+        <div class="bar-track"><div class="bar-fill-vendor" style="width:20.8%"></div></div>
+        <span>57,960</span>
+      </div>
+      <div class="bar-row">
+        <span>คอนกรีต</span>
+        <div class="bar-track"><div class="bar-fill-vendor" style="width:27.4%"></div></div>
+        <span>76,500</span>
+      </div>
+      <div class="bar-row">
+        <span>หินเกล็ด</span>
+        <div class="bar-track"><div class="bar-fill-bench" style="width:9%"></div></div>
+        <span>25,110</span>
+      </div>
+    </div>
+
+    <h2>เปรียบเทียบกับ PDF เดิม (จำนวนจากใบเสนอ)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>รายการ</th>
+          <th class="num">PDF จำนวน</th>
+          <th class="num">แผน จำนวน</th>
+          <th class="num">PDF รวม</th>
+          <th class="num">แผน×หน่วยบริษัท</th>
+          <th>หมายเหตุ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>หญ้า</td>
+          <td class="num">10</td>
+          <td class="num">177.3</td>
+          <td class="num">15,750</td>
+          <td class="num risk">279,248</td>
+          <td><span class="risk">จำนวนหญ้าใน PDF น่าจะผิดพลาด</span> — แผนระบุ 177.3 ตร.ม.</td>
+        </tr>
+        <tr>
+          <td>หินเกล็ดดำ</td>
+          <td class="num">210</td>
+          <td class="num">83.7</td>
+          <td class="num">63,000</td>
+          <td class="num">25,110</td>
+          <td>PDF ระบุพื้นที่มากกว่าแผน ~2.5 เท่า</td>
+        </tr>
+        <tr>
+          <td>ปูพื้นภายนอก</td>
+          <td class="num">34</td>
+          <td class="num">38.6</td>
+          <td class="num">51,000</td>
+          <td class="num">57,960</td>
+          <td>ใกล้เคียง (ต่าง ~13%)</td>
+        </tr>
+        <tr>
+          <td>คอนกรีต</td>
+          <td class="num">54</td>
+          <td class="num">102.0</td>
+          <td class="num">40,500</td>
+          <td class="num">76,500</td>
+          <td>แผนใหญ่กว่า PDF ~1.9 เท่า</td>
+        </tr>
+        <tr>
+          <td>แผ่นทางเดินทรายล้าง</td>
+          <td class="num">34 แผ่น</td>
+          <td class="num">—</td>
+          <td class="num">8,500</td>
+          <td class="num">—</td>
+          <td>ไม่มีโซนสีใน plan-2</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" class="num">รวม PDF เดิม</td>
+          <td class="num">178,750</td>
+          <td class="num risk">438,818</td>
+          <td>ถ้าใช้พื้นที่แผนจริง ยอดบริษัทสูงกว่า PDF มาก</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <h2>ข้อจำกัดและคำแนะนำ</h2>
+    <ul>
+      <li>การวัดจากแผนอาจคลาดเคลื่อน <strong>±5–10%</strong> โดยเฉพาะ footprint ตัวบ้านและขอบโซน carport ลายแฉก</li>
+      <li><strong>โรงจอดรถ (น้ำเงิน)</strong> 36.5 ตร.ม. — ไม่มีใน quotation.pdf; ราคากลางอ้างอิงอัตราคอนกรีต 450 บาท/ตร.ม.</li>
+      <li><strong>แผ่นทางเดินทรายล้าง</strong> 34 แผ่น (8,500 บาท ใน PDF) ไม่ปรากฏเป็นโซนสีใน plan-2</li>
+      <li>ราคาหญ้าบริษัท <strong>1,575 บาท/ตร.ม.</strong> สูงกว่าราคากลาง 13 เท่า — ควรยืนยันสเปกหญ้าและขอบเขตพื้นที่ก่อนจ่ายมัดจำ</li>
+      <li>PDF รวม 178,750 บาท ใช้จำนวนพื้นที่ที่ไม่ตรงแผน — ควรขอ overlay หรือวัดหน้างานจริง</li>
+      <li>ก่อนตัดสินใจ: ขอแผนงานทับ plan-2, ยืนยันความหนาคอนกรีต, ชนิดกระเบื้องปูพื้น, และเงื่อนไขมัดจำไม่คืน</li>
+    </ul>
+  </main>
+</body>
+</html>

@@ -119,3 +119,11 @@ Activity log for project tasks.
 - output: `resources/quotation/benchmark-quotation-v2.html`, `resources/quotation/plan.jpg`
 - summary: v2 grass+gravel 64,782 THB vs actual 78,750 THB; actual gravel 210 sqm vs plan 93.3 sqm; actual grass 10 sqm vs plan 306.6 sqm
 - next: confirm vendor area scope on plan; optionally archive 007–009; recalc v2 if red-box height or house footprint differs
+
+## [2026-07-03 21:45] created | 010-plan-2-area-quotation-qt-v1
+- type: execution
+- note: คำนวณพื้นที่ตามสีจาก plan-2.jpg (เขียว/แดง/เหลือง/เทา/น้ำเงิน); สร้าง quotation 2 ฉบับเทียบราคากลาง vs บริษัท เก็บใน qt-v1
+
+## [2026-07-03 21:52] executed | 010-plan-2-area-quotation-qt-v1
+- completed: T001, T002, T003, T004, T005, T006, T007
+- note: grass 177.3, gravel 83.7, paving 38.6, concrete 102.0, carport 36.5 sqm; benchmark 121,266 THB vs vendor 438,818 THB; output in `resources/quotation/qt-v1/`
