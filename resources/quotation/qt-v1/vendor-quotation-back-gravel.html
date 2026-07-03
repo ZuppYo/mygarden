@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ใบเสนอราคาบริษัท — หลังบ้านเป็นหินเกล็ด (qt-v1)</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17211b;
+      --muted: #667166;
+      --line: #d9e1d8;
+      --soft: #f4f7f2;
+      --accent: #2f6f45;
+      --warn: #9a5b00;
+      --danger: #a33a32;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #eef2ec;
+      color: var(--ink);
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      line-height: 1.55;
+    }
+    .page {
+      width: min(1100px, calc(100% - 32px));
+      margin: 24px auto;
+      padding: 36px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(23, 33, 27, 0.08);
+    }
+    header {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 22px;
+      margin-bottom: 16px;
+    }
+    h1 { font-size: 26px; line-height: 1.25; margin: 0 0 10px; }
+    h2 { font-size: 20px; margin: 28px 0 12px; color: var(--accent); }
+    .subtle { color: var(--muted); font-size: 14px; }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .badge-vendor { background: #fff3e0; color: var(--warn); }
+    .badge-variant { background: #fce8e6; color: #b42318; }
+    .meta {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .meta div {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      padding: 6px 0;
+    }
+    .meta div:last-child { border-bottom: 0; }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .nav-links a {
+      color: var(--accent);
+      text-decoration: none;
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .nav-links a:hover { background: var(--soft); }
+    .nav-links a.active {
+      background: #fff3e0;
+      border-color: var(--warn);
+      color: var(--warn);
+      font-weight: 600;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 20px 0 28px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      background: var(--soft);
+    }
+    .card .label { color: var(--muted); font-size: 13px; margin-bottom: 4px; }
+    .card .value { font-size: 22px; font-weight: 700; }
+    .highlight-ok { color: var(--accent); }
+    .plan-wrap {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 16px 0 24px;
+    }
+    .plan-wrap img { display: block; width: 100%; height: auto; }
+    .plan-caption {
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 22px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      vertical-align: top;
+    }
+    th { background: #e8f0e6; text-align: left; }
+    td.num, th.num { text-align: right; white-space: nowrap; }
+    tfoot td { font-weight: 700; background: #f8faf7; }
+    tr.changed { background: #fff8f0; }
+    tr.optional { background: #fafcff; }
+    .swatch {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      vertical-align: middle;
+      margin-right: 4px;
+      border: 1px solid rgba(0,0,0,.15);
+    }
+    .swatch.green { background: #4caf50; }
+    .swatch.red { background: #e53935; }
+    .swatch.yellow { background: #fdd835; }
+    .swatch.grey { background: #9e9e9e; }
+    .swatch.blue { background: #1e88e5; }
+    .note {
+      border-left: 4px solid var(--warn);
+      background: #fff8e8;
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin: 16px 0;
+    }
+    .note.info { border-color: var(--accent); background: #f0f7f2; }
+    .formula {
+      background: #f8faf7;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+      margin: 10px 0;
+    }
+    .risk { color: var(--danger); font-weight: 700; }
+    .ok { color: var(--accent); font-weight: 700; }
+    .muted { color: var(--muted); }
+    ul { padding-left: 22px; }
+    @media (max-width: 900px) {
+      header, .summary-grid { grid-template-columns: 1fr; }
+    }
+    @media print {
+      body { background: white; }
+      .page { width: 100%; margin: 0; padding: 18mm; border: 0; box-shadow: none; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <section>
+        <span class="badge badge-vendor">บ้านสวนธรรมรัตน์</span>
+        <span class="badge badge-variant">ทางเลือก: หลังบ้านเป็นหิน</span>
+        <h1>ใบเสนอราคาตามหน่วยบริษัท<br>หลังบ้าน 12.88×12.35 โรยหินเกล็ดดำ</h1>
+        <p class="subtle">หน่วยราคาจาก quotation.pdf × พื้นที่ plan-2 — เปลี่ยนโซนหญ้าหลังบ้านเป็นหินเกล็ดดำ</p>
+      </section>
+      <section class="meta">
+        <div><span>วันที่จัดทำ</span><strong>03/07/2569</strong></div>
+        <div><span>อ้างอิงหน่วยราคา</span><strong>quotation.pdf 20/06/2569</strong></div>
+        <div><span>ลูกค้า</span><strong>คุณเก๋</strong></div>
+        <div><span>แผน</span><strong>plan-2.jpg</strong></div>
+      </section>
+    </header>
+
+    <nav class="nav-links">
+      <a href="vendor-quotation.html">← ฉบับเดิม (หญ้าทั้งแปลง)</a>
+      <a href="vendor-quotation-back-gravel.html" class="active">ฉบับนี้</a>
+      <a href="benchmark-quotation.html">ราคากลาง</a>
+      <a href="comparison.html">เปรียบเทียบ</a>
+    </nav>
+
+    <section class="summary-grid">
+      <div class="card"><div class="label">ยอดรวม (4 รายการ)</div><div class="value highlight-ok">235,965 บาท</div></div>
+      <div class="card"><div class="label">เทียบฉบับเดิม</div><div class="value ok">−202,853 บาท</div></div>
+      <div class="card"><div class="label">ฉบับเดิม (หญ้าทั้งแปลง)</div><div class="value">438,818 บาท</div></div>
+      <div class="card"><div class="label">มัดจำ 50%</div><div class="value">117,983 บาท</div></div>
+    </section>
+
+    <div class="note info">
+      <strong>การเปลี่ยนแปลง:</strong> โซนหลังบ้าน <strong>12.88 × 12.35 = 159.1 ตร.ม.</strong> เปลี่ยนจากปลูกหญ้า (1,575 บาท/ตร.ม.) เป็นโรยหินเกล็ดดำ (300 บาท/ตร.ม.) — หญ้าเหลือเฉพาะสนามล่างซ้าย <strong>6.08 × 3.00 = 18.2 ตร.ม.</strong>
+    </div>
+
+    <figure class="plan-wrap">
+      <img src="../plan-2.jpg" alt="แผน plan-2">
+      <figcaption class="plan-caption">โซนที่เปลี่ยน: สนามบน (เต็มความกว้าง 12.88 ม. × สูง 12.35 ม.) จากเขียว → แดง (หินเกล็ดดำ)</figcaption>
+    </figure>
+
+    <h2>รายการตามหน่วยบริษัท</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>สี</th>
+          <th>รายการ</th>
+          <th>สูตร / หมายเหตุ</th>
+          <th class="num">ตร.ม.</th>
+          <th class="num">บาท/ตร.ม.</th>
+          <th class="num">รวม</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="swatch green"></span> เขียว</td>
+          <td>หญ้านวลน้อย</td>
+          <td>สนามล่างซ้ายเท่านั้น (เดิม 177.3 → 18.2)</td>
+          <td class="num">18.2</td>
+          <td class="num">1,575</td>
+          <td class="num">28,665</td>
+        </tr>
+        <tr class="changed">
+          <td><span class="swatch red"></span> แดง</td>
+          <td>หินเกล็ดดำ</td>
+          <td>รอบบ้าน 83.7 + หลังบ้าน 159.1</td>
+          <td class="num">242.8</td>
+          <td class="num">300</td>
+          <td class="num">72,840</td>
+        </tr>
+        <tr>
+          <td><span class="swatch yellow"></span> เหลือง</td>
+          <td>งานปูพื้นภายนอก</td>
+          <td>12.88 × 3.00</td>
+          <td class="num">38.6</td>
+          <td class="num">1,500</td>
+          <td class="num">57,960</td>
+        </tr>
+        <tr>
+          <td><span class="swatch grey"></span> เทา</td>
+          <td>งานเทคอนกรีตหน้าบ้าน</td>
+          <td>6.80×9.00 + 6.80×6.00</td>
+          <td class="num">102.0</td>
+          <td class="num">750</td>
+          <td class="num">76,500</td>
+        </tr>
+        <tr class="optional">
+          <td><span class="swatch blue"></span> น้ำเงิน</td>
+          <td>โรงจอดรถ</td>
+          <td>6.08 × 6.00 — ไม่มีใน PDF</td>
+          <td class="num">36.5</td>
+          <td class="num">—</td>
+          <td class="num muted">ไม่มีใน PDF</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5" class="num">รวม 4 รายการ</td>
+          <td class="num"><strong>235,965 บาท</strong></td>
+        </tr>
+        <tr>
+          <td colspan="5" class="num">ยอดมัดจำ 50%</td>
+          <td class="num">117,983 บาท</td>
+        </tr>
+        <tr>
+          <td colspan="5" class="num">ยอดคงเหลือหลังส่งงาน 50%</td>
+          <td class="num">117,982 บาท</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <h2>รายละเอียดโซนที่เปลี่ยน (หลังบ้าน → หินเกล็ด)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>รายการ</th>
+          <th class="num">ตร.ม.</th>
+          <th class="num">เดิม (หญ้า)</th>
+          <th class="num">ใหม่ (หิน)</th>
+          <th class="num">ส่วนต่าง</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>โซนหลังบ้าน 12.88 × 12.35</td>
+          <td class="num">159.1</td>
+          <td class="num">250,583</td>
+          <td class="num">47,730</td>
+          <td class="num ok">−202,853</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="formula">
+      หญ้าเดิมโซนนี้: 159.1 × 1,575 = 250,583 บาท<br>
+      หินเกล็ดใหม่: 159.1 × 300 = 47,730 บาท<br>
+      หินรอบบ้านเดิม: 83.7 × 300 = 25,110 บาท → รวมหิน 242.8 × 300 = 72,840 บาท
+    </div>
+
+    <h2>เปรียบเทียบกับฉบับเดิม (vendor-quotation.html)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>รายการ</th>
+          <th class="num">ฉบับเดิม</th>
+          <th class="num">ฉบับนี้</th>
+          <th class="num">ส่วนต่าง</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>หญ้า</td>
+          <td class="num">279,248 (177.3 ตร.ม.)</td>
+          <td class="num">28,665 (18.2 ตร.ม.)</td>
+          <td class="num ok">−250,583</td>
+        </tr>
+        <tr>
+          <td>หินเกล็ดดำ</td>
+          <td class="num">25,110 (83.7 ตร.ม.)</td>
+          <td class="num">72,840 (242.8 ตร.ม.)</td>
+          <td class="num">+47,730</td>
+        </tr>
+        <tr>
+          <td>ปูพื้นภายนอก</td>
+          <td class="num">57,960</td>
+          <td class="num">57,960</td>
+          <td class="num">0</td>
+        </tr>
+        <tr>
+          <td>คอนกรีต</td>
+          <td class="num">76,500</td>
+          <td class="num">76,500</td>
+          <td class="num">0</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="num">รวม</td>
+          <td class="num">438,818</td>
+          <td class="num ok">235,965</td>
+          <td class="num ok">−202,853 (−46%)</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <h2>หมายเหตุ</h2>
+    <ul>
+      <li>ใช้หน่วยราคาเดิมจาก PDF — ไม่ได้ยืนยันกับผู้รับเหมาว่ายอมรับการเปลี่ยนงานหรือราคานี้</li>
+      <li>ไม่รวมแผ่นทางเดินทรายล้าง 34 แผ่น (8,500 บาท) และ carport สีน้ำเงิน</li>
+      <li>ถ้ารวมแผ่นทางเดิน: 235,965 + 8,500 = <strong>244,465 บาท</strong></li>
+      <li>เงื่อนไขมัดจำไม่คืนตาม PDF ยังใช้ได้ถ้าตกลงจ้าง</li>
+    </ul>
+  </main>
+</body>
+</html>
