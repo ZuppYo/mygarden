@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ใบเสนอราคาอ้างอิงราคากลาง v2 - จากแผนบ้าน</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17211b;
+      --muted: #667166;
+      --line: #d9e1d8;
+      --soft: #f4f7f2;
+      --accent: #2f6f45;
+      --warn: #9a5b00;
+      --danger: #a33a32;
+      --red: #b42318;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #eef2ec;
+      color: var(--ink);
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      line-height: 1.55;
+    }
+
+    .page {
+      width: min(1100px, calc(100% - 32px));
+      margin: 24px auto;
+      padding: 36px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(23, 33, 27, 0.08);
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 22px;
+      margin-bottom: 24px;
+    }
+
+    h1 { font-size: 28px; line-height: 1.25; margin: 0 0 10px; }
+    h2 { font-size: 20px; margin: 28px 0 12px; color: var(--accent); }
+    h3 { font-size: 16px; margin: 0 0 8px; }
+    .subtle { color: var(--muted); }
+    .badge {
+      display: inline-block;
+      background: #e8f0e6;
+      color: var(--accent);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .meta {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .meta div {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      padding: 6px 0;
+    }
+
+    .meta div:last-child { border-bottom: 0; }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 20px 0 28px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      background: var(--soft);
+    }
+
+    .card .label { color: var(--muted); font-size: 13px; margin-bottom: 4px; }
+    .card .value { font-size: 22px; font-weight: 700; }
+
+    .plan-wrap {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 16px 0 24px;
+      background: #fafcfa;
+    }
+
+    .plan-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .plan-caption {
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 22px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      vertical-align: top;
+    }
+
+    th {
+      background: #e8f0e6;
+      color: #18351f;
+      text-align: left;
+    }
+
+    td.num, th.num { text-align: right; white-space: nowrap; }
+    tfoot td { font-weight: 700; background: #f8faf7; }
+
+    .note {
+      border-left: 4px solid var(--warn);
+      background: #fff8e8;
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin: 16px 0;
+    }
+
+    .formula {
+      background: #f8faf7;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+      margin: 10px 0;
+    }
+
+    .risk { color: var(--danger); font-weight: 700; }
+    .ok { color: var(--accent); font-weight: 700; }
+
+    ul { padding-left: 22px; }
+
+    @media (max-width: 900px) {
+      header, .summary-grid { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      body { background: white; }
+      .page {
+        width: 100%;
+        margin: 0;
+        padding: 18mm;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <section>
+        <span class="badge">Version 2</span>
+        <h1>ใบเสนอราคาอ้างอิงราคากลาง v2<br>คำนวณจากแผนบ้าน (plan.jpg)</h1>
+        <p class="subtle">ประเมินเฉพาะงานหินเกล็ดดำรอบบ้านในกรอบแดง และปลูกหญ้าพื้นที่ที่เหลือทั้งแปลง โดยใช้ราคากลาง/หน่วยเดียวกับ v1</p>
+      </section>
+      <section class="meta" aria-label="ข้อมูลเอกสาร">
+        <div><span>วันที่จัดทำ</span><strong>03/07/2569</strong></div>
+        <div><span>อ้างอิงแผน</span><strong>ผังแปลนกำแพง 1:175</strong></div>
+        <div><span>ลูกค้า</span><strong>คุณเก๋</strong></div>
+        <div><span>สถานที่</span><strong>สทิงพระ</strong></div>
+      </section>
+    </header>
+
+    <section class="summary-grid" aria-label="สรุปยอดรวม">
+      <div class="card">
+        <div class="label">พื้นที่หินเกล็ดดำ</div>
+        <div class="value">93.3 ตร.ม.</div>
+      </div>
+      <div class="card">
+        <div class="label">พื้นที่ปลูกหญ้า</div>
+        <div class="value">306.6 ตร.ม.</div>
+      </div>
+      <div class="card">
+        <div class="label">ยอดรวมราคากลาง v2</div>
+        <div class="value">64,782 บาท</div>
+      </div>
+      <div class="card">
+        <div class="label">มัดจำ 50%</div>
+        <div class="value">32,391 บาท</div>
+      </div>
+    </section>
+
+    <div class="note">
+      <strong>ขอบเขต v2:</strong> หินเกล็ดดำ = พื้นที่ในกรอบสีแดง − footprint ตัวบ้าน | หญ้า = พื้นที่สนามที่เหลือทั้งแปลง (นอกกรอบแดง) หัก carport ที่ไม่ปลูกหญ้า | ไม่รวมงานคอนกรีต ปูพื้น หรือแผ่นทางเดินจากใบเสนอราคาจริง
+    </div>
+
+    <h2>แผนอ้างอิง</h2>
+    <figure class="plan-wrap">
+      <img src="plan.jpg" alt="ผังแปลนกำแพง พร้อมกรอบสีแดง">
+      <figcaption class="plan-caption">อ้างอิงจาก plan.jpg — กรอบแดงครอบคลุมโซนบ้าน สูง 15.00 ม. (5 ช่องกริด × 3.00 ม.) กว้าง 12.00 ม.</figcaption>
+    </figure>
+
+    <h2>การคำนวณพื้นที่</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>โซน</th>
+          <th>สูตร / มิติอ้างอิง</th>
+          <th class="num">พื้นที่ (ตร.ม.)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>แปลงรวม (ประมาณ)</td>
+          <td>ส่วนบน 12.00×12.35 + กรอบแดง + ส่วนล่าง 12.88×15.00</td>
+          <td class="num">521.4</td>
+        </tr>
+        <tr>
+          <td>กรอบแดงรวม</td>
+          <td>12.00 × 15.00 ม. (เริ่มห่างจากขอบบน 12.35 ม.)</td>
+          <td class="num">180.0</td>
+        </tr>
+        <tr>
+          <td>ตัวบ้านในกรอบแดง</td>
+          <td>บล็อกบน 10.00×6.00 + คอridor 1.90×3.00 + บล็อกล่าง 7.00×3.00</td>
+          <td class="num">86.7</td>
+        </tr>
+        <tr>
+          <td><strong>หินเกล็ดดำ</strong></td>
+          <td>กรอบแดง − ตัวบ้าน = 180.0 − 86.7</td>
+          <td class="num"><strong>93.3</strong></td>
+        </tr>
+        <tr>
+          <td>สนามด้านบน (นอกกรอบแดง)</td>
+          <td>12.00 × 12.35 ม.</td>
+          <td class="num">148.2</td>
+        </tr>
+        <tr>
+          <td>สนามด้านล่าง (นอกกรอบแดง)</td>
+          <td>12.88 × 15.00 ม.</td>
+          <td class="num">193.2</td>
+        </tr>
+        <tr>
+          <td>หัก carport</td>
+          <td>5.80 × 6.00 ม. (ไม่ปลูกหญ้า)</td>
+          <td class="num">−34.8</td>
+        </tr>
+        <tr>
+          <td><strong>ปลูกหญ้า</strong></td>
+          <td>148.2 + (193.2 − 34.8)</td>
+          <td class="num"><strong>306.6</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="formula">หินเกล็ดดำ = 180.0 − 86.7 = 93.3 ตร.ม.<br>หญ้า = 148.2 + 193.2 − 34.8 = 306.6 ตร.ม.</div>
+
+    <h2>ใบเสนอราคาอ้างอิงราคากลาง v2</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>รายการ</th>
+          <th>สเปกมาตรฐาน</th>
+          <th class="num">จำนวน</th>
+          <th class="num">ราคากลาง/หน่วย</th>
+          <th class="num">ราคารวม</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>หินเกล็ดดำ</td>
+          <td>โรยหินรอบบ้านในกรอบแดง รวมปรับระดับ/อัดบดเบื้องต้น</td>
+          <td class="num">93.3 ตร.ม.</td>
+          <td class="num">300 บาท/ตร.ม.</td>
+          <td class="num">27,990 บาท</td>
+        </tr>
+        <tr>
+          <td>หญ้า</td>
+          <td>หญ้าจริงรวมปูและปรับพื้นเบื้องต้น</td>
+          <td class="num">306.6 ตร.ม.</td>
+          <td class="num">120 บาท/ตร.ม.</td>
+          <td class="num">36,792 บาท</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4" class="num">ราคารวมราคากลาง v2</td>
+          <td class="num">64,782 บาท</td>
+        </tr>
+        <tr>
+          <td colspan="4" class="num">ยอดมัดจำ 50%</td>
+          <td class="num">32,391 บาท</td>
+        </tr>
+        <tr>
+          <td colspan="4" class="num">ยอดคงเหลือหลังส่งงาน 50%</td>
+          <td class="num">32,391 บาท</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <h2>เปรียบเทียบ v2 vs ใบเสนอราคาจริง (รายการหญ้า + หินเกล็ดดำ)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>รายการ</th>
+          <th class="num">จำนวนจริง</th>
+          <th class="num">จำนวน v2</th>
+          <th class="num">ราคารวมจริง</th>
+          <th class="num">ราคารวม v2</th>
+          <th class="num">ส่วนต่าง</th>
+          <th>หมายเหตุ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>หินเกล็ดดำ</td>
+          <td class="num">210 ตร.ม.</td>
+          <td class="num">93.3 ตร.ม.</td>
+          <td class="num">63,000 บาท</td>
+          <td class="num">27,990 บาท</td>
+          <td class="num">−35,010 บาท</td>
+          <td>ใบจริงระบุพื้นที่มากกว่าที่คำนวณจากกรอบแดง ~2.25 เท่า</td>
+        </tr>
+        <tr>
+          <td>หญ้า</td>
+          <td class="num">10 ตร.ม.</td>
+          <td class="num">306.6 ตร.ม.</td>
+          <td class="num">15,750 บาท</td>
+          <td class="num">36,792 บาท</td>
+          <td class="num">+21,042 บาท</td>
+          <td><span class="risk">จำนวนหญ้าในใบจริงน่าจะผิดหรือไม่ครอบคลุมทั้งแปลง</span></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" class="num">รวม (หญ้า + หินเกล็ดดำ)</td>
+          <td class="num">78,750 บาท</td>
+          <td class="num">64,782 บาท</td>
+          <td class="num">−13,968 บาท (−17.7%)</td>
+          <td>ใบจริงสูงกว่า v2 แม้หินเกล็ดจะมากกว่า แต่หญ้าในใบจริงระบุน้อยมาก</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <h2>เปรียบเทียบกับ benchmark v1</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>รายการ</th>
+          <th class="num">v1 จำนวน</th>
+          <th class="num">v2 จำนวน</th>
+          <th class="num">v1 ราคารวม</th>
+          <th class="num">v2 ราคารวม</th>
+          <th>หมายเหตุ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>หินเกล็ดดำ</td>
+          <td class="num">210 ตร.ม.</td>
+          <td class="num">93.3 ตร.ม.</td>
+          <td class="num">63,000 บาท</td>
+          <td class="num">27,990 บาท</td>
+          <td>v1 ใช้จำนวนจากใบเสนอราคาจริง; v2 คำนวณจากแผน</td>
+        </tr>
+        <tr>
+          <td>หญ้า</td>
+          <td class="num">10 ตร.ม.</td>
+          <td class="num">306.6 ตร.ม.</td>
+          <td class="num">1,200 บาท</td>
+          <td class="num">36,792 บาท</td>
+          <td>v2 สะท้อนพื้นที่ปลูกหญ้าทั้งแปลงตามแผน</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>ข้อจำกัดและคำแนะนำ</h2>
+    <ul>
+      <li>การวัดจากแผนอาศัยมิติกริดบน plan.jpg อาจคลาดเคลื่อน ±5–10% หาก footprint ตัวบ้านหรือ carport ไม่ตรงกับที่ trace จากแผน</li>
+      <li>กรอบแดงสูง 15.00 ม. (5 ช่องกริด) ไม่ใช่ 18.00 ม. — ถ้ากรอบจริงสูงกว่านี้ พื้นที่หินเกล็ดดำจะเพิ่มขึ้น</li>
+      <li>ราคา/หน่วยอ้างอิงจาก benchmark v1: หินเกล็ดดำ 300 บาท/ตร.ม., หญ้า 120 บาท/ตร.ม.</li>
+      <li>ควรยืนยันกับผู้รับเหมาว่าใบเสนอราคาจริง (หญ้า 10 ตร.ม., หินเกล็ด 210 ตร.ม.) หมายถึงพื้นที่ใดบนแผน — ตัวเลข v2 ช่วยตรวจสอบความสมเหตุสมผลของจำนวนพื้นที่</li>
+      <li>ก่อนจ่ายมัดจำ ควรขอแผนงาน overlay หรือวัดหน้างานจริงเพื่อลดความคลาดเคลื่อน</li>
+    </ul>
+  </main>
+</body>
+</html>

@@ -8,6 +8,7 @@ Read for **active** vs **archived** tasks. Use recent entries in `task/log.md` o
 |------|-------|------|------|---------|--------|
 | [007-analyze-landscaping-quotation](./007-analyze-landscaping-quotation.md) | วิเคราะห์ใบเสนอราคางานจัดสวน | planning | quotation, landscaping, pricing, pdf, web-research | 2026-06-26 | done |
 | [008-create-benchmark-landscaping-quotation](./008-create-benchmark-landscaping-quotation.md) | สร้างใบเสนอราคาตามราคากลาง | execution | quotation, benchmark, pricing, landscaping, comparison, html | 2026-06-26 | done |
+| [009-plan-area-benchmark-quotation-v2](./009-plan-area-benchmark-quotation-v2.md) | วิเคราะห์พื้นที่จากแผนบ้านและสร้าง benchmark v2 | execution | quotation, benchmark, plan, area-calculation, landscaping, html, v2 | 2026-07-03 | done |
 
 ## Archived (`task/archive/`)
 

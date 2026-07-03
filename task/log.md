@@ -105,3 +105,17 @@ Activity log for project tasks.
 - output: `resources/quotation/benchmark-quotation.html`
 - summary: actual quote `178,750` THB; benchmark `120,120` THB; difference `58,630` THB (+48.8%)
 - next: confirm vendor specs/quantities (especially grass line), then optionally archive done tasks or revise benchmark after contractor clarification
+
+## [2026-07-03 17:09] created | 009-plan-area-benchmark-quotation-v2
+- type: execution
+- note: analyze plan.jpg red-box gravel + remaining grass areas; create benchmark-quotation-v2.html without modifying v1 files
+
+## [2026-07-03 17:15] executed | 009-plan-area-benchmark-quotation-v2
+- completed: T001, T002, T003, T004, T005, T006
+- note: gravel 93.3 sqm, grass 306.6 sqm; v2 total 64,782 THB; created `resources/quotation/benchmark-quotation-v2.html`
+
+## [2026-07-03 18:25] handoff | session
+- done: `009-plan-area-benchmark-quotation-v2`; explained red-box gravel calc (180 − 86.7 = 93.3 sqm)
+- output: `resources/quotation/benchmark-quotation-v2.html`, `resources/quotation/plan.jpg`
+- summary: v2 grass+gravel 64,782 THB vs actual 78,750 THB; actual gravel 210 sqm vs plan 93.3 sqm; actual grass 10 sqm vs plan 306.6 sqm
+- next: confirm vendor area scope on plan; optionally archive 007–009; recalc v2 if red-box height or house footprint differs

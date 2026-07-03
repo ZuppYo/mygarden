@@ -26,13 +26,14 @@
 
 ## Continuity — latest activity
 
-### Snapshot (2026-06-26)
+### Snapshot (2026-07-03)
 
-- Done: `000–006` archived (`task/archive/2026-06-10/`); garden design state unchanged from prior snapshot (Lamsam + Makhom placements remain in `design/placements.json`).
-- Done: `007-analyze-landscaping-quotation` analyzed `resources/quotation/quotation.pdf`; key risk = grass line price unusually high; actual quote total `178,750` THB.
-- Done: `008-create-benchmark-landscaping-quotation` created `resources/quotation/benchmark-quotation.html`; benchmark total `120,120` THB, deposit `60,060` THB, actual quote higher by `58,630` THB (+48.8%).
-- Active Task: none; `007` and `008` are done but not archived.
-- Reload: `[task/index.md](task/index.md)`, `[task/log.md](task/log.md)`, `[resources/quotation/benchmark-quotation.html](resources/quotation/benchmark-quotation.html)`
+- Done: `000–006` archived; garden design state unchanged (Lamsam + Makhom in `design/placements.json`).
+- Done: `007` analyzed `resources/quotation/quotation.pdf`; actual quote `178,750` THB; grass line suspicious.
+- Done: `008` created `resources/quotation/benchmark-quotation.html`; benchmark `120,120` THB (+48.8% vs actual).
+- Done: `009` analyzed `resources/quotation/plan.jpg`; created `resources/quotation/benchmark-quotation-v2.html` (v1 untouched); red-box gravel `93.3` sqm, grass `306.6` sqm; v2 total `64,782` THB (grass+gravel vs actual `78,750` THB).
+- Active Task: none; `007–009` done but not archived.
+- Reload: `[task/index.md](task/index.md)`, `[task/log.md](task/log.md)`, `[resources/quotation/benchmark-quotation-v2.html](resources/quotation/benchmark-quotation-v2.html)`, `[resources/quotation/plan.jpg](resources/quotation/plan.jpg)`
 
 ## Task state pointers
 
