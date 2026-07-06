@@ -55,6 +55,9 @@
     .bad { color: var(--danger); font-weight: 700; }
     ul { padding-left: 22px; margin: 8px 0 16px; }
     li { margin-bottom: 6px; }
+    a { color: var(--blue); }
+    a:hover { text-decoration: none; }
+    .src { font-size: 13px; word-break: break-word; }
     .toc { columns: 2; column-gap: 24px; font-size: 14px; }
     .toc li { break-inside: avoid; }
     @media (max-width: 700px) {
@@ -96,6 +99,7 @@
       <li>7. ทางเลือก: หลังบ้านเป็นหินเกล็ด</li>
       <li>8. คำถามที่ควรถามผู้รับเหมา</li>
       <li>9. ข้อจำกัดและคำแนะนำ</li>
+      <li>10. แหล่งอ้างอิงราคากลาง</li>
     </ul>
   </section>
 
@@ -153,19 +157,19 @@
   <section class="sheet">
     <h2>3. สมมติฐานราคากลาง (รวมค่าแรง + วัสดุมาตรฐาน)</h2>
     <div class="note">
-      ราคากลางเป็น <strong>งานเหมา</strong> ไม่ใช่ราคาวัสดุอย่างเดียว — อ้างอิงช่วงตลาดจากการ research (มิ.ย. 2569)
+      ราคากลางเป็น <strong>งานเหมา</strong> ไม่ใช่ราคาวัสดุอย่างเดียว — สำรวจตลาด มิ.ย.–ก.ค. 2569 (task 007/008) รายละเอียดแหล่งดู <a href="#sec-sources">ข้อ 10</a>
     </div>
     <table>
       <thead>
-        <tr><th>รายการ</th><th class="num">ราคากลาง/หน่วย</th><th>รวมอะไรบ้าง</th><th>ช่วงตลาดอ้างอิง</th></tr>
+        <tr><th>รายการ</th><th class="num">ราคากลาง/หน่วย</th><th>รวมอะไรบ้าง</th><th>ช่วงตลาด + แหล่งหลัก</th></tr>
       </thead>
       <tbody>
-        <tr><td>หญ้านวลน้อย</td><td class="num">120 บาท/ตร.ม.</td><td>หญ้าจริง + ปูและปรับพื้นเบื้องต้น</td><td>80–150 บาท/ตร.ม.</td></tr>
-        <tr><td>หินเกล็ดดำ</td><td class="num">300 บาท/ตร.ม.</td><td>ปรับพื้น + โรยหิน (เหมางาน)</td><td>250–350 บาท/ตร.ม.</td></tr>
-        <tr><td>ปูพื้นภายนอก</td><td class="num">750 บาท/ตร.ม.</td><td>ค่าแรง + วัสดุพื้นฐาน</td><td>300–550 (ทั่วไป); 750 = ค่ากลางที่เลือก</td></tr>
-        <tr><td>เทคอนกรีต</td><td class="num">450 บาท/ตร.ม.</td><td>คอนกรีต ~10 ซม. รวมแรง+วัสดุ</td><td>300–500 บาท/ตร.ม.</td></tr>
-        <tr><td>แผ่นทางเดินทรายล้าง 40×80</td><td class="num">180 บาท/แผ่น</td><td>แผ่นมาตรฐาน — ยังไม่รวมติดตั้งพิเศษชัด</td><td>120–235 บาท/แผ่น</td></tr>
-        <tr><td>carport (อ้างอิง)</td><td class="num">450 บาท/ตร.ม.</td><td>ใช้อัตราเทคอนกรีต — ไม่มีใน PDF</td><td>—</td></tr>
+        <tr><td>หญ้านวลน้อย</td><td class="num">120 บาท/ตร.ม.</td><td>หญ้าจริง + ปูและปรับพื้นเบื้องต้น</td><td class="src">80–150 บาท/ตร.ม. — <a href="https://www.spol.co.th/category/110/a1">spol.co.th</a> (หญ้านวลน้อยรวมปู)</td></tr>
+        <tr><td>หินเกล็ดดำ</td><td class="num">300 บาท/ตร.ม.</td><td>ปรับพื้น + โรยหิน (เหมางาน)</td><td class="src">250–350 บาท/ตร.ม. — วัสดุ ~576 บาท/ลบ.ม. <a href="https://www.sangthaimetalsheet.com/post/2025-construction-material-price-update">sangthaimetalsheet</a> + ค่าแรง <a href="https://pantip.com/topic/37387546">Pantip</a></td></tr>
+        <tr><td>ปูพื้นภายนอก</td><td class="num">750 บาท/ตร.ม.</td><td>ค่าแรง + วัสดุพื้นฐาน</td><td class="src">300–550 ทั่วไป; 750 = กลางช่วง — <a href="https://loglanefloor.com/blog/how-to-choose-flooring-contractor-2/">loglanefloor</a>, <a href="https://www.thaisoung.com/page/tips/tile-installation-price">thaisoung</a></td></tr>
+        <tr><td>เทคอนกรีต</td><td class="num">450 บาท/ตร.ม.</td><td>คอนกรีต ~10 ซม. รวมแรง+วัสดุ</td><td class="src">300–500 บาท/ตร.ม. — <a href="https://www.theeraphong.com/pour-concrete">theeraphong.com</a></td></tr>
+        <tr><td>แผ่นทางเดินทรายล้าง 40×80</td><td class="num">180 บาท/แผ่น</td><td>แผ่นมาตรฐาน — ยังไม่รวมติดตั้งพิเศษชัด</td><td class="src">120–235 บาท/แผ่น — <a href="https://www.nanagarden.com/product/392153">nanagarden</a> 140, <a href="https://www.rcm-88.com/product/1097328">rcm-88</a> 160</td></tr>
+        <tr><td>carport (อ้างอิง)</td><td class="num">450 บาท/ตร.ม.</td><td>ใช้อัตราเทคอนกรีต — ไม่มีใน PDF</td><td class="src">เทียบอัตราเทคอนกรีต — <a href="https://www.theeraphong.com/pour-concrete">theeraphong.com</a></td></tr>
       </tbody>
     </table>
     <p class="subtle">ยังไม่รวม: ขนดินไกล, ระบบน้ำ, วัสดุพรีเมียม, รถปั๊มยาก, แผ่นกันวัชพืชชั้นพิเศษ (แผนระบุแต่ benchmark ไม่ได้แยกรายการ)</p>
@@ -316,7 +320,60 @@
       PDF เดิม (จำนวนในใบ) = 178,750 บาท | กลาง×จำนวน PDF = 120,120 บาท<br>
       ทางเลือกหลังบ้านหิน (กลาง) = 149,904 บาท
     </div>
-    <p class="subtle" style="margin-top:20px">เอกสารนี้จัดทำจากการวิเคราะห์ plan-2 และ research ราคาตลาด — 04/07/2569</p>
+    <p class="subtle" style="margin-top:20px">เอกสารนี้จัดทำจากการวิเคราะห์ plan-2 และ research ราคาตลาด — อัปเดตแหล่งอ้างอิง 06/07/2569</p>
+  </section>
+
+  <section class="sheet" id="sec-sources">
+    <h2>10. แหล่งอ้างอิงราคากลาง</h2>
+    <p class="subtle">ราคาในข้อ 3 เป็น <strong>งานเหมารวมค่าแรง+วัสดุมาตรฐาน</strong> ไม่ใช่ราคาราชการหรือใบเสนอจากผู้รับเหมาโครงการนี้ — ใช้เป็นฐานต่อรองเท่านั้น</p>
+    <table>
+      <thead>
+        <tr><th>รายการ</th><th class="num">ราคากลางที่ใช้</th><th class="num">ช่วงตลาดที่พบ</th><th>แหล่งอ้างอิง (สำรวจ มิ.ย.–ก.ค. 2569)</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>หญ้านวลน้อย (รวมปู)</td>
+          <td class="num">120 บาท/ตร.ม.</td>
+          <td class="num">80–150</td>
+          <td class="src"><a href="https://www.spol.co.th/category/110/a1">spol.co.th — รับปูสนามหญ้า</a> ระบุหญ้านวลน้อยรวมปู+ปรับพื้นเบื้องต้น 80–120 บาท/ตร.ม.; ช่วงรวมทุกชนิดสูงสุด ~150</td>
+        </tr>
+        <tr>
+          <td>หินเกล็ดดำ (เหมางาน)</td>
+          <td class="num">300 บาท/ตร.ม.</td>
+          <td class="num">250–350</td>
+          <td class="src">วัสดุหินเกล็ด ~576 บาท/ลบ.ม. (<a href="https://www.sangthaimetalsheet.com/post/2025-construction-material-price-update">sangthaimetalsheet</a>) + ค่าแรงปรับพื้น/โรยหิน 150–350 บาท/ตร.ม. จากกระทู้ <a href="https://pantip.com/topic/37387546">Pantip 37387546</a>, <a href="https://pantip.com/topic/42449103">42449103</a></td>
+        </tr>
+        <tr>
+          <td>ปูพื้นภายนอก</td>
+          <td class="num">750 บาท/ตร.ม.</td>
+          <td class="num">300–550 (ทั่วไป)<br>450–900 (ทรายล้าง/หิน)</td>
+          <td class="src"><a href="https://loglanefloor.com/blog/how-to-choose-flooring-contractor-2/">loglanefloor</a> ค่าแรง+วัสดุพื้นฐานเซรามิก 300–500; <a href="https://www.thaisoung.com/page/tips/tile-installation-price">thaisoung</a> หินอ่อน/เทียม 900–1,200; <a href="https://nocnoc.com/blog/update-construction-worker-price/">nocnoc</a> ทรายล้างแรง+วัสดุ ~356 บาท/ตร.ม. — เลือก 750 เป็นค่ากลางเมื่อสเปกวัสดุยังไม่ชัด</td>
+        </tr>
+        <tr>
+          <td>เทคอนกรีตหน้าบ้าน</td>
+          <td class="num">450 บาท/ตร.ม.</td>
+          <td class="num">300–500</td>
+          <td class="src"><a href="https://www.theeraphong.com/pour-concrete">theeraphong.com — เทพื้นคสล</a> หนา 10 ซม. รวมแรง+วัสดุ 300–450 บาท/ตร.ม.; อ้างอิงเพิ่ม <a href="https://pantip.com/topic/39251170">Pantip 39251170</a> (หน้างาน 600–800 เมื่อรวมถม/ไวร์เมช)</td>
+        </tr>
+        <tr>
+          <td>แผ่นทางเดินทรายล้าง 40×80</td>
+          <td class="num">180 บาท/แผ่น</td>
+          <td class="num">120–235</td>
+          <td class="src"><a href="https://www.nanagarden.com/product/392153">nanagarden</a> 140 บาท/แผ่น; <a href="https://www.rcm-88.com/product/1097328">rcm-88</a> 160; <a href="https://www.suanhinsiladon.com/product/23879-58855/%E0%B8%97%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%A5%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%82%E0%B8%B2%E0%B8%A7%E0%B9%80%E0%B8%97%E0%B8%B2-40x80">suanhinsiladon</a> 150; <a href="https://8stone.co/">8stone</a> สูงสุด ~200 — ค่ากลาง 180 ไม่รวมขนส่ง/ติดตั้ง</td>
+        </tr>
+        <tr>
+          <td>carport (อ้างอิง)</td>
+          <td class="num">450 บาท/ตร.ม.</td>
+          <td class="num">300–500</td>
+          <td class="src">ไม่มีใน quotation.pdf — ใช้อัตราเทคอนกรีตเดียวกับแถวเทา (<a href="https://www.theeraphong.com/pour-concrete">theeraphong.com</a>)</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note info">
+      <strong>วิธีคิดราคากลาง:</strong> เอาช่วงตลาดจากหลายแหล่ง → เลือกตัวเลขกลางที่สมเหตุสมผลกับสเปกมาตรฐาน (ไม่พรีเมียม) → คูณกับพื้นที่ plan-2 ในข้อ 5<br>
+      <strong>ข้อจำกัด:</strong> ราคาออนไลน์เปลี่ยนได้, พื้นที่สงขลา/สทิงพระอาจต่างจากกรุงเทพฯ, ลิงก์ต้องเปิดอินเทอร์เน็ต (เอกสารนี้ยังพกพาได้แบบไฟล์เดียว)
+    </div>
+    <p class="subtle">งานวิเคราะห์ต้นทาง: task 007 (วิเคราะห์ PDF + web research), task 008 (กำหนดราคากลาง/หน่วย), task 010 (ฐานพื้นที่ plan-2)</p>
   </section>
 
 </div>

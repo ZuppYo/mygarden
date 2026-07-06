@@ -28,8 +28,8 @@
 
 ### Snapshot (2026-07-06)
 
-- Done: archived `007–010` (quotation/plan-2 work); outputs `summary.html`, `qt-v1/`, benchmark HTMLs.
-- Active Task: none — **next:** add price source citations to `summary.html`.
+- Done: added price source citations to `summary.html` (section 10 + links in section 3).
+- Active Task: none — **next:** optional sync citations to benchmark HTML.
 - Reload: `[resources/quotation/summary.html](resources/quotation/summary.html)`
 
 ## Task state pointers
