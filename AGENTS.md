@@ -22,14 +22,14 @@
 - `[task/index.md](task/index.md)`
 - `[task/log.md](task/log.md)`
 - `[design/WORKFLOW.md](design/WORKFLOW.md)`
-- Active Task: [011-southern-benchmark-pricing](task/011-southern-benchmark-pricing.md)
+- Active Task: none (await next task)
 
 ## Continuity — latest activity
 
 ### Snapshot (2026-07-06)
 
-- Done: task 011 — สำรวจราคากลางภาคใต้; ภาคใต้**ไม่ครบ** (หญ้าครบ, หิน/ปู/คอนกรีตบางส่วน, ทรายล้าง+carport ไม่พบ); อัปเดต `summary.html` ข้อ 3+10
-- Active Task: [011-southern-benchmark-pricing](task/011-southern-benchmark-pricing.md) — done; archive optional
+- Done: task 011 — ราคากลางภาคใต้ (ไม่ครบ 6 รายการ); แก้หญ้าบริษัท **100 ตร.ม. @ 157.5 = 15,750** (PDF ใส่ 10 ผิด); อัปเดต `summary.html` ข้อ 3–7, 10.2
+- Active Task: none — **next:** sync 157.5/100 ตร.ม. → `benchmark-quotation.html`, `qt-v1/*`; archive task 011 optional
 - Reload: `[resources/quotation/summary.html](resources/quotation/summary.html)`
 
 ## Task state pointers
