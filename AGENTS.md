@@ -28,12 +28,9 @@
 
 ### Snapshot (2026-07-06)
 
-- Done: `007–010` quotation; `summary.html` (self-contained, plan-2 embedded base64, ~421 KB) at `resources/quotation/summary.html`.
-- qt-v1: benchmark `121,266` THB; vendor plan `438,818` THB; back-gravel alt vendor `235,965` / benchmark `~149,904` THB.
-- Clarified: benchmark = **market estimate** (task 007 web research, task 008 mid-range picks) — **not** สรท./ราชการ; task 007 has ranges but **no URLs saved in repo**.
-- Active Task: none; `007–010` done, not archived.
-- **Next session:** add price **source citations** (URLs) to `summary.html` and/or `task/007`; optional `benchmark-back-gravel.html`.
-- Reload: `[summary.html](resources/quotation/summary.html)`, `[task/007-analyze-landscaping-quotation.md](task/007-analyze-landscaping-quotation.md)`, `[qt-v1/](resources/quotation/qt-v1/)`, `[plan-2.jpg](resources/quotation/plan-2.jpg)`
+- Done: archived `007–010` (quotation/plan-2 work); outputs `summary.html`, `qt-v1/`, benchmark HTMLs.
+- Active Task: none — **next:** add price source citations to `summary.html`.
+- Reload: `[resources/quotation/summary.html](resources/quotation/summary.html)`
 
 ## Task state pointers
 

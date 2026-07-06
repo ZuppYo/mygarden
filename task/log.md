@@ -145,3 +145,15 @@ Activity log for project tasks.
 - output: `summary.html`, `qt-v1/*`, `task/007-analyze-landscaping-quotation.md` (ranges, no links)
 - summary: user will add citation section next session — target `summary.html` (+ optionally task 007, benchmark HTML)
 - next: **add price reference URLs/sources** to summary; keep summary self-contained (inline only); archive 007–010 optional
+
+## [2026-07-06 10:09] archived | 007-analyze-landscaping-quotation
+- moved: task/007-analyze-landscaping-quotation.md → task/archive/2026-06-26/
+
+## [2026-07-06 10:09] archived | 008-create-benchmark-landscaping-quotation
+- moved: task/008-create-benchmark-landscaping-quotation.md → task/archive/2026-06-26/
+
+## [2026-07-06 10:09] archived | 009-plan-area-benchmark-quotation-v2
+- moved: task/009-plan-area-benchmark-quotation-v2.md → task/archive/2026-07-03/
+
+## [2026-07-06 10:09] archived | 010-plan-2-area-quotation-qt-v1
+- moved: task/010-plan-2-area-quotation-qt-v1.md → task/archive/2026-07-03/
