@@ -26,13 +26,14 @@
 
 ## Continuity — latest activity
 
-### Snapshot (2026-07-03)
+### Snapshot (2026-07-06)
 
-- Done: `000–006` archived; garden design unchanged (Lamsam + Makhom in `design/placements.json`).
-- Done: `007–010` quotation work — PDF `178,750` THB; plan.jpg v2 gravel `93.3` / grass `306.6` sqm; plan-2 qt-v1 areas grass `177.3`, gravel `83.7`, paving `38.6`, concrete `102.0`, carport `36.5` sqm.
-- qt-v1: benchmark `121,266` THB vs vendor plan areas `438,818` THB; vendor alt back-gravel `235,965` THB (`12.88×12.35` → stone).
+- Done: `007–010` quotation; `summary.html` (self-contained, plan-2 embedded base64, ~421 KB) at `resources/quotation/summary.html`.
+- qt-v1: benchmark `121,266` THB; vendor plan `438,818` THB; back-gravel alt vendor `235,965` / benchmark `~149,904` THB.
+- Clarified: benchmark = **market estimate** (task 007 web research, task 008 mid-range picks) — **not** สรท./ราชการ; task 007 has ranges but **no URLs saved in repo**.
 - Active Task: none; `007–010` done, not archived.
-- Reload: `[task/index.md](task/index.md)`, `[task/log.md](task/log.md)`, `[resources/quotation/qt-v1/](resources/quotation/qt-v1/)`, `[resources/quotation/plan-2.jpg](resources/quotation/plan-2.jpg)`
+- **Next session:** add price **source citations** (URLs) to `summary.html` and/or `task/007`; optional `benchmark-back-gravel.html`.
+- Reload: `[summary.html](resources/quotation/summary.html)`, `[task/007-analyze-landscaping-quotation.md](task/007-analyze-landscaping-quotation.md)`, `[qt-v1/](resources/quotation/qt-v1/)`, `[plan-2.jpg](resources/quotation/plan-2.jpg)`
 
 ## Task state pointers
 

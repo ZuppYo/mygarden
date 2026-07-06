@@ -133,3 +133,15 @@ Activity log for project tasks.
 - output: `resources/quotation/qt-v1/` — benchmark-quotation.html, vendor-quotation.html, vendor-quotation-back-gravel.html, comparison.html, area-breakdown.md
 - summary: plan-2 vendor 438,818 THB (plan areas × PDF units); back-gravel alt 235,965 THB (−46%); benchmark back-gravel alt ~149,874 THB; grass PDF line (10 sqm @ 1,575) still suspicious
 - next: archive 007–010; confirm vendor on back-gravel option + stepping stones; optional benchmark-back-gravel HTML
+
+## [2026-07-04 ~] session | summary.html + vendor Q&A
+- done: `resources/quotation/summary.html` — single portable HTML, plan-2 base64 embedded, no external links
+- done: explained benchmark prices include labor+materials; not official government rates
+- discussed: back-gravel scenario (vendor 235,965 / benchmark ~149,904 THB); `vendor-quotation-back-gravel.html` in qt-v1
+
+## [2026-07-06 10:07] handoff | session
+- done: clarified benchmark source methodology (task 007/008 web research, ranges only — URLs not in repo)
+- draft sources for next session: spol.co.th (grass 80–120), theeraphong.com (concrete 300–450), Pantip threads (paving/labor)
+- output: `summary.html`, `qt-v1/*`, `task/007-analyze-landscaping-quotation.md` (ranges, no links)
+- summary: user will add citation section next session — target `summary.html` (+ optionally task 007, benchmark HTML)
+- next: **add price reference URLs/sources** to summary; keep summary self-contained (inline only); archive 007–010 optional
