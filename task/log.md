@@ -2,6 +2,10 @@
 
 Activity log for project tasks.
 
+## [2026-07-06 10:48] knowledge-refresh | requirements-playbook
+- note: full — ingested 000-project-bootstrap,001-create-home-outline,002-implement-3d-360-view,003-add-front-right-lamsam-tree,004-improve-multi-view-plant-placement,005-hybrid-generative-blend,006-placement-picker-occlusion-3d,007-analyze-landscaping-quotation,008-create-benchmark-landscaping-quotation,009-plan-area-benchmark-quotation-v2,010-plan-2-area-quotation-qt-v1; skipped 0
+- related: task/knowledge/requirements-playbook.md
+
 ## [2026-06-10 13:28] created | 000-project-bootstrap
 - author: agent
 - note: bootstrap task system and initialize landscaping workflow
