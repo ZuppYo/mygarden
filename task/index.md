@@ -6,7 +6,7 @@ Read for **active** vs **archived** tasks. Use recent entries in `task/log.md` o
 
 | Slug | Title | Type | Tags | Updated | Status |
 |------|-------|------|------|---------|--------|
-| *(none)* | — | — | — | — | — |
+| [011-southern-benchmark-pricing](./011-southern-benchmark-pricing.md) | สำรวจราคากลางงานจัดสวนเฉพาะภาคใต้ | planning | quotation, benchmark, pricing, southern-thailand, songkhla, web-research, gap-analysis | 2026-07-06 | done |
 
 ## Archived (`task/archive/`)
 

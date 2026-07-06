@@ -22,14 +22,14 @@
 - `[task/index.md](task/index.md)`
 - `[task/log.md](task/log.md)`
 - `[design/WORKFLOW.md](design/WORKFLOW.md)`
-- Active Task: none (await next task)
+- Active Task: [011-southern-benchmark-pricing](task/011-southern-benchmark-pricing.md)
 
 ## Continuity — latest activity
 
 ### Snapshot (2026-07-06)
 
-- Done: added price source citations to `summary.html` (section 10 + links in section 3).
-- Active Task: none — **next:** optional sync citations to benchmark HTML.
+- Done: task 011 — สำรวจราคากลางภาคใต้; ภาคใต้**ไม่ครบ** (หญ้าครบ, หิน/ปู/คอนกรีตบางส่วน, ทรายล้าง+carport ไม่พบ); อัปเดต `summary.html` ข้อ 3+10
+- Active Task: [011-southern-benchmark-pricing](task/011-southern-benchmark-pricing.md) — done; archive optional
 - Reload: `[resources/quotation/summary.html](resources/quotation/summary.html)`
 
 ## Task state pointers
