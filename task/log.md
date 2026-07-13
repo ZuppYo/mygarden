@@ -2,6 +2,31 @@
 
 Activity log for project tasks.
 
+## [2026-07-13 11:50] updated | 012-02-sub-task-v2-benchmark
+- note: ปรับประเมินปูพื้น SCG UVT 1,500/ตร.ม. จากรูปงานติดตั้งจริง; contractor-message.md; summary §4c
+
+## [2026-07-13 11:25] executed | 012-02-sub-task-v2-benchmark
+- completed: T001, T002, T003, T004, T005, T006, T007
+- note: v2 228,475 vs กลาง×v2 146,610 (+56%); qt-v2/comparison.html; summary §4b
+
+## [2026-07-13 11:22] executed | 012-01-sub-task-compare-v1-v2
+- completed: T001, T002, T003, T004, T005, T006
+- note: v1→v2 +49,725; หญ้า 197@150; qt-v2/comparison-v1-v2.html
+
+## [2026-07-13 09:55] created | 012-02-sub-task-v2-benchmark
+- type: execution
+- parent: 012-master-task-quotation-v2-analysis
+- note: v2 vs ราคากลาง + plan-2; deliverable qt-v2/comparison.html
+
+## [2026-07-13 09:55] created | 012-01-sub-task-compare-v1-v2
+- type: planning
+- parent: 012-master-task-quotation-v2-analysis
+- note: เปรียบเทียบ quotation.pdf vs quotation-v2.pdf รวม clarify หญ้า 100 ตร.ม.
+
+## [2026-07-13 09:55] created | 012-master-task-quotation-v2-analysis
+- type: planning
+- note: Master — รับใบเสนอ v2 บ้านสวนธรรมรัตน์; spawn sub-task 01 แล้ว 02
+
 ## [2026-07-13 09:40] knowledge-refresh | requirements-playbook
 - note: full — ingested 000-project-bootstrap,001-create-home-outline,002-implement-3d-360-view,003-add-front-right-lamsam-tree,004-improve-multi-view-plant-placement,005-hybrid-generative-blend,006-placement-picker-occlusion-3d,007-analyze-landscaping-quotation,008-create-benchmark-landscaping-quotation,009-plan-area-benchmark-quotation-v2,010-plan-2-area-quotation-qt-v1; skipped 0
 - related: task/knowledge/requirements-playbook.md

@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>เปรียบเทียบใบเสนอ v1 vs v2 — บ้านสวนธรรมรัตน์</title>
+  <style>
+    :root { --ink:#17211b; --muted:#667166; --line:#d9e1d8; --soft:#f4f7f2; --accent:#2f6f45; --warn:#9a5b00; --danger:#a33a32; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#eef2ec; color:var(--ink); font-family:"Segoe UI",Tahoma,sans-serif; line-height:1.55; font-size:15px; }
+    .page { max-width:960px; margin:24px auto; padding:32px; background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:0 8px 28px rgba(23,33,27,.06); }
+    h1 { font-size:26px; margin:0 0 8px; }
+    h2 { font-size:19px; color:var(--accent); margin:28px 0 12px; border-bottom:2px solid var(--soft); padding-bottom:6px; }
+    .subtle { color:var(--muted); font-size:14px; }
+    .badge { display:inline-block; background:#e8eef8; color:#2a4a8a; padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700; margin-bottom:10px; }
+    .meta { display:grid; grid-template-columns:1fr 1fr; gap:8px 20px; background:var(--soft); border-radius:12px; padding:14px 16px; margin:16px 0; font-size:14px; }
+    .meta div { display:flex; justify-content:space-between; gap:12px; }
+    .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin:16px 0; }
+    .card { background:var(--soft); border:1px solid var(--line); border-radius:12px; padding:14px; }
+    .card .lbl { font-size:12px; color:var(--muted); }
+    .card .val { font-size:20px; font-weight:700; }
+    table { width:100%; border-collapse:collapse; margin:12px 0 18px; font-size:14px; }
+    th,td { border:1px solid var(--line); padding:8px 10px; vertical-align:top; }
+    th { background:#e8f0e6; text-align:left; }
+    td.num,th.num { text-align:right; white-space:nowrap; }
+    tfoot td { font-weight:700; background:#f8faf7; }
+    tr.new { background:#fff8f0; }
+    tr.same { background:#f8faf7; }
+    .note { border-left:4px solid var(--warn); background:#fff8e8; padding:12px 14px; border-radius:8px; margin:14px 0; font-size:14px; }
+    .note.warn { border-color:var(--danger); background:#fff0ee; }
+    .note.info { border-color:var(--accent); background:#f0f7f2; }
+    .ok { color:var(--accent); font-weight:700; }
+    .bad { color:var(--danger); font-weight:700; }
+    .nav { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; }
+    .nav a { color:var(--accent); text-decoration:none; padding:6px 12px; border:1px solid var(--line); border-radius:8px; font-size:14px; }
+    ul { padding-left:22px; }
+    @media (max-width:700px) { .meta { grid-template-columns:1fr; } }
+    @media print { body { background:#fff; } .page { box-shadow:none; border:0; } .nav { display:none; } }
+  </style>
+</head>
+<body>
+<div class="page">
+  <span class="badge">v1 → v2 diff</span>
+  <h1>เปรียบเทียบใบเสนอราคา v1 vs v2<br>บ้านสวนธรรมรัตน์</h1>
+  <p class="subtle">task 012-01 · จัดทำ 13/07/2569</p>
+
+  <div class="meta">
+    <div><span>v1</span><strong>20/06/2569 · 178,750 บาท</strong></div>
+    <div><span>v2</span><strong>12/07/2569 · 228,475 บาท</strong></div>
+    <div><span>ลูกค้า</span><strong>คุณเก๋ · สทิงพระ</strong></div>
+    <div><span>ส่วนต่างยอดรวม</span><strong class="bad">+49,725 (+27.8%)</strong></div>
+    <div><span>มัดจำ v1</span><strong>89,375 / 89,375 (50/50)</strong></div>
+    <div><span>มัดจำ v2</span><strong class="bad">100,000 / 128,475</strong></div>
+  </div>
+
+  <nav class="nav">
+    <a href="../quotation.pdf">PDF v1</a>
+    <a href="../quotation-v2.pdf">PDF v2</a>
+    <a href="comparison.html">v2 vs ราคากลาง</a>
+    <a href="../summary.html">summary.html</a>
+  </nav>
+
+  <div class="note warn">
+    <strong>หญ้า v1:</strong> PDF ระบุ <strong>10 ตร.ม.</strong> (ผิด) — ยอด 15,750 บาท จริงคือ <strong>100 ตร.ม. @ 157.5 บาท/ตร.ม.</strong> ไม่ใช่ 1,575/ตร.ม.
+  </div>
+
+  <div class="cards">
+    <div class="card"><div class="lbl">v1 รวม (validate)</div><div class="val">178,750</div></div>
+    <div class="card"><div class="lbl">v2 รวม (validate)</div><div class="val bad">228,475</div></div>
+    <div class="card"><div class="lbl">รายการใหม่ v2</div><div class="val">+9,375</div></div>
+    <div class="card"><div class="lbl">มัดจำ v2 เพิ่ม</div><div class="val bad">+10,625</div></div>
+  </div>
+
+  <h2>ตารางเปรียบเทียบรายการ</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>รายการ</th>
+        <th class="num">v1 จำนวน</th>
+        <th class="num">v1 /หน่วย</th>
+        <th class="num">v1 รวม</th>
+        <th class="num">v1 แก้หญ้า</th>
+        <th class="num">v2 จำนวน</th>
+        <th class="num">v2 /หน่วย</th>
+        <th class="num">v2 รวม</th>
+        <th class="num">Δ รวม</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>หญ้านวลน้อย</td>
+        <td class="num">10</td>
+        <td class="num bad">1,575*</td>
+        <td class="num">15,750</td>
+        <td class="num">100 @ 157.5</td>
+        <td class="num">197</td>
+        <td class="num">150</td>
+        <td class="num">29,550</td>
+        <td class="num bad">+13,800</td>
+      </tr>
+      <tr>
+        <td>หินเกล็ดดำ</td>
+        <td class="num">210</td>
+        <td class="num">300</td>
+        <td class="num">63,000</td>
+        <td class="num">210</td>
+        <td class="num">111</td>
+        <td class="num ok">300</td>
+        <td class="num">33,300</td>
+        <td class="num ok">−29,700</td>
+      </tr>
+      <tr class="same">
+        <td>ปูพื้นภายนอก</td>
+        <td class="num">34</td>
+        <td class="num">1,500</td>
+        <td class="num">51,000</td>
+        <td class="num">34</td>
+        <td class="num">34</td>
+        <td class="num">1,500</td>
+        <td class="num">51,000</td>
+        <td class="num ok">0</td>
+      </tr>
+      <tr>
+        <td>เทคอนกรีตหน้าบ้าน</td>
+        <td class="num">54</td>
+        <td class="num">750</td>
+        <td class="num">40,500</td>
+        <td class="num">54</td>
+        <td class="num">129</td>
+        <td class="num">750</td>
+        <td class="num">96,750</td>
+        <td class="num bad">+56,250</td>
+      </tr>
+      <tr class="same">
+        <td>แผ่นทางเดินทรายล้าง 40×80</td>
+        <td class="num">34 แผ่น</td>
+        <td class="num">250</td>
+        <td class="num">8,500</td>
+        <td class="num">34</td>
+        <td class="num">34</td>
+        <td class="num">250</td>
+        <td class="num">8,500</td>
+        <td class="num ok">0</td>
+      </tr>
+      <tr class="new">
+        <td>ซัมโน้นดำ (ริมทางเดินหญ้า)</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="num">13.5</td>
+        <td class="num">250</td>
+        <td class="num">3,375</td>
+        <td class="num">+3,375</td>
+      </tr>
+      <tr class="new">
+        <td>ค่าบริการ (v1 ค่าเดินทางฟรี)</td>
+        <td class="num">ฟรี</td>
+        <td class="num">—</td>
+        <td class="num">0</td>
+        <td class="num">—</td>
+        <td class="num">1</td>
+        <td class="num">6,000</td>
+        <td class="num">6,000</td>
+        <td class="num">+6,000</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr><td colspan="3" class="num">รวม</td><td class="num">178,750</td><td></td><td colspan="2"></td><td class="num">228,475</td><td class="num bad">+49,725</td></tr>
+    </tfoot>
+  </table>
+  <p class="subtle">*หน่วย v1 หญ้า 1,575 มาจาก 15,750÷10 — ถ้าแก้เป็น 100 ตร.ม. ได้ 157.5/ตร.ม.</p>
+
+  <h2>สเปกคอนกรีต v2 (ใหม่)</h2>
+  <div class="note info">
+    v2 ระบุชัด: <strong>Wire mesh 4 mm · หนา 15 cm · Strength 240</strong> — v1 ไม่ระบุสเปก · ราคา/หน่วยยัง 750 แต่พื้นที่เพิ่ม 54 → 129 ตร.ม.
+  </div>
+
+  <h2>v2 เทียบพื้นที่ plan-2</h2>
+  <table>
+    <thead>
+      <tr><th>รายการ</th><th class="num">v2</th><th class="num">plan-2</th><th class="num">ส่วนต่าง</th><th>ประเมิน</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>หญ้า</td><td class="num">197</td><td class="num">177.3</td><td class="num">+19.7 (+11%)</td><td>ใกล้แผนมากขึ้น (v1 แก้หญ้า 100 ยังต่ำกว่าแผน)</td></tr>
+      <tr><td>หินเกล็ดดำ</td><td class="num">111</td><td class="num">83.7</td><td class="num bad">+27.3 (+33%)</td><td>ยังมากกว่าแผน — ขอ overlay</td></tr>
+      <tr><td>ปูพื้นภายนอก</td><td class="num">34</td><td class="num">38.6</td><td class="num">−4.6 (−12%)</td><td>ใกล้เคียง</td></tr>
+      <tr><td>คอนกรีต</td><td class="num">129</td><td class="num">102.0</td><td class="num">+27 (+26%)</td><td>มากกว่าแผน — อาจรวมโซนเพิ่มหรือวัดต่าง</td></tr>
+      <tr><td>ซัมโน้นดำ</td><td class="num">13.5</td><td class="num">—</td><td class="num">—</td><td>รายการใหม่ — ไม่มีในแผนสี</td></tr>
+    </tbody>
+  </table>
+
+  <h2>เงื่อนไขการชำระ</h2>
+  <table>
+    <thead><tr><th></th><th class="num">v1</th><th class="num">v2</th></tr></thead>
+    <tbody>
+      <tr><td>มัดจำ</td><td class="num">89,375 (50%)</td><td class="num bad">100,000 (43.8%)</td></tr>
+      <tr><td>หลังส่งมอบ</td><td class="num">89,375</td><td class="num">128,475</td></tr>
+      <tr><td>ค่าเดินทาง/บริการ</td><td class="num ok">ฟรี</td><td class="num">6,000 บาท</td></tr>
+      <tr><td>ยกเลิกมัดจำ</td><td colspan="2">ไม่คืนทุกกรณี (ทั้ง v1 และ v2)</td></tr>
+    </tbody>
+  </table>
+  <div class="note warn">
+    มัดจำ v2 <strong>100,000 บาท</strong> สูงกว่า v1 ถึง <strong>10,625 บาท</strong> และไม่ใช่สัดส่วน 50/50 — ความเสี่ยงสูงขึ้นหากยกเลิก
+  </div>
+
+  <h2>คำถามจาก diff นี้</h2>
+  <ol>
+    <li>หญ้า v2 ระบุ <strong>197 ตร.ม.</strong> — ตรงกับโซนไหนบนแผน? (แผน ~177 ตร.ม.)</li>
+    <li>หินลดจาก 210 → 111 แต่ยังมากกว่าแผน 83.7 — ครอบคลุมพื้นที่ใดบ้าง?</li>
+    <li>คอนกรีต 129 ตร.ม. หนา 15 cm — รวม carport หรือโซนอื่นนอกแผนเทา?</li>
+    <li>ซัมโน้นดำ 13.5 ตร.ม. วางตรงไหน? รวมใน scope หญ้าหรือแยก?</li>
+    <li>ค่าบริการ 6,000 ครอบคลุมอะไร? ทำไม v1 ฟรีแต่ v2 เรียกเก็บ?</li>
+    <li>ขอปรับมัดจำเป็น milestone หรือลดเป็น 50% ของยอดที่ตกลงจริง</li>
+  </ol>
+</div>
+</body>
+</html>
