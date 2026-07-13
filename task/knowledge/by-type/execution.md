@@ -2,7 +2,7 @@
 title: "Requirements — execution tasks"
 type: knowledge
 detail: "Guidance for type: execution"
-last_refresh: 2026-07-06
+last_refresh: 2026-07-13
 ---
 
 # Execution task guidance
@@ -17,6 +17,7 @@ last_refresh: 2026-07-06
 - For quotations: state **Constraints** when prior versions are frozen ("new file only", dedicated folder).
 - Include comparison/summary section in HTML deliverables; cite price sources when benchmarks are user-facing.
 - Document numeric outputs in task body or Output section (totals, areas, differences).
+- When syncing unit prices across files, verify quantity × unit = line total (catch PDF transcription errors).
 
 ## Should not do
 
@@ -31,6 +32,7 @@ last_refresh: 2026-07-06
 - HTML quotation files under `resources/quotation/`.
 - Updates to `outline/home.html` viewpoint mappings.
 - Area calculations with formulas recorded in markdown or HTML.
+- Propagating corrected unit prices from `summary.html` to legacy benchmark files.
 
 ## Typical Out of scope
 

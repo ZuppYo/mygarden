@@ -2,7 +2,7 @@
 title: "Requirements knowledge"
 type: knowledge
 detail: "Generated from task/archive — do not edit by hand without refresh"
-last_refresh: 2026-07-06
+last_refresh: 2026-07-13
 last_refresh_mode: full
 source_task_count: 11
 manifest_tasks: 11
@@ -35,8 +35,11 @@ manifest_tasks: 11
 ### Quotation & pricing
 
 - Extract and **validate** PDF line items (subtotals, suspicious quantities — especially grass area/units).
+- Cross-check PDF quantities against plan-derived areas; flag mismatches (e.g. grass 10 sqm vs plan 177+ sqm).
 - Perform web research for market benchmark ranges before setting mid-point unit prices.
 - Document benchmark prices as **labor + materials** (not government rates); note spec assumptions.
+- Separate **material-only** vs **labor+install lump sum** — never mix without explicit labeling.
+- Survey government sources (กรมบัญชีกลาง, TPSO, data.moc.go.th) — document what exists vs gaps; do not invent official landscaping tables.
 - Add **price source citations** (URLs) in deliverable HTML when presenting benchmarks to users.
 - Show comparison tables: unit price, line total, difference %, and price per sqm where relevant.
 - Document area-calculation **formulas**, grid dimensions, and ±5–10% measurement uncertainty.
@@ -57,6 +60,7 @@ manifest_tasks: 11
 - Negotiate prices, hire contractors, or buy materials on behalf of the client.
 - Train custom diffusion models, NeRF, or Gaussian Splatting for this repo's scope.
 - Treat benchmark totals as binding quotes — always flag items needing vendor spec confirmation.
+- Claim regional government landscaping price tables exist when survey shows they do not.
 
 ## Patterns by tag
 
@@ -68,9 +72,12 @@ manifest_tasks: 11
 | `plan`, `area-calculation` | Grid dims from plan image → formula per color zone → document assumptions |
 | `html` | Print-friendly CSS; self-contained portable summary when sharing (inline/base64 assets) |
 | `workflow`, `research` | Synthesize findings in `design/WORKFLOW.md` or task body before execution sub-task |
+| `southern-thailand`, `gap-analysis` | Regional web research → completeness table (ครบ/บางส่วน/ไม่พบ) → update `summary.html` columns |
 
 ## Open follow-ups
 
+- Sync grass fix **100 sqm @ 157.5 = 15,750** from `summary.html` → `benchmark-quotation.html`, `qt-v1/*`.
+- Archive task `011-southern-benchmark-pricing` then run incremental `refresh knowledge` to ingest regional patterns.
 - Sync price-source citations from `summary.html` to `benchmark-quotation.html` (and optionally v2 / qt-v1).
 - Confirm vendor specs on suspicious PDF lines (grass 10 sqm @ 1,575 THB/sqm; exterior paving spec).
 - Tune `garage-right` occluder masks; extend foreground occlusion to `garage-front` if needed.
