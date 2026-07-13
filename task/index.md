@@ -4,6 +4,8 @@ Read for **active** vs **archived** tasks. Use recent entries in `task/log.md` o
 
 ## Active (`task/`)
 
+Handoff: [session.handoff-close](./session.handoff-close.md)
+
 | Slug | Title | Type | Tags | Updated | Status |
 |------|-------|------|------|---------|--------|
 | [012-master-task-quotation-v2-analysis](./012-master-task-quotation-v2-analysis.md) | วิเคราะห์ใบเสนอราคา v2 บ้านสวนธรรมรัตน์ | planning | master, quotation, v2, benchmark, comparison | 2026-07-13 | done |

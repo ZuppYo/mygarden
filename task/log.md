@@ -2,6 +2,10 @@
 
 Activity log for project tasks.
 
+## [2026-07-13 16:55] handoff | session.handoff-close
+- note: 4 active tasks all done; next รอคำตอบบริษัท v2 (คอนกรีต 12cm/overlay/มัดจำ) หรือ archive 011+012
+- related: 011-southern-benchmark-pricing, 012-master-task-quotation-v2-analysis, 012-01-sub-task-compare-v1-v2, 012-02-sub-task-v2-benchmark
+
 ## [2026-07-13 11:50] updated | 012-02-sub-task-v2-benchmark
 - note: ปรับประเมินปูพื้น SCG UVT 1,500/ตร.ม. จากรูปงานติดตั้งจริง; contractor-message.md; summary §4c
 

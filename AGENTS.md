@@ -16,21 +16,35 @@
 - Maintain the ultra-compact template of `AGENTS.md` (keep token usage low).
 - Keep file paths relative to workspace root in tasks/logs, but resolve absolute paths when executing tools.
 
+## IOM task skills
+
+| Skill | Path |
+|-------|------|
+| iom-todo-task | `.agents/skills/iom-todo-task/SKILL.md` |
+| iom-todo-task-archive | `.agents/skills/iom-todo-task-archive/SKILL.md` |
+| iom-todo-handoff | `.agents/skills/iom-todo-handoff/SKILL.md` |
+| iom-todo-task-knowledge | `.agents/skills/iom-todo-task-knowledge/SKILL.md` |
+
 ## Reload pack (minimal)
 
 - `[AGENTS.md](AGENTS.md)`
+- `[task/session.handoff-close.md](task/session.handoff-close.md)` — **Primary context**
 - `[task/index.md](task/index.md)`
-- `[task/log.md](task/log.md)`
+- `[task/log.md](task/log.md)` (head ~30 lines)
+- `[task/011-southern-benchmark-pricing.md](task/011-southern-benchmark-pricing.md)`
+- `[task/012-master-task-quotation-v2-analysis.md](task/012-master-task-quotation-v2-analysis.md)`
+- `[task/012-01-sub-task-compare-v1-v2.md](task/012-01-sub-task-compare-v1-v2.md)`
+- `[task/012-02-sub-task-v2-benchmark.md](task/012-02-sub-task-v2-benchmark.md)`
 - `[design/WORKFLOW.md](design/WORKFLOW.md)`
-- Active Task: none (await next task)
+- `[resources/quotation/qt-v2/contractor-message.md](resources/quotation/qt-v2/contractor-message.md)`
 
 ## Continuity — latest activity
 
-### Snapshot (2026-07-06)
+### Snapshot (2026-07-13)
 
-- Done: task 011 — ราคากลางภาคใต้ (ไม่ครบ 6 รายการ); แก้หญ้าบริษัท **100 ตร.ม. @ 157.5 = 15,750** (PDF ใส่ 10 ผิด); อัปเดต `summary.html` ข้อ 3–7, 10.2
-- Active Task: none — **next:** sync 157.5/100 ตร.ม. → `benchmark-quotation.html`, `qt-v1/*`; archive task 011 optional
-- Reload: `[resources/quotation/summary.html](resources/quotation/summary.html)`
+- Done: task **012** — v1/v2 + v2 vs ราคากลาง; qt-v2 HTML; summary §4b–4d; ปูพื้น SCG 1,500 OK; ขอบกั้นดิน=บล็อกซีเมน; แม็คโคร=6,000
+- Active Task: none (all Active rows `done`) — **next:** รอคำตอบบริษัท (คอนกรีต 12cm / overlay / มัดจำ) หรือ archive 011+012
+- Reload: `[task/session.handoff-close.md](task/session.handoff-close.md)` · `[resources/quotation/qt-v2/contractor-message.md](resources/quotation/qt-v2/contractor-message.md)`
 
 ## Task state pointers
 
