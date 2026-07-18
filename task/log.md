@@ -2,6 +2,14 @@
 
 Activity log for project tasks.
 
+## [2026-07-19 00:44] handoff | session.handoff-close
+- note: 4 active done; สีเทา 61.2 + cut-packages A/B; next เลือกชุดตัดหรือต่อรองบริษัท หรือ archive 011+012
+- related: 011-southern-benchmark-pricing, 012-master-task-quotation-v2-analysis, 012-01-sub-task-compare-v1-v2, 012-02-sub-task-v2-benchmark
+
+## [2026-07-19 00:20] updated | grey-area-revise-sync
+- note: สีเทา plan 61.2 (เลิกใช้ 102); บริษัทเทา 75=129−54 (~+14); กลาง×แผน 102,906; sync qt-v2, summary, qt-v1, handoff, 012-02
+- related: 012-02-sub-task-v2-benchmark, session.handoff-close
+
 ## [2026-07-13 16:55] handoff | session.handoff-close
 - note: 4 active tasks all done; next รอคำตอบบริษัท v2 (คอนกรีต 12cm/overlay/มัดจำ) หรือ archive 011+012
 - related: 011-southern-benchmark-pricing, 012-master-task-quotation-v2-analysis, 012-01-sub-task-compare-v1-v2, 012-02-sub-task-v2-benchmark

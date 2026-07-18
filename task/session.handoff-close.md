@@ -1,15 +1,15 @@
 ---
-title: "Handoff — วิเคราะห์ใบเสนอ v2 เสร็จ รอต่อรองผู้รับเหมา"
+title: "Handoff — revise สีเทา + ชุดตัดงาน รอตัดสินใจ/ต่อรอง"
 type: handoff
-detail: task 012 done; qt-v2 deliverables; รอคำตอบคอนกรีต 12cm / overlay / มัดจำ
-tags: [handoff, quotation, v2]
+detail: สีเทา 61.2; cut-packages A/B; รอเลือกชุดตัดหรือคำตอบบริษัท
+tags: [handoff, quotation, v2, cut-packages]
 created: 2026-07-13
-updated: 2026-07-13
+updated: 2026-07-19
 ---
 
-# Handoff — ใบเสนอ v2 บ้านสวนธรรมรัตน์
+# Handoff — ใบเสนอ v2 + ชุดตัดงาน
 
-**Status:** 4 active task(s) · ทุกรายการ `done` · งานถัดไป = ต่อรอง/รอคำตอบผู้รับเหมา (ไม่มี task เปิด)
+**Status:** 4 active task(s) · ทุกรายการ `done` · ไม่มี checklist เปิด · งานถัดไป = เลือกชุดตัดงาน / ต่อรองผู้รับเหมา
 
 ---
 
@@ -21,44 +21,64 @@ Start at [`AGENTS.md`](../AGENTS.md) § Reload pack (canonical `@` list). This f
 
 ## One-line summary
 
-วิเคราะห์ quotation v2 (228,475) เทียบ v1 และราคากลางเสร็จแล้ว — รอคำตอบบริษัทเรื่องคอนกรีต 12 cm, overlay พื้นที่, และมัดจำ 100,000 ก่อนตัดสินใจ.
+v2 228,475 เกินงบ — revise สีเทา plan **61.2** (บริษัท 75) · กลาง×แผน **102,906** · มีชุดตัดงาน A/B ที่ [cut-packages.html](../resources/quotation/qt-v2/cut-packages.html) · รอเลือกชุดหรือคำตอบบริษัท
 
 ---
 
-## Session outcomes (2026-07-13)
+## Session outcomes (2026-07-19)
 
 ### Deliverables
 
 | ไฟล์ | เนื้อหา |
 |------|---------|
-| [qt-v2/comparison-v1-v2.html](../resources/quotation/qt-v2/comparison-v1-v2.html) | diff v1 → v2 |
-| [qt-v2/comparison.html](../resources/quotation/qt-v2/comparison.html) | v2 vs ราคากลาง |
+| [qt-v2/cut-packages.html](../resources/quotation/qt-v2/cut-packages.html) | ชุดตัดงาน A1–A6 + ใกล้เคียง B1–B10 |
+| [qt-v2/comparison.html](../resources/quotation/qt-v2/comparison.html) | สีเทา 61.2 · กลาง×แผน 102,906 |
+| [qt-v2/comparison-v1-v2.html](../resources/quotation/qt-v2/comparison-v1-v2.html) | เทาบริษัท 75 vs แผน 61.2 |
 | [qt-v2/contractor-message.md](../resources/quotation/qt-v2/contractor-message.md) | ข้อความถามผู้รับเหมา |
-| [summary.html](../resources/quotation/summary.html) §4b–4d | สรุป v2, SCG ปูพื้น, ขอบกั้นดิน |
-| [qt-v2/scg-paving-reference.jpg](../resources/quotation/qt-v2/scg-paving-reference.jpg) | รูปปูพื้น SCG จริง |
-| [qt-v2/edge-block-reference.jpg](../resources/quotation/qt-v2/edge-block-reference.jpg) | รูปขอบกั้นดินบล็อกซีเมน |
+| [summary.html](../resources/quotation/summary.html) | sync สีเทา 61.2 |
+| [qt-v1/area-breakdown.md](../resources/quotation/qt-v1/area-breakdown.md) | สูตรพื้นที่ตามสี (เทา = 6.80×9.00) |
 
 ### ตัวเลขสำคัญ
 
-| ฉบับ | ยอด | หมายเหตุ |
-|------|-----|----------|
-| v1 แก้หญ้า 100 ตร.ม. | 178,750 | PDF หญ้า 10 ผิด |
-| v2 จริง | **228,475** | มัดจำ 100,000 |
-| v1 หน่วย + พื้นที่ 197/111/129 + ขอบกั้นดิน | ~223,953 | ไม่รวมแม็คโคร 6,000 |
-| กลาง × plan-2 (4 รายการ) | 121,266 | ฐานต่อรอง |
+| รายการ | ค่า |
+|--------|-----|
+| v2 รวม | **228,475** (มัดจำ 100,000) |
+| กลาง × plan-2 (4 รายการ) | **102,906** |
+| สีเทา plan / บริษัท | **61.2** / **75** (=129−54) |
+| ทางลาด v1 | **54** |
+| หญ้าหลังบ้าน (เขียวใหญ่ติดแดง) | **159.1** @150 = 23,865 |
+
+### คอนกรีต / สีเทา
+
+| | ตร.ม. |
+|--|------:|
+| v1 ทางลาด (ไม่รวมเทา) | 54 |
+| v2 รวม | 129 |
+| สีเทาบริษัท (=129−54) | **75** |
+| สีเทา plan (ดูแค่สี · ไม่รวมน้ำเงิน) | **61.2** |
+| ส่วนต่าง | **+13.8 ≈ +14** |
+
+### ชุดตัดงาน (ยึดราคาบริษัท)
+
+| ชุด | ตัด | เหลือ ≈ |
+|-----|-----|--------:|
+| A1 | หญ้าหลังบ้าน | 204,610 |
+| A2 | เทา 61.2 | 182,575 |
+| A3 | ทางลาด 54 | 187,975 |
+| A4 | เทา + ลาด | 142,075 |
+| A5 | หญ้า + เทา + ลาด | **118,210** |
+| A6 | หญ้า + คอนกรีตใบ v2 (129) | **107,860** |
+
+- **หินส่วนเกิน** = ไม่ใช่โซนแยก · ส่วนต่างสีแดงรอบบ้าน (111−83.7 = **27.3** ตร.ม. @300) ใช้ในชุด B
+- รายละเอียดเต็ม + ชุดใกล้เคียง B1–B10 → [cut-packages.html](../resources/quotation/qt-v2/cut-packages.html)
 
 ### ชี้แจงบริษัท (ยืนยันแล้ว)
 
-- **คอนกรีต 129 ตร.ม.** — v1 แค่ทางลาด 54 · v2 รวมถนนเชื่อม = โซนเทาแผน (~102 ตร.ม. แต่ v2 ระบุ 129)
-- **ขอบกั้นดิน 3,375** — บล็อกซีเมน 13.5 × 250 (น่าจะเป็น **เมตร** ไม่ใช่ ตร.ม.) · v1 ลืมใส่
-- **ค่าบริการ 6,000** = แม็คโครปรับพื้นที่ · v1 ลืมใส่
-- **ปูพื้น 1,500/ตร.ม.** — สมเหตุสมผลถ้า SCG UVT ติดตั้งครบ (ต่ำกว่า SCG Home 1,890)
+- ขอบกั้นดิน = บล็อกซีเมน 3,375 · ค่าบริการ 6,000 = แม็คโคร · ปูพื้น 1,500 สมเหตุสมผลถ้า SCG UVT ติดตั้งครบ
 
-### คุยเพิ่มในแชท (ยังไม่มีคำตอบบริษัท)
+### ยังรอคำตอบบริษัท
 
-- คอนกรีต **15 → 12 cm** (mesh เดิม) — Mazda 3 หลัก / กระบะอนาคต → ประมาณลด **~10,000–19,000** (ยอดรวม ~209k–215k)
-- หิน 111 vs แผน 83.7 — ยังไม่ชี้แจง
-- มัดจำ 100,000 ไม่คืน — ยังเสี่ยงหลัก
+- คอนกรีต 15 → 12 cm · overlay สีเทา 75 vs 61.2 · หิน 111 vs 83.7 · มัดจำ 100,000
 
 ---
 
@@ -75,8 +95,8 @@ Start at [`AGENTS.md`](../AGENTS.md) § Reload pack (canonical `@` list). This f
 
 - **Status:** done · **Updated:** 2026-07-13
 - **Goal:** v1/v2 + v2 vs ราคากลาง
-- **Pending:** none (sub-task 01+02 done)
-- **Next:** archive optional หลังได้คำตอบบริษัทหรือต่อรองเสร็จ
+- **Pending:** none (sub 01+02 done)
+- **Next:** archive optional หลังตัดสินใจตัดงาน/ต่อรองเสร็จ
 
 ### 012-01-sub-task-compare-v1-v2
 
@@ -84,14 +104,15 @@ Start at [`AGENTS.md`](../AGENTS.md) § Reload pack (canonical `@` list). This f
 
 ### 012-02-sub-task-v2-benchmark
 
-- **Status:** done · **Pending:** none · อัปเดต SCG/ขอบกั้นดิน 13/07
+- **Status:** done · **Updated:** 2026-07-19 · revise สีเทา + sync
+- **Pending:** none
 
 ---
 
 ## Next session
 
 1. `@AGENTS.md` → § Reload pack + Continuity
-2. อ่าน [contractor-message.md](../resources/quotation/qt-v2/contractor-message.md) — ส่ง/ติดตามคำตอบบริษัท
-3. เมื่อได้ราคาคอนกรีต 12 cm → อัปเดต comparison + summary
-4. Optional: archive task 011, 012 (`iom-todo-task-archive`)
-5. Optional: sync หญ้า 157.5/100 ตร.ม. → `benchmark-quotation.html`, `qt-v1/*` (ค้างจาก snapshot เก่า)
+2. เปิด [cut-packages.html](../resources/quotation/qt-v2/cut-packages.html) — เลือกชุด A/B ตามงบ
+3. อ่าน [contractor-message.md](../resources/quotation/qt-v2/contractor-message.md) — ส่ง/ติดตาม (หรือร่างข้อความตัดงานตามชุดที่เลือก)
+4. ยืนยันกับบริษัท: ตัดเทาใช้ **61.2** หรือยกเลิกบรรทัด **129** (ต่าง 10,350)
+5. Optional: archive 011, 012 (`iom-todo-task-archive`)

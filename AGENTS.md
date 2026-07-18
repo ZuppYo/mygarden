@@ -35,16 +35,16 @@
 - `[task/012-master-task-quotation-v2-analysis.md](task/012-master-task-quotation-v2-analysis.md)`
 - `[task/012-01-sub-task-compare-v1-v2.md](task/012-01-sub-task-compare-v1-v2.md)`
 - `[task/012-02-sub-task-v2-benchmark.md](task/012-02-sub-task-v2-benchmark.md)`
-- `[design/WORKFLOW.md](design/WORKFLOW.md)`
+- `[resources/quotation/qt-v2/cut-packages.html](resources/quotation/qt-v2/cut-packages.html)`
 - `[resources/quotation/qt-v2/contractor-message.md](resources/quotation/qt-v2/contractor-message.md)`
 
 ## Continuity — latest activity
 
-### Snapshot (2026-07-13)
+### Snapshot (2026-07-19)
 
-- Done: task **012** — v1/v2 + v2 vs ราคากลาง; qt-v2 HTML; summary §4b–4d; ปูพื้น SCG 1,500 OK; ขอบกั้นดิน=บล็อกซีเมน; แม็คโคร=6,000
-- Active Task: none (all Active rows `done`) — **next:** รอคำตอบบริษัท (คอนกรีต 12cm / overlay / มัดจำ) หรือ archive 011+012
-- Reload: `[task/session.handoff-close.md](task/session.handoff-close.md)` · `[resources/quotation/qt-v2/contractor-message.md](resources/quotation/qt-v2/contractor-message.md)`
+- Done: สีเทา plan **61.2** · ชุดตัดงาน A/B (`cut-packages.html`) · sync qt-v2/summary/qt-v1 · กลาง×แผน **102,906**
+- Active Task: none (all `done`) — **next:** เลือกชุดตัดจาก cut-packages หรือต่อรองบริษัท (12cm / overlay / มัดจำ) หรือ archive 011+012
+- Reload: `[task/session.handoff-close.md](task/session.handoff-close.md)` · `[resources/quotation/qt-v2/cut-packages.html](resources/quotation/qt-v2/cut-packages.html)`
 
 ## Task state pointers
 

@@ -127,8 +127,8 @@
         <tr><td><span class="swatch g"></span> เขียว</td><td>ปลูกหญ้านวลน้อย</td><td>สนามบน + สนามล่างซ้าย</td></tr>
         <tr><td><span class="swatch r"></span> แดง</td><td>หินเกล็ดดำ + แผ่นกันวัชพืช</td><td>กรอบรอบบ้าน − footprint ตัวบ้าน</td></tr>
         <tr><td><span class="swatch y"></span> เหลือง</td><td>ปูพื้นภายนอก</td><td>แถบเต็มความกว้าง 1 ช่องกริด</td></tr>
-        <tr><td><span class="swatch gr"></span> เทา</td><td>เทคอนกรีตหน้าบ้าน</td><td>โรงจอดขวา + ทางเข้า</td></tr>
-        <tr><td><span class="swatch b"></span> น้ำเงิน</td><td>โรงจอดรถ (carport)</td><td>ไม่มีใน PDF — บันทึกพื้นที่แยก</td></tr>
+        <tr><td><span class="swatch gr"></span> เทา</td><td>เทคอนกรีตหน้าบ้าน</td><td>6.80×9.00 = 61.2 (ดูแค่สี · ไม่แยกลาย) · ไม่รวมน้ำเงิน</td></tr>
+        <tr><td><span class="swatch b"></span> น้ำเงิน</td><td>โรงจอดรถ (carport)</td><td>ไม่มีใน PDF — ยังไม่ทำ · บันทึกพื้นที่แยก</td></tr>
       </tbody>
     </table>
   </section>
@@ -146,16 +146,15 @@
         <tr><td>ตัวบ้านในกรอบ (หัก)</td><td>10.90×6 + 1.90×3 + 6.40×6</td><td class="num">−109.5</td></tr>
         <tr class="highlight"><td><span class="swatch r"></span> <strong>หินเกล็ดดำสุทธิ</strong></td><td>193.2 − 109.5</td><td class="num"><strong>83.7</strong></td></tr>
         <tr class="highlight"><td><span class="swatch y"></span> ปูพื้นภายนอก</td><td>12.88 × 3.00</td><td class="num">38.6</td></tr>
-        <tr class="highlight"><td><span class="swatch gr"></span> คอนกรีต — โรงรถขวา</td><td>6.80 × 9.00</td><td class="num">61.2</td></tr>
-        <tr class="highlight"><td><span class="swatch gr"></span> คอนกรีต — ทางเข้า</td><td>6.80 × 6.00</td><td class="num">40.8</td></tr>
-        <tr><td><strong>รวมคอนกรีต</strong></td><td></td><td class="num"><strong>102.0</strong></td></tr>
+        <tr class="highlight"><td><span class="swatch gr"></span> <strong>สีเทา — คอนกรีต</strong></td><td>6.80 × 9.00 (ดูแค่สี)</td><td class="num"><strong>61.2</strong></td></tr>
         <tr class="highlight"><td><span class="swatch b"></span> carport</td><td>6.08 × 6.00</td><td class="num">36.5</td></tr>
       </tbody>
     </table>
     <div class="formula">
       หินเกล็ด = 12.88×15.00 − 109.5 = 83.7 ตร.ม.<br>
       หญ้า = 12.88×12.35 + 6.08×3.00 = 177.3 ตร.ม.<br>
-      รวม 4 รายการหลัก = 401.6 ตร.ม. (±5–10% จากการ trace แผน)
+      สีเทา = 6.80×9.00 = 61.2 ตร.ม. (revise 19/07 — เลิกใช้ 102)<br>
+      รวม 4 รายการหลัก = 360.8 ตร.ม. (±5–10% จากการ trace แผน)
     </div>
   </section>
 
@@ -200,7 +199,7 @@
         <tr><td>หญ้า</td><td class="num">10 → <strong>100</strong></td><td class="num">1,575 → <strong>157.5</strong></td><td class="num">15,750</td><td class="num">177.3</td><td class="bad">PDF ใส่ 10 ผิด — 100 ตร.ม. @ 157.5/ตร.ม.</td></tr>
         <tr><td>หินเกล็ดดำ</td><td class="num">210</td><td class="num">300</td><td class="num">63,000</td><td class="num">83.7</td><td>PDF มากกว่าแผน ~2.5 เท่า</td></tr>
         <tr><td>ปูพื้นภายนอก</td><td class="num">34</td><td class="num">1,500</td><td class="num">51,000</td><td class="num">38.6</td><td>ใกล้เคียง</td></tr>
-        <tr><td>คอนกรีต</td><td class="num">54</td><td class="num">750</td><td class="num">40,500</td><td class="num">102.0</td><td>แผนใหญ่กว่า PDF ~1.9 เท่า</td></tr>
+        <tr><td>คอนกรีต</td><td class="num">54</td><td class="num">750</td><td class="num">40,500</td><td class="num">61.2</td><td>v1=ทางลาด · แผน=สีเทา (คนละชั้น — ดู §4b)</td></tr>
         <tr><td>แผ่นทางเดินทรายล้าง</td><td class="num">34 แผ่น</td><td class="num">250</td><td class="num">8,500</td><td class="num">—</td><td>ไม่มีโซนสีใน plan-2</td></tr>
       </tbody>
       <tfoot>
@@ -233,7 +232,7 @@
     <div class="cards">
       <div class="card"><div class="lbl">v2 รวม</div><div class="val bad">228,475 บาท</div></div>
       <div class="card"><div class="lbl">กลาง × จำนวน v2 (5 รายการ)</div><div class="val ok">146,610 บาท</div></div>
-      <div class="card"><div class="lbl">กลาง × plan-2 (4 รายการ)</div><div class="val ok">121,266 บาท</div></div>
+      <div class="card"><div class="lbl">กลาง × plan-2 (4 รายการ)</div><div class="val ok">102,906 บาท</div></div>
       <div class="card"><div class="lbl">มัดจำ v2</div><div class="val bad">100,000 บาท</div></div>
     </div>
     <table>
@@ -254,8 +253,8 @@
       </tfoot>
     </table>
     <p><strong>ข้อดี v2:</strong> หญ้า 197 ตร.ม. ชัด · หน่วยหญ้า 150 · สเปกคอนกรีตระบุ · หินตรงกลาง · ปูพื้น SCG สมเหตุสมผล (§4c)<br>
-    <strong>ชี้แจงบริษัท 13/07:</strong> คอนกรีต 129 = ทางลาด+ถนนเชื่อม (โซนเทา) · ขอบกั้นดิน = <strong>บล็อกซีเมน</strong> 3,375 (ไม่ใช่ซัมโน้นดำ) · ค่าบริการ 6,000 = แม็คโครปรับพื้นที่<br>
-    <strong>ยังควรคุย:</strong> คอนกรีต 129 vs แผน 102 · พื้นที่หิน 111 vs แผน 84 · มัดจำ 100,000</p>
+    <strong>ชี้แจงบริษัท 13/07 + revise 19/07:</strong> v1=54 ทางลาด (ไม่รวมเทา) · v2=129 = ทางลาด+สีเทา → สีเทาบริษัท <strong>75</strong> (=129−54) vs แผน <strong>61.2</strong> (ต่าง ~14) · ขอบกั้นดิน = <strong>บล็อกซีเมน</strong> 3,375 · ค่าบริการ 6,000 = แม็คโคร<br>
+    <strong>ยังควรคุย:</strong> สีเทา 75 vs 61.2 · หิน 111 vs 84 · มัดจำ 100,000</p>
   </section>
 
   <section class="sheet" id="sec-scg-paving">
@@ -308,10 +307,10 @@
   <section class="sheet">
     <h2>5. ตารางราคากลาง × พื้นที่แผน (ฐานต่อรองหลัก)</h2>
     <div class="cards">
-      <div class="card"><div class="lbl">ราคากลาง 4 รายการ</div><div class="val ok">121,266 บาท</div></div>
-      <div class="card"><div class="lbl">+ carport อ้างอิง</div><div class="val">137,682 บาท</div></div>
-      <div class="card"><div class="lbl">+ แผ่นทางเดิน 34 แผ่น</div><div class="val">127,386 บาท</div></div>
-      <div class="card"><div class="lbl">มัดจำ 50% (4 รายการ)</div><div class="val">60,633 บาท</div></div>
+      <div class="card"><div class="lbl">ราคากลาง 4 รายการ</div><div class="val ok">102,906 บาท</div></div>
+      <div class="card"><div class="lbl">+ carport อ้างอิง</div><div class="val">119,331 บาท</div></div>
+      <div class="card"><div class="lbl">+ แผ่นทางเดิน 34 แผ่น</div><div class="val">109,026 บาท</div></div>
+      <div class="card"><div class="lbl">มัดจำ 50% (4 รายการ)</div><div class="val">51,453 บาท</div></div>
     </div>
     <table>
       <thead>
@@ -325,11 +324,11 @@
         <tr><td><span class="swatch g"></span></td><td>หญ้านวลน้อย</td><td class="num">177.3</td><td class="num">120</td><td class="num">21,276</td><td class="num">157.5</td><td class="num">27,925</td></tr>
         <tr><td><span class="swatch r"></span></td><td>หินเกล็ดดำ</td><td class="num">83.7</td><td class="num">300</td><td class="num">25,110</td><td class="num">300</td><td class="num">25,110</td></tr>
         <tr><td><span class="swatch y"></span></td><td>ปูพื้นภายนอก</td><td class="num">38.6</td><td class="num">750</td><td class="num">28,980</td><td class="num">1,500</td><td class="num">57,960</td></tr>
-        <tr><td><span class="swatch gr"></span></td><td>เทคอนกรีต</td><td class="num">102.0</td><td class="num">450</td><td class="num">45,900</td><td class="num">750</td><td class="num">76,500</td></tr>
+        <tr><td><span class="swatch gr"></span></td><td>เทคอนกรีต (สีเทา)</td><td class="num">61.2</td><td class="num">450</td><td class="num">27,540</td><td class="num">750</td><td class="num">45,900</td></tr>
         <tr class="alt"><td><span class="swatch b"></span></td><td>carport</td><td class="num">36.5</td><td class="num">450</td><td class="num">16,425</td><td class="num">—</td><td class="num">—</td></tr>
       </tbody>
       <tfoot>
-        <tr><td colspan="4" class="num">รวม 4 รายการ</td><td class="num ok">121,266</td><td colspan="2" class="num">187,495 (หน่วย PDF×แผน แก้หญ้า 157.5)</td></tr>
+        <tr><td colspan="4" class="num">รวม 4 รายการ</td><td class="num ok">102,906</td><td colspan="2" class="num">156,895 (หน่วย PDF×แผน แก้หญ้า 157.5)</td></tr>
       </tfoot>
     </table>
   </section>
@@ -347,7 +346,7 @@
         <tr><td>คอนกรีต</td><td class="num">450</td><td class="num">750</td><td class="num">+300</td><td>สูงกว่ากลาง ~67% — ขอความหนา/KSC/ไวร์เมช</td></tr>
       </tbody>
     </table>
-    <p><strong>ข้อเสนอต่อรอง:</strong> ใช้พื้นที่จากแผน (401.6 ตร.ม. 4 รายการ) × อัตรากลาง = <strong>121,266 บาท</strong> เป็นฐานคุย — ไม่ใช่ 178,750 (ยอด PDF) หรือ 187,495 (หน่วย PDF×แผน แก้หญ้า 157.5/ตร.ม.)</p>
+    <p><strong>ข้อเสนอต่อรอง:</strong> ใช้พื้นที่จากแผน (360.8 ตร.ม. 4 รายการ · สีเทา 61.2) × อัตรากลาง = <strong>102,906 บาท</strong> เป็นฐานคุย — ไม่ใช่ 178,750 (ยอด PDF) หรือ 156,895 (หน่วย PDF×แผน แก้หญ้า 157.5/ตร.ม.)</p>
   </section>
 
   <section class="sheet">
@@ -361,13 +360,13 @@
         <tr><td colspan="4"><em>ราคากลาง</em></td></tr>
         <tr><td>หญ้า (ตร.ม.)</td><td class="num">177.3 → 21,276</td><td class="num">18.2 → 2,184</td><td class="num">−19,092</td></tr>
         <tr><td>หิน (ตร.ม.)</td><td class="num">83.7 → 25,110</td><td class="num">242.8 → 72,840</td><td class="num">+47,730</td></tr>
-        <tr><td>ปูพื้น + คอนกรีต</td><td class="num">74,880</td><td class="num">74,880</td><td class="num">0</td></tr>
-        <tr><td><strong>รวมกลาง</strong></td><td class="num"><strong>121,266</strong></td><td class="num"><strong>149,904</strong></td><td class="num bad">+28,638</td></tr>
+        <tr><td>ปูพื้น + คอนกรีต</td><td class="num">56,520</td><td class="num">56,520</td><td class="num">0</td></tr>
+        <tr><td><strong>รวมกลาง</strong></td><td class="num"><strong>102,906</strong></td><td class="num"><strong>131,544</strong></td><td class="num bad">+28,638</td></tr>
         <tr><td colspan="4"><em>หน่วย PDF × แผน</em></td></tr>
         <tr><td>หญ้า</td><td class="num">27,925</td><td class="num">2,867</td><td class="num">−25,058</td></tr>
         <tr><td>หิน</td><td class="num">25,110</td><td class="num">72,840</td><td class="num">+47,730</td></tr>
-        <tr><td>ปูพื้น + คอนกรีต</td><td class="num">134,460</td><td class="num">134,460</td><td class="num">0</td></tr>
-        <tr><td><strong>รวม PDF×แผน</strong></td><td class="num"><strong>187,495</strong></td><td class="num"><strong>210,167</strong></td><td class="num">+22,672 (+12%)</td></tr>
+        <tr><td>ปูพื้น + คอนกรีต</td><td class="num">103,860</td><td class="num">103,860</td><td class="num">0</td></tr>
+        <tr><td><strong>รวม PDF×แผน</strong></td><td class="num"><strong>156,895</strong></td><td class="num"><strong>179,567</strong></td><td class="num">+22,672 (+14%)</td></tr>
       </tbody>
     </table>
     <div class="note info">
@@ -383,7 +382,7 @@
       <li>หิน 210 ตร.ม. ใน PDF ครอบคลุมพื้นที่ใดบนแผน? แผนได้ ~84 ตร.ม. รอบบ้าน — มีรวมหลังบ้านหรือไม่?</li>
       <li>หินเกล็ด: ความหนา, มีแผ่นกันวัชพืช, รวมปรับระดับ/อัดบดแล้วหรือยัง?</li>
       <li>ปูพื้นภายนอก: รุ่น SCG อะไร — ตรงรูปงานติดตั้งจริง (UVT ลายคอบเบิล) หรือไม่? 1,500/ตร.ม. รวมทรายรองพื้น+เคลือบ+ขอบแล้วหรือยัง?</li>
-      <li>คอนกรีต: หนาเท่าไร KSC ไวร์เมช ทรายรองพื้น slope ระบายน้ำ?</li>
+      <li>สีเทา/คอนกรีต: v2 ส่วนเพิ่ม 75 (129−54) vs แผน 61.2 — หนาเท่าไร KSC ไวร์เมช ทรายรองพื้น slope?</li>
       <li>แผ่นทางเดิน 34 แผ่น: วางที่ไหนบนแผน? รวมขนส่ง/ติดตั้งหรือไม่?</li>
       <li>carport สีน้ำเงิน 36.5 ตร.ม. — มีใน scope หรือไม่? ราคาเท่าไร?</li>
       <li>ขอแยกราคา วัสดุ / ค่าแรง / ขนส่ง เพื่อเทียบกับราคากลาง</li>
@@ -403,11 +402,11 @@
     </ul>
     <div class="note">
       <strong>สรุปตัวเลขสำคัญสำหรับคุย:</strong><br>
-      ราคากลาง × พื้นที่แผน (4 รายการ) = <strong>121,266 บาท</strong><br>
-      PDF ยอดรวม = 178,750 บาท | หญ้าแก้หน่วย 157.5/ตร.ม. × 100 = 15,750 | กลาง×จำนวนบริษัท = 130,920 บาท<br>
-      PDF×แผน (หน่วยแก้หญ้า) = 187,495 บาท | ทางเลือกหลังบ้านหิน (กลาง) = 149,904 บาท
+      ราคากลาง × พื้นที่แผน (4 รายการ · สีเทา 61.2) = <strong>102,906 บาท</strong><br>
+      PDF v1 ยอดรวม = 178,750 บาท | v2 = 228,475 | สีเทาบริษัท 75 vs แผน 61.2 (~+14)<br>
+      PDF×แผน (หน่วยแก้หญ้า) = 156,895 บาท | ทางเลือกหลังบ้านหิน (กลาง) = 131,544 บาท
     </div>
-    <p class="subtle" style="margin-top:20px">เอกสารนี้จัดทำจากการวิเคราะห์ plan-2 และ research ราคาตลาด — อัปเดตแหล่งอ้างอิง 06/07/2569</p>
+    <p class="subtle" style="margin-top:20px">เอกสารนี้จัดทำจากการวิเคราะห์ plan-2 และ research ราคาตลาด — อัปเดตแหล่งอ้างอิง 06/07/2569 · revise สีเทา 19/07/2569</p>
   </section>
 
   <section class="sheet" id="sec-sources">

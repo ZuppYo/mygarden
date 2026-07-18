@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ชุดตัดงาน — ใบเสนอ v2</title>
+  <style>
+    :root { --ink:#17211b; --muted:#667166; --line:#d9e1d8; --soft:#f4f7f2; --accent:#2f6f45; --warn:#9a5b00; --danger:#a33a32; --near:#1a5276; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#eef2ec; color:var(--ink); font-family:"Segoe UI",Tahoma,sans-serif; line-height:1.55; }
+    .page { width:min(1100px,calc(100% - 32px)); margin:24px auto; padding:36px; background:#fff; border:1px solid var(--line); border-radius:18px; box-shadow:0 18px 45px rgba(23,33,27,.08); }
+    header { display:grid; grid-template-columns:1.2fr .8fr; gap:24px; border-bottom:3px solid var(--accent); padding-bottom:22px; margin-bottom:16px; }
+    h1 { font-size:26px; line-height:1.25; margin:0 0 10px; }
+    h2 { font-size:20px; margin:28px 0 12px; color:var(--accent); }
+    h3 { font-size:16px; margin:20px 0 8px; color:var(--ink); }
+    .subtle { color:var(--muted); font-size:14px; }
+    .badge { display:inline-block; padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700; margin-bottom:8px; }
+    .badge-cut { background:#fff3e0; color:var(--warn); }
+    .badge-near { background:#eaf2f8; color:var(--near); }
+    .meta { background:var(--soft); border:1px solid var(--line); border-radius:12px; padding:16px; }
+    .meta div { display:flex; justify-content:space-between; gap:16px; border-bottom:1px solid var(--line); padding:6px 0; }
+    .meta div:last-child { border-bottom:0; }
+    .nav-links { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px; }
+    .nav-links a { color:var(--accent); text-decoration:none; padding:6px 12px; border:1px solid var(--line); border-radius:8px; font-size:14px; }
+    .summary-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:20px 0 28px; }
+    .card { border:1px solid var(--line); border-radius:14px; padding:16px; background:var(--soft); }
+    .card .label { color:var(--muted); font-size:13px; margin-bottom:4px; }
+    .card .value { font-size:22px; font-weight:700; }
+    .pkg-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin:16px 0 24px; }
+    .pkg { border:1px solid var(--line); border-radius:14px; padding:16px 18px; background:#fff; }
+    .pkg.primary { border-color:#b7d4c0; background:#f7fbf8; }
+    .pkg.near { border-color:#b8cce0; background:#f7fafc; }
+    .pkg .code { font-size:12px; font-weight:700; letter-spacing:.04em; color:var(--muted); margin-bottom:4px; }
+    .pkg h3 { margin:0 0 8px; font-size:17px; }
+    .pkg .cuts { font-size:13px; color:var(--muted); margin:0 0 12px; }
+    .pkg .row { display:flex; justify-content:space-between; gap:12px; padding:4px 0; font-size:14px; }
+    .pkg .remain { font-size:22px; font-weight:700; margin-top:8px; padding-top:10px; border-top:1px dashed var(--line); }
+    table { width:100%; border-collapse:collapse; margin:12px 0 22px; font-size:14px; }
+    th,td { border:1px solid var(--line); padding:10px 12px; vertical-align:top; }
+    th { background:#e8f0e6; text-align:left; }
+    td.num,th.num { text-align:right; white-space:nowrap; }
+    tfoot td { font-weight:700; background:#f8faf7; }
+    tr.hl { background:#f0f7f2; }
+    tr.near-row { background:#f3f7fb; }
+    .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:middle; margin-right:4px; border:1px solid rgba(0,0,0,.15); }
+    .swatch.green{background:#4caf50}.swatch.grey{background:#9e9e9e}.swatch.ramp{background:#78909c}.swatch.red{background:#e53935}
+    .note { border-left:4px solid var(--warn); background:#fff8e8; padding:12px 14px; border-radius:10px; margin:16px 0; }
+    .note.info { border-color:var(--accent); background:#f0f7f2; }
+    .risk { color:var(--danger); font-weight:700; }
+    .ok { color:var(--accent); font-weight:700; }
+    .save { color:var(--warn); font-weight:700; }
+    ul { padding-left:22px; }
+    @media (max-width:900px) {
+      header,.summary-grid,.pkg-grid { grid-template-columns:1fr; }
+    }
+    @media print {
+      body{background:#fff}
+      .page{width:100%;margin:0;padding:14mm;border:0;box-shadow:none}
+      .nav-links{display:none}
+      .pkg{break-inside:avoid}
+    }
+  </style>
+</head>
+<body>
+<main class="page">
+  <header>
+    <section>
+      <span class="badge badge-cut">ตัดงานจาก v2</span>
+      <h1>ชุดตัดงาน — บ้านสวนธรรมรัตน์</h1>
+      <p class="subtle">ยึดราคาหน่วยบริษัทจากใบเสนอ v2 · พื้นที่ตาม plan-2 / ทางลาดตาม v1 · อัปเดต 19/07/2569</p>
+    </section>
+    <section class="meta">
+      <div><span>ยอด v2 เดิม</span><strong class="risk">228,475 บาท</strong></div>
+      <div><span>หญ้า</span><strong>150 บาท/ตร.ม.</strong></div>
+      <div><span>คอนกรีต</span><strong>750 บาท/ตร.ม.</strong></div>
+      <div><span>หินเกล็ดดำ</span><strong>300 บาท/ตร.ม.</strong></div>
+    </section>
+  </header>
+
+  <nav class="nav-links">
+    <a href="../quotation-v2.pdf">PDF v2</a>
+    <a href="comparison.html">v2 vs กลาง</a>
+    <a href="comparison-v1-v2.html">v1 vs v2</a>
+    <a href="contractor-message.md">ข้อความถามผู้รับเหมา</a>
+    <a href="../summary.html">summary.html</a>
+    <a href="../plan-2.jpg">plan-2</a>
+  </nav>
+
+  <section class="summary-grid">
+    <div class="card"><div class="label">หญ้าหลังบ้าน (เขียวใหญ่)</div><div class="value">159.1 ตร.ม.</div></div>
+    <div class="card"><div class="label">สีเทาในแผน</div><div class="value">61.2 ตร.ม.</div></div>
+    <div class="card"><div class="label">ทางลาด (v1)</div><div class="value">54 ตร.ม.</div></div>
+    <div class="card"><div class="label">ตัดสูงสุดในชุดหลัก</div><div class="value save">−120,615</div></div>
+  </section>
+
+  <h2>1. ชิ้นงานฐาน (คำนวณเดี่ยว)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ชิ้นงาน</th>
+        <th>ที่มาพื้นที่</th>
+        <th class="num">ตร.ม.</th>
+        <th class="num">ราคา/หน่วย</th>
+        <th class="num">มูลค่าตัด</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="swatch green"></span> หญ้าหลังบ้าน</td>
+        <td>เขียวชิ้นใหญ่ติดแดง · 12.88 × 12.35</td>
+        <td class="num">159.1</td>
+        <td class="num">150</td>
+        <td class="num save">23,865</td>
+      </tr>
+      <tr>
+        <td><span class="swatch grey"></span> คอนกรีตสีเทา</td>
+        <td>plan ดูแค่สี · 6.80 × 9.00 · ไม่รวมน้ำเงิน</td>
+        <td class="num">61.2</td>
+        <td class="num">750</td>
+        <td class="num save">45,900</td>
+      </tr>
+      <tr>
+        <td><span class="swatch ramp"></span> ทางลาดเข้าบ้าน</td>
+        <td>ตาม v1 (ไม่อยู่ในสีแผน)</td>
+        <td class="num">54</td>
+        <td class="num">750</td>
+        <td class="num save">40,500</td>
+      </tr>
+      <tr class="hl">
+        <td>คอนกรีตทั้งคู่ (เทาแผน + ลาด)</td>
+        <td>61.2 + 54</td>
+        <td class="num">115.2</td>
+        <td class="num">750</td>
+        <td class="num save">86,400</td>
+      </tr>
+      <tr>
+        <td>บรรทัดคอนกรีตทั้งก้อนในใบ v2</td>
+        <td>129 ตร.ม. (=54 + เทาบริษัท 75)</td>
+        <td class="num">129</td>
+        <td class="num">750</td>
+        <td class="num save">96,750</td>
+      </tr>
+      <tr class="near-row">
+        <td><span class="swatch red"></span> หินส่วนเกิน (ทางเลือกใกล้เคียง)</td>
+        <td>ใบเสนอ 111 − แผนสีแดง 83.7 · <strong>ไม่ใช่โซนแยก</strong> — คือส่วนที่บริษัทคิดเกินจากหินรอบบ้าน</td>
+        <td class="num">27.3</td>
+        <td class="num">300</td>
+        <td class="num save">8,190</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note info">
+    <strong>หินส่วนเกินอยู่ตรงไหน?</strong> ไม่มีสีแยกบนแผน — คือส่วนต่างของโซน<strong>สีแดง</strong> (หินเกล็ดดำรอบบ้าน): บริษัท 111 vs แผน 83.7 = <strong>+27.3 ตร.ม.</strong> · การ “ตัดหินส่วนเกิน” = ขอลดจำนวนหินให้ใกล้แผน ไม่ใช่ยกเลิกงานหินทั้งก้อน<br><br>
+    หญ้าที่เหลือในแผนถ้าตัดหลังบ้าน = สนามล่างซ้าย <strong>18.2 ตร.ม.</strong> ≈ 2,730 บาท ·
+    บรรทัดคอนกรีตในใบ v2 (96,750) สูงกว่าเทาแผน+ลาด (86,400) อยู่ <strong>10,350</strong> เพราะบริษัทคิดเทา 75 ไม่ใช่ 61.2
+  </div>
+
+  <h2>2. ชุดหลัก — ตามที่สรุป</h2>
+  <p class="subtle">ชุดตัดจากหญ้าหลังบ้าน + คอนกรีต (เทาแผน / ทางลาด / ทั้งคู่ / ตามใบ v2)</p>
+  <div class="pkg-grid">
+    <article class="pkg primary">
+      <div class="code">ชุด A1</div>
+      <h3>ตัดหญ้าหลังบ้านอย่างเดียว</h3>
+      <p class="cuts">ตัด: หญ้า 159.1 ตร.ม.</p>
+      <div class="row"><span>ลด</span><span class="save">−23,865</span></div>
+      <div class="remain ok">เหลือ 204,610</div>
+    </article>
+    <article class="pkg primary">
+      <div class="code">ชุด A2</div>
+      <h3>ตัดคอนกรีตเทาอย่างเดียว</h3>
+      <p class="cuts">ตัด: สีเทา 61.2 ตร.ม.</p>
+      <div class="row"><span>ลด</span><span class="save">−45,900</span></div>
+      <div class="remain ok">เหลือ 182,575</div>
+    </article>
+    <article class="pkg primary">
+      <div class="code">ชุด A3</div>
+      <h3>ตัดทางลาดอย่างเดียว</h3>
+      <p class="cuts">ตัด: ทางลาด 54 ตร.ม. (v1)</p>
+      <div class="row"><span>ลด</span><span class="save">−40,500</span></div>
+      <div class="remain ok">เหลือ 187,975</div>
+    </article>
+    <article class="pkg primary">
+      <div class="code">ชุด A4</div>
+      <h3>ตัดคอนกรีตทั้งคู่</h3>
+      <p class="cuts">ตัด: เทา 61.2 + ทางลาด 54</p>
+      <div class="row"><span>ลด</span><span class="save">−86,400</span></div>
+      <div class="remain ok">เหลือ 142,075</div>
+    </article>
+    <article class="pkg primary">
+      <div class="code">ชุด A5 · แนะนำถ้าตัดหนัก</div>
+      <h3>หญ้าหลังบ้าน + คอนกรีตทั้งคู่</h3>
+      <p class="cuts">ตัด: หญ้า 159.1 + เทา 61.2 + ลาด 54</p>
+      <div class="row"><span>ลด</span><span class="save">−110,265</span></div>
+      <div class="remain ok">เหลือ 118,210</div>
+    </article>
+    <article class="pkg primary">
+      <div class="code">ชุด A6 · ตามบรรทัดใบเสนอ</div>
+      <h3>หญ้าหลังบ้าน + บรรทัดคอนกรีต v2</h3>
+      <p class="cuts">ตัด: หญ้า 159.1 + คอนกรีต 129 ทั้งก้อนในใบ</p>
+      <div class="row"><span>ลด</span><span class="save">−120,615</span></div>
+      <div class="remain ok">เหลือ 107,860</div>
+    </article>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ชุด</th>
+        <th>รายการตัด</th>
+        <th class="num">ลด (บาท)</th>
+        <th class="num">เหลือจาก 228,475</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>A1</td><td>หญ้าหลังบ้าน</td><td class="num save">23,865</td><td class="num">204,610</td></tr>
+      <tr><td>A2</td><td>คอนกรีตเทา</td><td class="num save">45,900</td><td class="num">182,575</td></tr>
+      <tr><td>A3</td><td>ทางลาด</td><td class="num save">40,500</td><td class="num">187,975</td></tr>
+      <tr><td>A4</td><td>เทา + ทางลาด</td><td class="num save">86,400</td><td class="num">142,075</td></tr>
+      <tr class="hl"><td><strong>A5</strong></td><td><strong>หญ้าหลังบ้าน + เทา + ทางลาด</strong></td><td class="num save">110,265</td><td class="num ok">118,210</td></tr>
+      <tr class="hl"><td><strong>A6</strong></td><td><strong>หญ้าหลังบ้าน + คอนกรีตใบ v2 (129)</strong></td><td class="num save">120,615</td><td class="num ok">107,860</td></tr>
+      <tr><td ref>(อ้างอิง)</td><td>ยกเลิกบรรทัดคอนกรีต v2 ทั้งก้อนอย่างเดียว</td><td class="num save">96,750</td><td class="num">131,725</td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. ชุดราคาใกล้เคียง — ทางเลือกเพิ่ม</h2>
+  <p class="subtle">จับคู่ให้เหลือยอดใกล้ชุดหลัก · บางชุดเติมการขอลด<strong>หินส่วนเกิน</strong> (111−83.7 = 27.3 ตร.ม. @300 จากโซนสีแดงรอบบ้าน — ไม่ใช่โซนแยก) เพื่อขยับงบเล็กน้อย</p>
+
+  <h3><span class="badge badge-near">แถบ ~180–190k</span> ใกล้ A2 / A3</h3>
+  <div class="pkg-grid">
+    <article class="pkg near">
+      <div class="code">ชุด B1 · ใกล้ A2 (182,575)</div>
+      <h3>เทา + หินส่วนเกิน</h3>
+      <p class="cuts">ตัด: เทา 61.2 + หินเกิน 27.3</p>
+      <div class="row"><span>ลด</span><span class="save">−54,090</span></div>
+      <div class="remain">เหลือ 174,385</div>
+    </article>
+    <article class="pkg near">
+      <div class="code">ชุด B2 · ใกล้ A3 (187,975)</div>
+      <h3>ทางลาด + หินส่วนเกิน</h3>
+      <p class="cuts">ตัด: ลาด 54 + หินเกิน 27.3</p>
+      <div class="row"><span>ลด</span><span class="save">−48,690</span></div>
+      <div class="remain">เหลือ 179,785</div>
+    </article>
+  </div>
+
+  <h3><span class="badge badge-near">แถบ ~150–165k</span> ระหว่าง A4 กับตัดเบา</h3>
+  <div class="pkg-grid">
+    <article class="pkg near">
+      <div class="code">ชุด B3</div>
+      <h3>หญ้าหลังบ้าน + เทา</h3>
+      <p class="cuts">ตัด: หญ้า 159.1 + เทา 61.2 · คงทางลาด</p>
+      <div class="row"><span>ลด</span><span class="save">−69,765</span></div>
+      <div class="remain">เหลือ 158,710</div>
+    </article>
+    <article class="pkg near">
+      <div class="code">ชุด B4</div>
+      <h3>หญ้าหลังบ้าน + ทางลาด</h3>
+      <p class="cuts">ตัด: หญ้า 159.1 + ลาด 54 · คงสีเทา</p>
+      <div class="row"><span>ลด</span><span class="save">−64,365</span></div>
+      <div class="remain">เหลือ 164,110</div>
+    </article>
+    <article class="pkg near">
+      <div class="code">ชุด B5 · ใกล้ B3</div>
+      <h3>หญ้า + เทา + หินส่วนเกิน</h3>
+      <p class="cuts">ตัด: หญ้า + เทา + หินเกิน 27.3</p>
+      <div class="row"><span>ลด</span><span class="save">−77,955</span></div>
+      <div class="remain">เหลือ 150,520</div>
+    </article>
+    <article class="pkg near">
+      <div class="code">ชุด B6 · ใกล้ B4</div>
+      <h3>หญ้า + ทางลาด + หินส่วนเกิน</h3>
+      <p class="cuts">ตัด: หญ้า + ลาด + หินเกิน 27.3</p>
+      <div class="row"><span>ลด</span><span class="save">−72,555</span></div>
+      <div class="remain">เหลือ 155,920</div>
+    </article>
+  </div>
+
+  <h3><span class="badge badge-near">แถบ ~105–145k</span> ใกล้ A4 / A5 / A6</h3>
+  <div class="pkg-grid">
+    <article class="pkg near">
+      <div class="code">ชุด B7 · ใกล้ A4 (142,075)</div>
+      <h3>ยกเลิกบรรทัดคอนกรีต v2 ทั้งก้อน</h3>
+      <p class="cuts">ตัด: คอนกรีต 129 ตามใบ · ไม่แตะหญ้า</p>
+      <div class="row"><span>ลด</span><span class="save">−96,750</span></div>
+      <div class="remain">เหลือ 131,725</div>
+    </article>
+    <article class="pkg near">
+      <div class="code">ชุด B8 · ใกล้ A5 (118,210)</div>
+      <h3>หญ้า + คอนกรีตทั้งคู่ (แผน)</h3>
+      <p class="cuts">= ชุด A5 · เทาแผน 61.2 + ลาด 54</p>
+      <div class="row"><span>ลด</span><span class="save">−110,265</span></div>
+      <div class="remain ok">เหลือ 118,210</div>
+    </article>
+    <article class="pkg near">
+      <div class="code">ชุด B9 · ใกล้ A6 (107,860)</div>
+      <h3>หญ้า + บรรทัดคอนกรีต v2</h3>
+      <p class="cuts">= ชุด A6</p>
+      <div class="row"><span>ลด</span><span class="save">−120,615</span></div>
+      <div class="remain ok">เหลือ 107,860</div>
+    </article>
+    <article class="pkg near">
+      <div class="code">ชุด B10 · ต่ำกว่า A6 เล็กน้อย</div>
+      <h3>หญ้า + คอนกรีต v2 + หินส่วนเกิน</h3>
+      <p class="cuts">ตัดหนักสุดในเอกสารนี้</p>
+      <div class="row"><span>ลด</span><span class="save">−128,805</span></div>
+      <div class="remain">เหลือ 99,670</div>
+    </article>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ชุดใกล้เคียง</th>
+        <th>ใกล้ชุดหลัก</th>
+        <th>รายการตัด</th>
+        <th class="num">ลด</th>
+        <th class="num">เหลือ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="near-row"><td>B1</td><td>A2</td><td>เทา + หินเกิน</td><td class="num save">54,090</td><td class="num">174,385</td></tr>
+      <tr class="near-row"><td>B2</td><td>A3</td><td>ทางลาด + หินเกิน</td><td class="num save">48,690</td><td class="num">179,785</td></tr>
+      <tr class="near-row"><td>B3</td><td>—</td><td>หญ้าหลังบ้าน + เทา</td><td class="num save">69,765</td><td class="num">158,710</td></tr>
+      <tr class="near-row"><td>B4</td><td>—</td><td>หญ้าหลังบ้าน + ทางลาด</td><td class="num save">64,365</td><td class="num">164,110</td></tr>
+      <tr class="near-row"><td>B5</td><td>B3</td><td>หญ้า + เทา + หินเกิน</td><td class="num save">77,955</td><td class="num">150,520</td></tr>
+      <tr class="near-row"><td>B6</td><td>B4</td><td>หญ้า + ทางลาด + หินเกิน</td><td class="num save">72,555</td><td class="num">155,920</td></tr>
+      <tr class="near-row"><td>B7</td><td>A4</td><td>คอนกรีตใบ v2 (129)</td><td class="num save">96,750</td><td class="num">131,725</td></tr>
+      <tr class="near-row"><td>B8</td><td>A5</td><td>หญ้า + เทาแผน + ลาด</td><td class="num save">110,265</td><td class="num">118,210</td></tr>
+      <tr class="near-row"><td>B9</td><td>A6</td><td>หญ้า + คอนกรีตใบ v2</td><td class="num save">120,615</td><td class="num">107,860</td></tr>
+      <tr class="near-row"><td>B10</td><td>A6−</td><td>หญ้า + คอนกรีต v2 + หินเกิน</td><td class="num save">128,805</td><td class="num">99,670</td></tr>
+    </tbody>
+  </table>
+
+  <h2>4. คำแนะนำสั้น</h2>
+  <div class="note">
+    <ul style="margin:0">
+      <li><strong>งบ ~180k:</strong> เริ่มที่ A2 หรือ A3 · ถ้าอยากขยับลงอีกนิดใช้ B1/B2 (ตัดหินส่วนเกินด้วย)</li>
+      <li><strong>งบ ~140–160k:</strong> A4 (ตัดคอนกรีตทั้งคู่) หรือ B3/B4 (ตัดหญ้าหลังบ้าน + เทาหรือลาดอย่างใดอย่างหนึ่ง)</li>
+      <li><strong>งบ ~110–120k:</strong> A5 ใช้พื้นที่แผน · A6/B9 ใช้บรรทัดใบเสนอ (ลดมากกว่าเพราะเทาบริษัท 75)</li>
+      <li>ก่อนตกลงกับบริษัท: ยืนยันว่าตัดเทาใช้ <strong>61.2</strong> หรือยกเลิกทั้งบรรทัด <strong>129</strong> — ต่างกัน 10,350 บาท</li>
+    </ul>
+  </div>
+
+  <p class="subtle">อ้างอิงพื้นที่: <a href="../qt-v1/area-breakdown.md">area-breakdown.md</a> · ราคาหน่วย: <a href="../quotation-v2.pdf">quotation-v2.pdf</a> · สร้าง 19/07/2569</p>
+</main>
+</body>
+</html>

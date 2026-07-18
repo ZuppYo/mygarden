@@ -10,7 +10,7 @@ Handoff: [session.handoff-close](./session.handoff-close.md)
 |------|-------|------|------|---------|--------|
 | [012-master-task-quotation-v2-analysis](./012-master-task-quotation-v2-analysis.md) | วิเคราะห์ใบเสนอราคา v2 บ้านสวนธรรมรัตน์ | planning | master, quotation, v2, benchmark, comparison | 2026-07-13 | done |
 | [012-01-sub-task-compare-v1-v2](./012-01-sub-task-compare-v1-v2.md) | เปรียบเทียบใบเสนอ v1 vs v2 | planning | sub-task, quotation, v1, v2, comparison | 2026-07-13 | done |
-| [012-02-sub-task-v2-benchmark](./012-02-sub-task-v2-benchmark.md) | เปรียบเทียบ v2 กับราคากลาง | execution | sub-task, quotation, v2, benchmark, plan-2 | 2026-07-13 | done |
+| [012-02-sub-task-v2-benchmark](./012-02-sub-task-v2-benchmark.md) | เปรียบเทียบ v2 กับราคากลาง | execution | sub-task, quotation, v2, benchmark, plan-2 | 2026-07-19 | done |
 | [011-southern-benchmark-pricing](./011-southern-benchmark-pricing.md) | สำรวจราคากลางงานจัดสวนเฉพาะภาคใต้ | planning | quotation, benchmark, pricing, southern-thailand, songkhla, web-research, gap-analysis | 2026-07-06 | done |
 
 ## Archived (`task/archive/`)
